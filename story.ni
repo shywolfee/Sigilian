@@ -217,7 +217,7 @@ The safety-stripes are scenery in Transtube Waiting Area. The description of the
 
 The tube-tunnel is scenery in Transtube Waiting Area. The description of the tube-tunnel is “A dark circular tunnel mouth, three meters in diameter, leading into the station's transit network. Air rushes in and out with each passing pod. The rails inside gleam faintly — mag-lev guides that accelerate the pods to terrifying speeds through the station's superstructure.” The printed name of the tube-tunnel is “tube tunnel”. Understand “tunnel” or “tube” or “transtube” or “rails” as the tube-tunnel.
 
-A vending-machine is in Transtube Waiting Area. “A vending machine stands against the wall near the benches.” The printed name of the vending-machine is “vending machine”. The description of the vending-machine is “It sells stim-patches, water pouches, and ration bars. The prices are extortionate. A hand-written note taped to the front reads: NO REFUNDS. MACHINE EATS CREDS SOMETIMES. KNOWN ISSUE.”
+The platform-vending-machine is a vending-machine in Transtube Waiting Area. “A vending machine stands against the wall near the benches.” The printed name of the platform-vending-machine is “vending machine”. The description of the platform-vending-machine is “It sells stim-patches, water pouches, and ration bars. The prices are extortionate. A hand-written note taped to the front reads: NO REFUNDS. MACHINE EATS CREDS SOMETIMES. KNOWN ISSUE.” Understand “vending” or “machine” or “vending machine” as the platform-vending-machine.
 
 Chapter 13 - Warren South Corridor
 
@@ -323,13 +323,13 @@ Section 4 - Ring Mid West Junction
 
 Ring Mid West is west of Ring Mid Central. Ring Mid West is zero-grav. “The mid-level western junction. The outer wall of the Ring is close here — you can see the massive doors of docking slip 1B directly to the west, and the dark shapes of ships berthed in the adjacent slips. The guide cables here are thicker, heavy-duty lines meant for towing loaded cargo pods.”
 
-The mid-west-buoy is a nav-buoy in Ring Mid West. “A nav-buoy marks the junction.” The description of the mid-west-buoy is “NAV BUOY MW-1 — RING MID WEST[line break][line break]  WEST → Docking Slip 1B[line break]  EAST → Mid Central[line break]  UP → Slip 1A (Upper West)[line break]  DOWN → Slip 1C (Lower West)” The printed name of the mid-west-buoy is “navigation buoy”. Understand “nav” or “buoy” or “beacon” as the mid-west-buoy.
+The mid-west-buoy is a nav-buoy in Ring Mid West. “A nav-buoy marks the junction.” The description of the mid-west-buoy is “NAV BUOY MW-1 — RING MID WEST[line break][line break]  WEST → Docking Slip 1B[line break]  EAST → Mid Central[line break]  UP → Slip 1A (Upper West)[line break]  DOWN → Slip 1C (Lower West).” The printed name of the mid-west-buoy is “navigation buoy”. Understand “nav” or “buoy” or “beacon” as the mid-west-buoy.
 
 Section 5 - Ring Upper West Junction
 
 Ring Upper West is above Ring Mid West. Ring Upper West is zero-grav. “The upper-western corner of the Ring — the highest and furthest west you can go in the docking structure. The slip 1A docking doors dominate the wall to the west. From here you can see the full sweep of the Ring's interior curving away below and to the east, a vast steel canyon strung with lights and cables.”
 
-The upper-west-buoy is a nav-buoy in Ring Upper West. “A nav-buoy floats here, its light pulsing.” The description of the upper-west-buoy is “NAV BUOY UW-1 — RING UPPER WEST[line break][line break]  WEST → Docking Slip 1A[line break]  EAST → Upper Central[line break]  DOWN → Mid West (Slip 1B)” The printed name of the upper-west-buoy is “navigation buoy”. Understand “nav” or “buoy” or “beacon” as the upper-west-buoy.
+The upper-west-buoy is a nav-buoy in Ring Upper West. “A nav-buoy floats here, its light pulsing.” The description of the upper-west-buoy is “NAV BUOY UW-1 — RING UPPER WEST[line break][line break]  WEST → Docking Slip 1A[line break]  EAST → Upper Central[line break]  DOWN → Mid West (Slip 1B).” The printed name of the upper-west-buoy is “navigation buoy”. Understand “nav” or “buoy” or “beacon” as the upper-west-buoy.
 
 Ring Upper West is west of Ring Upper Central.
 
@@ -337,7 +337,7 @@ Section 6 - Ring Lower West Junction
 
 Ring Lower West is below Ring Mid West. Ring Lower West is zero-grav. “The lower-western junction, deep in the Ring's industrial belly. Slip 1C's doors are to the west. The air — such as it is in zero-grav — carries the chemical tang of hull sealant and thruster propellant. Maintenance drones buzz past on pre-programmed routes.”
 
-The lower-west-buoy is a nav-buoy in Ring Lower West. “A nav-buoy blinks red-amber here.” The description of the lower-west-buoy is “NAV BUOY LW-1 — RING LOWER WEST[line break][line break]  WEST → Docking Slip 1C[line break]  EAST → Lower Central[line break]  UP → Mid West (Slip 1B)” The printed name of the lower-west-buoy is “navigation buoy”. Understand “nav” or “buoy” or “beacon” as the lower-west-buoy.
+The lower-west-buoy is a nav-buoy in Ring Lower West. “A nav-buoy blinks red-amber here.” The description of the lower-west-buoy is “NAV BUOY LW-1 — RING LOWER WEST[line break][line break]  WEST → Docking Slip 1C[line break]  EAST → Lower Central[line break]  UP → Mid West (Slip 1B).” The printed name of the lower-west-buoy is “navigation buoy”. Understand “nav” or “buoy” or “beacon” as the lower-west-buoy.
 
 Ring Lower West is west of Ring Lower Central.
 
@@ -345,7 +345,7 @@ Section 7 - Ring Mid East Junction
 
 Ring Mid East is east of Ring Mid Central. Ring Mid East is zero-grav. “The mid-level eastern junction. Slip 3B's docking doors are visible to the east. This section of the Ring sees heavy traffic — it's closest to the commercial berths, and traders, couriers, and customs inspectors drift through constantly. A customs drone hovers at the junction, scanning passing cargo with a blue laser grid.”
 
-The mid-east-buoy is a nav-buoy in Ring Mid East. “A nav-buoy marks the eastern junction.” The description of the mid-east-buoy is “NAV BUOY ME-1 — RING MID EAST[line break][line break]  EAST → Docking Slip 3B[line break]  WEST → Mid Central[line break]  UP → Slip 3A (Upper East)[line break]  DOWN → Slip 3C (Lower East)” The printed name of the mid-east-buoy is “navigation buoy”. Understand “nav” or “buoy” or “beacon” as the mid-east-buoy.
+The mid-east-buoy is a nav-buoy in Ring Mid East. “A nav-buoy marks the eastern junction.” The description of the mid-east-buoy is “NAV BUOY ME-1 — RING MID EAST[line break][line break]  EAST → Docking Slip 3B[line break]  WEST → Mid Central[line break]  UP → Slip 3A (Upper East)[line break]  DOWN → Slip 3C (Lower East).” The printed name of the mid-east-buoy is “navigation buoy”. Understand “nav” or “buoy” or “beacon” as the mid-east-buoy.
 
 The customs-drone is scenery in Ring Mid East. The description of the customs-drone is “An autonomous scanning unit, roughly the size of a large dog, hovering on micro-thrusters. It sweeps passing cargo with a blue laser grid and cross-references against manifests. It ignores people — mostly.” The printed name of the customs-drone is “customs drone”. Understand “drone” or “customs” or “scanner” or “laser” as the customs-drone.
 
@@ -353,7 +353,7 @@ Section 8 - Ring Upper East Junction
 
 Ring Upper East is above Ring Mid East. Ring Upper East is zero-grav. “The upper-eastern corner of the Ring. Slip 3A's berth doors are to the east. Through a gap in the structure, you can see the hull of a docked freighter — enormous, pitted with micrometeorite scars, its running lights blinking a slow amber pulse.”
 
-The upper-east-buoy is a nav-buoy in Ring Upper East. “A nav-buoy drifts at the junction.” The description of the upper-east-buoy is “NAV BUOY UE-1 — RING UPPER EAST[line break][line break]  EAST → Docking Slip 3A[line break]  WEST → Upper Central[line break]  DOWN → Mid East (Slip 3B)” The printed name of the upper-east-buoy is “navigation buoy”. Understand “nav” or “buoy” or “beacon” as the upper-east-buoy.
+The upper-east-buoy is a nav-buoy in Ring Upper East. “A nav-buoy drifts at the junction.” The description of the upper-east-buoy is “NAV BUOY UE-1 — RING UPPER EAST[line break][line break]  EAST → Docking Slip 3A[line break]  WEST → Upper Central[line break]  DOWN → Mid East (Slip 3B).” The printed name of the upper-east-buoy is “navigation buoy”. Understand “nav” or “buoy” or “beacon” as the upper-east-buoy.
 
 Ring Upper East is east of Ring Upper Central.
 
@@ -361,7 +361,7 @@ Section 9 - Ring Lower East Junction
 
 Ring Lower East is below Ring Mid East. Ring Lower East is zero-grav. “The lower-eastern junction. Slip 3C is to the east. This is the quietest corner of the Ring — the slips down here tend to house long-term berths, ships in for repairs or mothballed by owners who stopped paying fees. A few have been here so long they've grown a patina of micro-corrosion.”
 
-The lower-east-buoy is a nav-buoy in Ring Lower East. “A nav-buoy marks this quiet junction.” The description of the lower-east-buoy is “NAV BUOY LE-1 — RING LOWER EAST[line break][line break]  EAST → Docking Slip 3C[line break]  WEST → Lower Central[line break]  UP → Mid East (Slip 3B)” The printed name of the lower-east-buoy is “navigation buoy”. Understand “nav” or “buoy” or “beacon” as the lower-east-buoy.
+The lower-east-buoy is a nav-buoy in Ring Lower East. “A nav-buoy marks this quiet junction.” The description of the lower-east-buoy is “NAV BUOY LE-1 — RING LOWER EAST[line break][line break]  EAST → Docking Slip 3C[line break]  WEST → Lower Central[line break]  UP → Mid East (Slip 3B).” The printed name of the lower-east-buoy is “navigation buoy”. Understand “nav” or “buoy” or “beacon” as the lower-east-buoy.
 
 Ring Lower East is east of Ring Lower Central.
 
