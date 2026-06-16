@@ -464,3 +464,190 @@ Some berth-shuttles are scenery in the Shuttle Berth Bay. The description of the
 Instead of going down in the Shuttle Berth Bay:
 	say “You step onto the grav-lock hatch and drop through as gravity releases its hold.”;
 	now the player is in the Shuttle Grav-Lock.
+
+Part 4 - The Shuttle System
+
+Chapter 1 - The Shuttle Interior
+
+The Shuttle Cabin is a room. The description of The Shuttle Cabin is “The interior of a short-haul shuttle — twenty seats in two rows, bolted to a floor that vibrates with engine idle. The bulkheads are scuffed grey composite, the overhead bins dented from decades of abuse. A destination panel glows beside the forward hatch. Through the tiny porthole, you can see the berth bay outside — or whatever destination you've arrived at.[paragraph break]Available destinations: PRAXIS STATION, AETERIA.”
+
+The shuttle-dest-panel is a display-screen in the Shuttle Cabin. The description of the shuttle-dest-panel is “A scratched panel listing shuttle routes:[line break][line break]  1. PRAXIS STATION (return)[line break]  2. AETERIA — Ryftren Imperial Capital[line break][line break]Other destinations require transfer at Aeteria Orbital.” The printed name of the shuttle-dest-panel is “destination panel”. Understand “panel” or “destination” or “display” as the shuttle-dest-panel.
+
+Some shuttle-seats are an enterable supporter in the Shuttle Cabin. “Rows of battered seats fill the cabin.” The description of the shuttle-seats is “Moulded crash seats with fraying harnesses. The cushioning has long since compressed to nothing. Graffiti is scratched into the armrests in a dozen languages.” The printed name of the shuttle-seats is “seats”. Understand “seats” or “seat” or “chair” or “harness” as the shuttle-seats.
+
+The shuttle-porthole is scenery in the Shuttle Cabin. The description of the shuttle-porthole is “A small oval viewport, scratched and cloudy. Through it you can see whatever is outside — berth bay lights, the black of space, or the burning curve of a planetary atmosphere.” The printed name of the shuttle-porthole is “porthole”. Understand “porthole” or “window” or “viewport” as the shuttle-porthole.
+
+Chapter 2 - Shuttle Boarding
+
+Boarding-shuttle is an action applying to nothing. Understand “board shuttle” or “enter shuttle” or “get in shuttle” as boarding-shuttle.
+
+Check boarding-shuttle:
+	if the player is in the Shuttle Cabin, say “You're already aboard.” instead;
+	if the player is not in the Shuttle Berth Bay, say “There's no shuttle to board here.” instead.
+
+Carry out boarding-shuttle:
+	say “You feed creds into the ticket kiosk and receive a flimsy boarding pass. Gate 4 — the Aeteria run. The shuttle is a boxy workhorse, its hull scorched from atmospheric entries. You duck through the hatch and find a seat.”;
+	now the player is in the Shuttle Cabin.
+
+Chapter 3 - Shuttle Destinations
+
+Shuttle-travelling is an action applying to one topic. Understand “select [text]” or “travel to [text]” or “choose [text]” as shuttle-travelling when the player is in the Shuttle Cabin.
+
+Check shuttle-travelling:
+	if the player is not in the Shuttle Cabin, say “You're not in a shuttle.” instead.
+
+Carry out shuttle-travelling:
+	if the topic understood matches “praxis/station/return”:
+		say “The shuttle detaches from its berth, maneuvers briefly, and docks again two berths over. You've gone nowhere. The hatch opens onto the familiar berth bay.”;
+		now the player is in the Shuttle Berth Bay;
+	else if the topic understood matches “aeteria”:
+		say “The hatch seals. The shuttle detaches with a clang of released docking clamps and a kick of maneuvering thrusters. Through the porthole, Praxis Station falls away — a dark mass of metal against the impossible light of the Maw.[paragraph break]The main engines fire. You are pressed into your seat for twenty minutes as the shuttle burns toward Aeteria. The planet grows from a bright point to a disc to a wall of brown and amber cloud — city-light visible even through the atmosphere, whole continents glowing with the fever of civilization.[paragraph break]The shuttle slots into orbital traffic and docks with the Halon Orbital Tether. The hatch opens onto the tether station.”;
+		now the player is in the Halon Tether Station;
+	else:
+		say “The panel blinks: DESTINATION NOT RECOGNIZED. Available routes: PRAXIS STATION, AETERIA.”
+
+Part 5 - Aeteria
+
+Chapter 1 - The Halon Orbital Tether
+
+The Halon Tether Station is a room. The description of the Halon Tether Station is “A vast ring-shaped station wrapped around the equatorial orbital tether — a carbon-nanotube cable stretching from geostationary orbit down to the planet's surface, visible through the observation windows as a dark line vanishing into the cloud layer below. The station thrums with traffic: passengers, cargo, military. Imperial Ryftren banners hang from the ceiling — crimson and black, the coiled serpent sigil watching from every surface.[paragraph break]Two descent options are posted on the main concourse board. The shuttle berth is back to the west. The cord loading bay is to the north. The express capsule terminal is to the east.”
+
+The tether-banners are scenery in the Halon Tether Station. The description of the tether-banners is “Crimson and black — the colors of the Ryftren Empire. The coiled serpent sigil is embroidered in gold thread on each banner. Some are faded, some fresh. The Empire likes to remind you whose air you're breathing.” The printed name of the tether-banners is “Imperial banners”. Understand “banners” or “banner” or “imperial” or “crimson” or “serpent” or “sigil” or “ryftren” as the tether-banners.
+
+The tether-cable-view is scenery in the Halon Tether Station. The description of the tether-cable-view is “The orbital tether itself — a cable of braided carbon nanotubes, two meters in diameter, stretching from this station down through sixty thousand kilometers of atmosphere to an anchor point on the surface. It is the spine of Aeteria's commerce, the thread that ties orbit to ground. Cargo pods and personnel capsules crawl along it like beads on a wire.” The printed name of the tether-cable-view is “orbital tether”. Understand “tether” or “cable” or “nanotube” or “line” as the tether-cable-view.
+
+The tether-concourse-board is a display-screen in the Halon Tether Station. The description of the tether-concourse-board is “DESCENT OPTIONS — AETERIA SURFACE:[line break][line break]  THE CORD (North) .... 45 MIN .... 5 CRED[line break]    Industrial descent. Reentry suit provided.[line break]    Arrival: The Cauldron, Salvage Processing[line break][line break]  EXPRESS CAPSULE (East) .... 12 MIN .... 80 CRED[line break]    Pressurized capsule. Climate controlled.[line break]    Arrival: The Cauldron, Passenger Terminal[line break][line break]NOTICE: All off-world arrivals processed through The Cauldron. Imperial transit documentation required.” The printed name of the tether-concourse-board is “concourse board”. Understand “board” or “concourse” or “descent” or “options” as the tether-concourse-board.
+
+Instead of going west in the Halon Tether Station:
+	say “You return through the docking arm to the shuttle berth. The hatch opens onto the familiar cabin.”;
+	now the player is in the Shuttle Cabin.
+
+Chapter 2 - The Cord
+
+The Cord Loading Bay is a room. The Cord Loading Bay is north of the Halon Tether Station. The description of the Cord Loading Bay is “An industrial space that makes no pretense of comfort. The floor is grated metal, the walls bare hull plating. Racks of reentry suits line one wall — bulky, scorched things that look like they've survived more drops than their occupants. A loading gantry extends over the tether cable itself, where harness rigs dangle like nooses. Workers in coveralls prep the next batch of riders with bored efficiency.[paragraph break]A sign reads: CORD DESCENT — STRAP IN, SEAL UP, DON'T SCREAM. IT DOESN'T HELP.”
+
+The reentry-suits are scenery in the Cord Loading Bay. The description of the reentry-suits is “Heavy ablative suits, each one a cocoon of heat-resistant polymer and crash gel. They're designed to survive atmospheric reentry while dangling from a tether cable at terminal velocity. The scorch marks on the outer shells tell you they work. The dents tell you the landing isn't gentle.” The printed name of the reentry-suits is “reentry suits”. Understand “suits” or “suit” or “reentry” or “ablative” as the reentry-suits.
+
+The cord-harness-rigs are scenery in the Cord Loading Bay. The description of the cord-harness-rigs is “Harness assemblies that clip onto the tether cable. Each one holds a single suited rider. When released, they slide down the cable under gravity, the suit's ablative shell absorbing the heat of atmospheric friction. It's the cheapest way down — five creds — and exactly as dignified as it sounds.” The printed name of the cord-harness-rigs is “harness rigs”. Understand “harness” or “rigs” or “rig” or “gantry” or “noose” or “nooses” as the cord-harness-rigs.
+
+The cord-workers are scenery in the Cord Loading Bay. The description of the cord-workers is “Tether workers in grease-stained coveralls, moving with the mechanical efficiency of people who do this a hundred times a day. They check suit seals, clip harnesses, and shove riders off the gantry without ceremony. One of them has HAVE A NICE FALL stenciled on the back of his jacket.” The printed name of the cord-workers is “tether workers”. Understand “workers” or “crew” or “tether workers” as the cord-workers.
+
+Riding-the-cord is an action applying to nothing. Understand “ride cord” or “take cord” or “ride the cord” or “strap in” or “descend” as riding-the-cord when the player is in the Cord Loading Bay.
+
+Carry out riding-the-cord:
+	say “A worker shoves you into a reentry suit without asking your size. The suit seals around you with a hiss — suddenly you're breathing canned air and seeing the world through a scratched visor. They clip your harness to the cable, run a perfunctory seal check, and give you a thumbs-up.[paragraph break]Then they push you off the gantry.[paragraph break]The first ten seconds are silence and weightlessness. Then atmosphere hits — a howl of friction that builds to a roar, the suit's ablative shell glowing cherry-red at the edges of your vision. You're falling at terminal velocity down a cable that stretches to infinity below you, wrapped in a burning cocoon, and there is nothing to do but endure it.[paragraph break]Forty-five minutes of controlled descent. The roar fades to a whistle, the glow dies, and suddenly there is sky — brown, hazy, choked with smog and city-light. The cable enters the roof of a massive structure and your harness brakes engage with a brutal jerk. You slam to a stop on a receiving platform, suit steaming.[paragraph break]Welcome to The Cauldron.”;
+	now the player is in the Cord Receiving Platform.
+
+Chapter 3 - The Express Capsule
+
+The Express Capsule Terminal is a room. The Express Capsule Terminal is east of the Halon Tether Station. The description of the Express Capsule Terminal is “A cleaner space than the cord bay — actual walls, actual lighting, a waiting area with seats that have cushions. The express capsules are visible through a glass partition: sleek ovoid pods that ride the tether cable in pressurized comfort. An attendant in an Imperial transit uniform stands by the boarding gate. Screens display descent schedules and weather conditions on the surface below.”
+
+The express-capsules-view is scenery in the Express Capsule Terminal. The description of the express-capsules-view is “Pressurized descent pods, each seating four. They're smooth, white, and look almost medical — like eggs designed by engineers who'd never experienced joy. But they're climate-controlled, pressurized, and don't require you to be set on fire during descent. Eighty creds well spent.” The printed name of the express-capsules-view is “express capsules”. Understand “capsules” or “capsule” or “pods” or “pod” or “express” as the express-capsules-view.
+
+The capsule-attendant is a person in the Express Capsule Terminal. The description of the capsule-attendant is “A young man in the grey-and-crimson uniform of Imperial Transit. He has the practiced smile of someone trained to be polite to people he considers beneath him. His name badge reads TOVAR.” The printed name of the capsule-attendant is “attendant”. Understand “attendant” or “tovar” or “man” as the capsule-attendant.
+
+Instead of talking to the capsule-attendant, say “'Express capsule to the surface? Eighty creds. Twelve minutes. Arrive at the Cauldron passenger terminal like a civilized being.' He gestures toward the boarding gate with a gloved hand.”
+
+The capsule-boarding-gate is scenery in the Express Capsule Terminal. The description of the capsule-boarding-gate is “A glass-and-steel gate with a cred-reader mounted on the post. Feed it eighty creds, the gate opens, you walk to the capsule. Simple as commerce.” The printed name of the capsule-boarding-gate is “boarding gate”. Understand “gate” or “boarding” or “reader” or “cred” as the capsule-boarding-gate.
+
+Taking-capsule is an action applying to nothing. Understand “take capsule” or “board capsule” or “ride capsule” or “take express” or “enter capsule” as taking-capsule when the player is in the Express Capsule Terminal.
+
+Carry out taking-capsule:
+	say “You feed eighty creds into the gate reader. It chirps approval and the gate slides open. You walk through a short boarding tunnel into the capsule — four seats, soft lighting, a faint hum of environmental systems. The hatch seals behind you.[paragraph break]The capsule detaches from the terminal and begins its descent. Through the viewport, the curve of Aeteria swells to fill the world — a planet-city, every landmass a single unbroken sprawl of towers and industry, the oceans grey with thermal runoff. The cloud layer approaches and swallows you. Twelve minutes of smooth, pressurized descent through brown murk.[paragraph break]The capsule docks with a gentle thud. The hatch opens onto processed air and institutional lighting.”;
+	now the player is in the Capsule Arrival Hall.
+
+Part 6 - The Cauldron
+
+Chapter 1 - Cord Arrival
+
+The Cord Receiving Platform is a room. The description of the Cord Receiving Platform is “A scorched industrial platform deep in the guts of The Cauldron — the geodesic-domed processing facility that floats on repulsor columns above Aeteria's sprawl. The platform reeks of ablative polymer and ozone. Spent reentry suits are piled in bins by workers who strip and rack them for the next batch of riders. The ceiling is a lattice of tether cable housings and brake mechanisms. Everything is soot-blackened.[paragraph break]A conveyor path leads south into the salvage processing queue — the bureaucratic gauntlet all cord riders must endure.”
+
+The spent-suits are scenery in the Cord Receiving Platform. The description of the spent-suits is “Piles of used reentry suits, still steaming from descent. Workers strip them with practiced hands — pulling the ablative shells, checking the gel liners, racking them for the next poor soul. The suits are recycled until they fail, and then they're recycled some more.” The printed name of the spent-suits is “spent suits”. Understand “suits” or “suit” or “spent” or “bins” as the spent-suits.
+
+The platform-workers are scenery in the Cord Receiving Platform. The description of the platform-workers is “Cauldron workers in heat-resistant coveralls, moving through the steam and stink with total indifference. They've seen a thousand dazed cord riders stumble off the platform. You're not special.” The printed name of the platform-workers is “platform workers”. Understand “workers” or “crew” as the platform-workers.
+
+Chapter 2 - Salvage Processing
+
+The Salvage Processing Queue is a room. The Salvage Processing Queue is south of the Cord Receiving Platform. The description of the Salvage Processing Queue is “A long, low-ceilinged corridor lined with processing booths — the bureaucratic intake for cord arrivals. The queue shuffles forward at a crawl. Imperial clerks behind reinforced glass check documentation, scan biometrics, and stamp transit passes with mechanical indifference. The air is stale and hot. Overhead signs read: HAVE DOCUMENTATION READY. UNDOCUMENTED ARRIVALS WILL BE DETAINED.[paragraph break]The line moves south toward the Cauldron's main concourse.”
+
+The processing-booths are scenery in the Salvage Processing Queue. The description of the processing-booths is “Reinforced glass windows with speak-through grilles. Behind each one, an Imperial clerk sits amid stacks of transit forms and blinking terminals. They process arrivals with the enthusiasm of people counting down the minutes to shift end.” The printed name of the processing-booths is “processing booths”. Understand “booths” or “booth” or “glass” or “clerk” or “clerks” or “window” as the processing-booths.
+
+The queue-signs are scenery in the Salvage Processing Queue. The description of the queue-signs is “HAVE DOCUMENTATION READY. UNDOCUMENTED ARRIVALS WILL BE DETAINED. BRIBERY OF IMPERIAL OFFICIALS IS A CAPITAL OFFENSE. That last one has been defaced so many times they've welded a steel plate over part of it.” The printed name of the queue-signs is “signs”. Understand “signs” or “sign” or “overhead” as the queue-signs.
+
+Chapter 3 - Capsule Arrival
+
+The Capsule Arrival Hall is a room. The description of the Capsule Arrival Hall is “The express capsule terminal on the Cauldron side — cleaner and quieter than the cord intake, with actual tile floors and functioning air filtration. The capsule bay is to the north, the passenger processing hall to the south. Imperial Transit staff in pressed uniforms direct arrivals with crisp efficiency. It's still a processing facility, but one that pretends to have dignity.”
+
+The arrival-staff are scenery in the Capsule Arrival Hall. The description of the arrival-staff is “Imperial Transit officers in grey-and-crimson. They check documentation with scanners rather than stamp pads, and address passengers as 'citizen' rather than 'next.' The pretense of civility that eighty creds buys you.” The printed name of the arrival-staff is “transit staff”. Understand “staff” or “officers” or “transit” as the arrival-staff.
+
+Chapter 4 - Passenger Processing
+
+The Passenger Processing Hall is a room. The Passenger Processing Hall is south of the Capsule Arrival Hall. The description of the Passenger Processing Hall is “A wide hall with biometric gates and document scanners — the capsule arrivals' version of intake. Faster, cleaner, and staffed by people who make eye contact. Express arrivals get processed in minutes rather than hours. The main concourse is to the south.”
+
+The biometric-gates are scenery in the Passenger Processing Hall. The description of the biometric-gates is “Sleek archways that scan retina, palm, and gait as you walk through. If your documentation checks out, the far side opens. If not — well, there are armed guards standing nearby for a reason.” The printed name of the biometric-gates is “biometric gates”. Understand “gates” or “biometric” or “scanners” or “archway” or “archways” as the biometric-gates.
+
+Chapter 5 - The Main Concourse
+
+The Cauldron Concourse is a room. The Cauldron Concourse is south of the Salvage Processing Queue. The Cauldron Concourse is west of the Passenger Processing Hall. The description of the Cauldron Concourse is “The central hub of The Cauldron — a vast circular space beneath the geodesic dome. The dome itself is a lattice of hexagonal transpex panels, and through them you can see the brown Aeterian sky and, far below, the sprawl — an infinite carpet of towers and smog stretching to every horizon. The Cauldron floats above it all on repulsor columns, a processing station hanging in the sky like a bureaucratic cloud.[paragraph break]The concourse is ringed with vendors, currency exchanges, and Imperial information kiosks. Arrivals from the cord processing queue filter in from the north. Capsule arrivals enter from the east. The exit chutes to the city are to the south.”
+
+The geodesic-dome is scenery in the Cauldron Concourse. The description of the geodesic-dome is “Thousands of hexagonal transpex panels held together by a steel lattice — the Cauldron's signature dome. Through it, the sky is a permanent brown haze. You can see the repulsor columns extending downward from the Cauldron's base, shimmering pillars of anti-grav energy holding the entire structure aloft. Below, the city stretches forever.” The printed name of the geodesic-dome is “dome”. Understand “dome” or “geodesic” or “panels” or “transpex” or “lattice” or “hexagonal” as the geodesic-dome.
+
+The repulsor-columns-view is scenery in the Cauldron Concourse. The description of the repulsor-columns-view is “Visible through the dome's lower panels — shimmering columns of anti-gravitational energy, each one fifty meters in diameter, extending from the Cauldron's underside down into the smog below. They hum at a frequency you feel in your teeth. If they failed, The Cauldron would drop like a stone into the sprawl. Best not to think about that.” The printed name of the repulsor-columns-view is “repulsor columns”. Understand “repulsor” or “columns” or “anti-grav” or “pillars” as the repulsor-columns-view.
+
+The sprawl-view is scenery in the Cauldron Concourse. The description of the sprawl-view is “The city below. Aeteria — the capital world of the Ryftren Empire, every square kilometer built over, built up, built under. From this height you can see the tower forests of the commercial districts, the industrial flats belching smoke, and the tangled mass of The Cage — the immigrant quarter where new arrivals are funneled. It looks like an infection spreading between the larger structures.” The printed name of the sprawl-view is “the sprawl”. Understand “sprawl” or “city” or “towers” or “below” as the sprawl-view.
+
+The concourse-vendors are scenery in the Cauldron Concourse. The description of the concourse-vendors is “Currency exchanges offering terrible rates, food stalls selling packaged rations at markup, shops hawking translation implants and local maps loaded onto disposable data chips. Everything priced for people with no choice.” The printed name of the concourse-vendors is “vendors”. Understand “vendors” or “shops” or “exchange” or “kiosks” or “stalls” as the concourse-vendors.
+
+Chapter 6 - The Exit Chutes
+
+The Exit Chute Bay is a room. The Exit Chute Bay is south of the Cauldron Concourse. The description of the Exit Chute Bay is “The exit from The Cauldron and the last stop before the city proper. A row of circular chute openings line the far wall, each one a meter in diameter — nanopolymer drop tubes that extend from the Cauldron's underside down into The Cage below. A chute operator sits in a booth, waving arrivals forward in groups. Signs in a dozen languages read: ENTRY IS FINAL. NO RE-ASCENT FROM THIS POINT.[paragraph break]Through the transparent floor panels, you can see the drop — hundreds of meters of open air between the Cauldron and the rooftops of The Cage. The nanopolymer tubes sway gently in the wind.”
+
+The drop-chutes are scenery in the Exit Chute Bay. The description of the drop-chutes is “Circular openings in the wall, each one the mouth of a flexible nanopolymer tube. The tubes extend downward through the Cauldron's base and into the open air, delivering passengers to receiving stations in The Cage below. The interior of each tube glistens with friction-dampening gel — the only thing between you and a fatal drop.” The printed name of the drop-chutes is “drop chutes”. Understand “chutes” or “chute” or “tube” or “tubes” or “openings” or “nanopolymer” as the drop-chutes.
+
+The chute-operator is a person in the Exit Chute Bay. The description of the chute-operator is “A heavyset woman in a stained Cauldron uniform, sitting in a booth with the air of someone who has watched thousands of people slide into tubes and does not care about any of them. She waves groups forward with a gloved hand. Her booth has a mug, a sandwich, and a counter that reads: 847,203 — presumably the number of people she's dropped.” The printed name of the chute-operator is “chute operator”. Understand “operator” or “woman” or “attendant” as the chute-operator.
+
+Instead of talking to the chute-operator, say “'Step up, feet first, arms crossed. Gel does the rest. Next.' She's already looking past you.”
+
+The transparent-floor is scenery in the Exit Chute Bay. The description of the transparent-floor is “Transparent panels set into the floor, offering a vertiginous view straight down. The repulsor columns shimmer nearby. Below, the rooftops of The Cage are a jumbled mass of interconnected towers, linked by bridges, cables, and structures that defy architectural description. The nanopolymer tubes dangle into the mess like tentacles.” The printed name of the transparent-floor is “transparent floor”. Understand “floor” or “transparent” or “panels” or “view” as the transparent-floor.
+
+Entering-chute is an action applying to nothing. Understand “enter chute” or “use chute” or “slide” or “drop” or “descend” or “go down” as entering-chute when the player is in the Exit Chute Bay.
+
+Carry out entering-chute:
+	say “The operator waves you forward. You step up to a chute opening and look down — a glistening nanopolymer tube descending into brown murk. Your stomach does something complicated.[paragraph break]'Feet first. Arms crossed. Go.'[paragraph break]You step in.[paragraph break]The gel catches you immediately — warm, viscous, clinging. You slide. Slowly at first, then faster as the tube angles downward. The Cauldron's underside passes by above you, then open air — you're falling through a translucent tube suspended in the sky, the city sprawl wheeling far below, the repulsor columns humming nearby. The gel controls your speed, slowing you, speeding you, guiding you through curves and switchbacks in the tube's path.[paragraph break]The tube enters a building. Darkness, then harsh light. The gel deposits you — stumbling, coated in residue — onto a receiving platform in The Cage.”;
+	now the player is in the Cage Drop Station.
+
+Part 7 - The Cage
+
+Chapter 1 - Drop Station
+
+The Cage Drop Station is a room. The description of the Cage Drop Station is “A grimy receiving platform in the upper levels of The Cage — Aeteria's immigrant quarter. The nanopolymer tube exits above you, dripping gel residue onto already-slick floors. A dozen other new arrivals stand around looking dazed, wiping gel from their clothes. The air is thick, humid, and smells of too many people in too little space.[paragraph break]The platform opens onto a corridor to the south. Gel-stained signs on the walls point the way to transit, housing registration, and — ominously — Imperial Processing.”
+
+The gel-residue is scenery in the Cage Drop Station. The description of the gel-residue is “The friction-dampening gel from the drop chute. It's warm, faintly luminescent, and clings to everything. Other arrivals are trying to scrape it off their clothes with varying success. It'll dry and flake off in an hour. Until then, you're marked as fresh meat.” The printed name of the gel-residue is “gel residue”. Understand “gel” or “residue” or “slime” as the gel-residue.
+
+The other-arrivals are scenery in the Cage Drop Station. The description of the other-arrivals is “A dozen people in various states of gel-coated disorientation. Migrant workers, refugees, economic opportunists, the desperate. They come from a hundred worlds to the capital of an empire that doesn't want them, processed through the Cauldron and dropped into the Cage like coins into a slot machine.” The printed name of the other-arrivals is “other arrivals”. Understand “arrivals” or “people” or “migrants” or “refugees” as the other-arrivals.
+
+Chapter 2 - Cage Upper Corridor
+
+The Cage Upper Corridor is a room. The Cage Upper Corridor is south of the Cage Drop Station. The description of the Cage Upper Corridor is “A corridor that was probably a hallway between offices once, before The Cage grew around it like scar tissue. The walls are a patchwork of original building material — poured concrete — and improvised additions: sheet metal, polymer sheeting, salvaged hull plating from decommissioned ships. The ceiling is low, the lighting uneven — flickering strips interspersed with bare bulbs and the occasional bioluminescent panel. The corridor heads south toward a junction. Doorways branch off on both sides, covered with curtains and makeshift doors.”
+
+The cage-walls are scenery in the Cage Upper Corridor. The description of the cage-walls is “The geology of The Cage: layers of construction spanning decades. The original poured concrete of whatever this building was. Sheet metal additions welded over gaps. Polymer sheeting stapled over that. Wiring and plumbing running exposed over everything. It's not architecture — it's accretion.” The printed name of the cage-walls is “walls”. Understand “walls” or “wall” or “metal” or “concrete” or “polymer” or “sheeting” as the cage-walls.
+
+The cage-doorways are scenery in the Cage Upper Corridor. The description of the cage-doorways is “Doorways into residential spaces — if you can call them that. Through gaps in the curtains you catch glimpses of lives compressed into minimum volume: bunks stacked three high, cooking elements balanced on crates, children doing homework by the light of data screens. The Cage is where Aeteria puts the people it needs but doesn't want to see.” The printed name of the cage-doorways is “doorways”. Understand “doorways” or “doors” or “curtains” as the cage-doorways.
+
+Chapter 3 - Cage Junction
+
+The Cage Junction is a room. The Cage Junction is south of the Cage Upper Corridor. The description of the Cage Junction is “A junction where three corridors meet and a stairwell drops down through a gap in the floor — the original building's fire stairs, now the main vertical artery through this section of The Cage. The space has been colonized by vendors: a noodle cart, a woman selling secondhand clothes from a blanket, a man with a folding table covered in data chips and translation modules. The noise is constant — voices, music, the clang of construction somewhere nearby.[paragraph break]Corridors lead north, east, and west. The stairwell descends.”
+
+The cage-noodle-cart is scenery in the Cage Junction. The description of the cage-noodle-cart is “A battered cart with a built-in heating element, tended by an old man who doesn't look up. The noodles are cheap, hot, and — based on the queue — the best thing available. The smell is almost enough to make you forget where you are.” The printed name of the cage-noodle-cart is “noodle cart”. Understand “noodle” or “cart” or “noodles” or “food” as the cage-noodle-cart.
+
+The cage-vendors are scenery in the Cage Junction. The description of the cage-vendors is “The informal economy of The Cage. Secondhand clothes, data chips loaded with local maps and translation software, cheap comm units, forged documents of varying quality. Everything you need to survive in a city that doesn't want you, sold by people in the same situation.” The printed name of the cage-vendors is “vendors”. Understand “vendors” or “woman” or “man” or “table” or “clothes” or “chips” as the cage-vendors.
+
+The cage-stairwell is scenery in the Cage Junction. The description of the cage-stairwell is “A gap in the floor where the original building's fire stairs descend into the levels below. The stairwell is narrow and perpetually crowded — the main route between the upper Cage and the lower levels, where things get denser, darker, and cheaper. Graffiti covers every surface. Someone has painted WELCOME TO THE BOTTOM on the wall at the top of the stairs.” The printed name of the cage-stairwell is “stairwell”. Understand “stairwell” or “stairs” or “gap” or “steps” as the cage-stairwell.
+
+The Cage East Corridor is a room. The Cage East Corridor is east of the Cage Junction. The description of the Cage East Corridor is “A corridor heading east, narrower than the junction. The buildings here have been connected by improvised bridges and tunnels at multiple levels — through gaps in the walls you can see the dizzying vertical depth of The Cage, other corridors and walkways visible above and below, connected by ladders, ramps, and rope bridges. It's not one building. It's dozens of skyscrapers fused together into a single organism.”
+
+The cage-bridges are scenery in the Cage East Corridor. The description of the cage-bridges is “Through gaps in the wall, you can see the internal structure of The Cage: walkways spanning the gaps between buildings, rope bridges swaying over drops of twenty or thirty floors, ladders bolted to walls, improvised ramps connecting levels that were never meant to connect. People move through this vertical maze with the confidence of lifelong residents. You move through it with the confidence of someone who might fall.” The printed name of the cage-bridges is “bridges”. Understand “bridges” or “bridge” or “walkways” or “ladders” or “ramps” or “rope” as the cage-bridges.
+
+The Cage West Corridor is a room. The Cage West Corridor is west of the Cage Junction. The description of the Cage West Corridor is “A corridor heading west, toward the outer wall of this particular tower. A window — actual glass, cracked but intact — offers a view outside The Cage. Beyond it, the city of Aeteria stretches in every direction: tower blocks, industrial stacks, transit lines, the distant gleam of the commercial districts. And above, barely visible through the smog, the dark disc of The Cauldron floating on its repulsor columns.”
+
+The cage-window is scenery in the Cage West Corridor. The description of the cage-window is “Cracked glass, smeared with grime, but it lets in actual daylight — a rare commodity in The Cage. Through it you can see the exterior of the surrounding towers, connected by skyways and cable bridges. The streets far below are invisible under layers of construction and overgrowth. The Cage has no ground floor — it starts at the thirtieth story of the original buildings and goes up from there.” The printed name of the cage-window is “window”. Understand “window” or “glass” or “view” as the cage-window.
