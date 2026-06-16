@@ -191,7 +191,10 @@ Warren West Corridor is a room. Warren West Corridor is west of Warren Market Sq
 
 The public-terminal is a fixed in place thing in Warren West Corridor. “A public terminal is bolted to the wall, its screen casting a pale glow.” The description of the public-terminal is “A station information terminal. The screen is cracked down the middle but still displays. It shows a rotating feed of Warren notices: work postings, missing persons, bounties, and the ever-present Praxis Station public service announcements. Currently it reads: REMEMBER — THE MAW PROVIDES.” The printed name of the public-terminal is “public terminal”. Understand “terminal” or “screen” or “public” or “computer” as the public-terminal.
 
-The sealed-bulkhead-west is scenery in Warren West Corridor. The description of the sealed-bulkhead-west is “A heavy pressure bulkhead, sealed shut and welded for good measure. Whatever's on the other side, the station doesn't want you going there. Or maybe it doesn't want whatever's there coming here.” The printed name of the sealed-bulkhead-west is “sealed bulkhead”. Understand “bulkhead” or “sealed” or “door” as the sealed-bulkhead-west.
+The sealed-bulkhead-west is scenery in Warren West Corridor. The description of the sealed-bulkhead-west is “A heavy pressure bulkhead, sealed shut and welded for good measure. The welding looks old — corroded in places, the bead uneven. Whatever's on the other side, the station doesn't want you going there. Or maybe it doesn't want whatever's there coming here. The welding looks like it might give if you pushed hard enough.” The printed name of the sealed-bulkhead-west is “sealed bulkhead”. Understand “bulkhead” or “sealed” or “door” as the sealed-bulkhead-west.
+
+Instead of pushing the sealed-bulkhead-west:
+	try going west.
 
 Chapter 10 - Warren East Corridor
 
@@ -437,7 +440,11 @@ Section 9 - Slip 3C
 
 Docking Slip 3C is a room. Docking Slip 3C is zero-grav. Docking Slip 3C is east of Ring Lower East. The description of Docking Slip 3C is “The lower-east berth — the quietest slip in the Ring. The ship here has been docked so long that micro-corrosion has begun to spread across its hull in fractal patterns of rust and verdigris. No lights. No crew. No name. Just a dead ship slowly becoming part of the station.”
 
-The dead-ship is scenery in Docking Slip 3C. The description of the dead-ship is “A ship of uncertain class, its lines obscured by years of neglect and corrosion. The hull plating has begun to flake, and in places you can see through to the structural ribs beneath. The airlock is sealed — whether from inside or outside, you can't tell. The dock fees on this berth must be astronomical, yet no one has claimed or scrapped it. There's a story here, but no one to tell it.” The printed name of the dead-ship is “derelict ship”. Understand “ship” or “derelict” or “dead” or “wreck” or “corrosion” or “rust” as the dead-ship.
+The dead-ship is scenery in Docking Slip 3C. The description of the dead-ship is “A ship of uncertain class, its lines obscured by years of neglect and corrosion. The hull plating has begun to flake, and in places you can see through to the structural ribs beneath. The airlock is unsealed — hanging open a few centimeters, dark inside. The dock fees on this berth must be astronomical, yet no one has claimed or scrapped it. There's a story here, but no one to tell it.” The printed name of the dead-ship is “derelict ship”. Understand “ship” or “derelict” or “dead” or “wreck” or “corrosion” or “rust” as the dead-ship.
+
+Instead of entering the dead-ship:
+	say “You pull the airlock open. It moves with a reluctant groan — corroded hinges, years of disuse. Beyond it, darkness. You pull yourself inside.”;
+	now the player is in the Derelict Interior.
 
 Chapter 7 - Shuttle Berths
 
@@ -651,3 +658,96 @@ The cage-bridges are scenery in the Cage East Corridor. The description of the c
 The Cage West Corridor is a room. The Cage West Corridor is west of the Cage Junction. The description of the Cage West Corridor is “A corridor heading west, toward the outer wall of this particular tower. A window — actual glass, cracked but intact — offers a view outside The Cage. Beyond it, the city of Aeteria stretches in every direction: tower blocks, industrial stacks, transit lines, the distant gleam of the commercial districts. And above, barely visible through the smog, the dark disc of The Cauldron floating on its repulsor columns.”
 
 The cage-window is scenery in the Cage West Corridor. The description of the cage-window is “Cracked glass, smeared with grime, but it lets in actual daylight — a rare commodity in The Cage. Through it you can see the exterior of the surrounding towers, connected by skyways and cable bridges. The streets far below are invisible under layers of construction and overgrowth. The Cage has no ground floor — it starts at the thirtieth story of the original buildings and goes up from there.” The printed name of the cage-window is “window”. Understand “window” or “glass” or “view” as the cage-window.
+
+Part 8 - Death and What Comes After
+
+Chapter 1 - Dangerous Places on Praxis
+
+Section 1 - The Breached Section
+
+The Breached Section is a room. The Breached Section is west of Warren West Corridor. The description of the Breached Section is “You shouldn't be here.[paragraph break]The welding on the bulkhead was weaker than it looked. Beyond it, the corridor continues for ten meters before ending in nothing — a ragged hole where the hull was torn open. Stars are visible through the breach. The emergency containment field flickers, thin as tissue, the only thing between the corridor's atmosphere and the vacuum beyond. Red warning lights strobe. A klaxon screams. The field is failing.”
+
+Instead of going west in Warren West Corridor:
+	say “You push against the sealed bulkhead. The welding gives — it was weaker than it looked, the metal fatigued. The bulkhead grinds open six inches. You squeeze through.”;
+	now the player is in the Breached Section.
+
+The hull-breach is scenery in the Breached Section. The description of the hull-breach is “A wound in the station's skin. Through it — nothing. Vacuum. Stars. The slow drift of debris. The containment field across the opening sparks and gutters like a candle in a draft.”
+
+The failing-field is scenery in the Breached Section. The description of the failing-field is “A shimmer of energy across the breach, barely visible. It's failing. You can feel the air pressure dropping — your ears pop, your eyes water. You have seconds.” The printed name of the failing-field is “containment field”. Understand “field” or “containment” or “shimmer” or “energy” as the failing-field.
+
+Every turn when the player is in the Breached Section:
+	say “The containment field gutters—[paragraph break]”;
+	say “It fails.[paragraph break]The air goes first. Ripped out through the breach in a single explosive exhalation that takes everything not bolted down — including you. You tumble through the gap, spinning, the station receding. Your lungs empty. Frost forms on your skin. The cold is beyond cold — it's an absence of everything.[paragraph break]The last thing you see is the Maw, turning slowly in the dark.[paragraph break]”;
+	end the story saying “You have died in the vacuum of space”.
+
+Section 2 - Slip 1A Berth Doors
+
+The slip-1a-berth-doors are scenery in Docking Slip 1A. The description of the slip-1a-berth-doors is “The outer berth doors — massive panels that open to allow ships in and out. They're sealed. A manual release is visible on the wall nearby, behind a safety cage. The cage has been pried open. Someone was here before you.” The printed name of the slip-1a-berth-doors is “berth doors”. Understand “berth doors” or “doors” or “outer” or “panels” as the slip-1a-berth-doors.
+
+The berth-door-release is a thing in Docking Slip 1A. The description of the berth-door-release is “A manual door release — a heavy lever behind a safety cage that's already been forced open. Pulling it would open the berth doors to space. There is no reason to do this. A hand-written sign taped to the lever reads: DON'T.” The printed name of the berth-door-release is “manual release”. Understand “release” or “lever” or “manual” or “safety cage” as the berth-door-release.
+
+Pulling-lever is an action applying to one visible thing. Understand “pull [something]” or “use [something]” as pulling-lever.
+
+Instead of pulling-lever the berth-door-release:
+	say “You pull the lever.[paragraph break]For a moment, nothing. Then a deep mechanical groan as the berth doors begin to separate. A line of stars appears between them, widening. The air starts to move — gently at first, then with purpose, then with violence.[paragraph break]The doors are open. Space is right there. And you — in zero gravity, with nothing to hold onto — are moving toward it.[paragraph break]The last sound you hear is the emergency klaxon, muted to nothing as the air runs out.”;
+	end the story saying “The void takes what it is given”.
+
+Section 3 - The Derelict
+
+The Derelict Interior is a room. The Derelict Interior is east of Docking Slip 3C. The description of the Derelict Interior is “You shouldn't have come in here.[paragraph break]The airlock was unsealed from inside. Beyond it, the ship is dark and cold — emergency lighting only, red strips along the floor casting everything in the color of old blood. The air is thin, stale, wrong. Frost covers every surface. Something happened here — the crew quarters are empty, personal effects scattered, a meal half-eaten on the galley table, frozen solid.[paragraph break]And there is a sound. A ticking. Rhythmic. Coming from deeper in the ship.”
+
+The derelict-frost is scenery in the Derelict Interior. The description of the derelict-frost is “Ice crystals coating every surface — walls, consoles, the frozen meal on the table. But the patterns are wrong. The frost forms in spirals, in fractals, in shapes that almost look deliberate. Like something breathed on the walls and the breath froze into language.” The printed name of the derelict-frost is “frost”. Understand “frost” or “ice” or “crystals” or “patterns” as the derelict-frost.
+
+The frozen-meal is scenery in the Derelict Interior. The description of the frozen-meal is “A bowl of something that was once food, frozen mid-steam. Utensils laid down as if the eater stepped away for a moment. That moment was a long time ago.” The printed name of the frozen-meal is “frozen meal”. Understand “meal” or “food” or “bowl” or “table” or “galley” as the frozen-meal.
+
+The derelict-ticking is scenery in the Derelict Interior. The description of the derelict-ticking is “A rhythmic sound from deeper in the hull. Tick. Tick. Tick. Regular as a heartbeat. It could be a cooling system. It could be a timing mechanism. It could be something else entirely. You don't want to find out.” The printed name of the derelict-ticking is “ticking sound”. Understand “ticking” or “sound” or “tick” as the derelict-ticking.
+
+Every turn when the player is in the Derelict Interior:
+	say “The ticking stops.[paragraph break]In the silence that follows, you hear something else: a long, slow creak of metal, as if the ship is stretching. Then a crack — sharp, percussive — and the hull gives. Not slowly. All at once.[paragraph break]The ship breaks apart around you. The walls peel away like skin, and suddenly there is nothing between you and the void. You tumble through debris, through frozen air, through pieces of a ship that died a long time ago.[paragraph break]The last thing you see is the dark. The absolute, depthless dark of deep space.”;
+	end the story saying “Some ships keep their dead”.
+
+Section 4 - The Maintenance Walkway
+
+The Maintenance Walkway is a room. The Maintenance Walkway is down from the Cage Junction. The description of the Maintenance Walkway is “You descend the stairwell past the lowest inhabited level of The Cage, past warning signs and locked gates that someone has already cut through, into a maintenance shaft that runs along the exterior of the tower cluster. A narrow catwalk extends over an open gap — below it, through grated flooring, you can see the true distance to the ground. Hundreds of meters of open air. Far below, the streets of the lower city. Far above, the brown sky.[paragraph break]The catwalk is corroded. The bolts holding it to the wall are rusted through. Every step produces a groan of protesting metal.[paragraph break]There is something strange about the light here. A faint shimmer in the air below, as though the space beneath the catwalk is bending.”
+
+The corroded-catwalk is scenery in the Maintenance Walkway. The description of the corroded-catwalk is “A metal grating walkway bolted to the tower's exterior wall. The bolts are rusted, the grating warped. It was not meant to be walked on — it was meant to hold cable runs and pipe housings. The weight of a person is more than it was designed for.” The printed name of the corroded-catwalk is “catwalk”. Understand “catwalk” or “walkway” or “grating” or “bolts” or “metal” as the corroded-catwalk.
+
+The strange-shimmer is scenery in the Maintenance Walkway. The description of the strange-shimmer is “A distortion in the air below the catwalk. Not heat haze — something else. The light bends around an invisible point, and if you stare long enough, the city below seems to stretch and compress, as though viewed through a lens made of something that isn't glass. Your eyes water. There is a faint sound at the edge of hearing — a hum that isn't a hum, a note that isn't a note.” The printed name of the strange-shimmer is “shimmer”. Understand “shimmer” or “light” or “distortion” or “strange” or “bend” or “bending” as the strange-shimmer.
+
+Every turn when the player is in the Maintenance Walkway:
+	say “The catwalk groans.[paragraph break]You feel it give — not all at once, but in stages. A bolt shears. Then another. The metal tilts beneath your feet. You grab for the wall but there is nothing to hold.[paragraph break]The catwalk folds and you fall.[paragraph break]”;
+	now the player is in the Falling.
+
+Chapter 2 - The Fall
+
+The Falling is a room. The description of the Falling is “You are falling.[paragraph break]The city rushes upward — towers, bridges, cables, the underside of The Cage receding above you. Wind screams. Your stomach is somewhere you left behind.[paragraph break]But something is wrong. You should be falling toward the ground. Instead, the ground is pulling away. The buildings are stretching, elongating, their edges smearing like wet paint. The sky above is darkening — not to night, but to something else. Something deeper than night.[paragraph break]The shimmer you saw from the catwalk is everywhere now. The air itself is bending. And you are falling not down but through — through the space between things, through a crack in the architecture of reality that was hiding underneath a maintenance walkway in the poorest quarter of a city that doesn't care about you.[paragraph break]You fall, and the world falls with you.”
+
+Instead of doing anything in the Falling:
+	now the player is in the Dissolution.
+
+The Dissolution is a room. The description of the Dissolution is “The fall changes.[paragraph break]The city is gone. The sky is gone. There is only motion and light — light that bends and folds and turns back on itself. You are accelerating, or the universe is accelerating around you — the distinction has ceased to matter.[paragraph break]There is a sound. A single sustained note, impossibly complex — a violin being drawn forward and backward at the same time, every string vibrating in sympathy with something vast and unseen. The note contains harmonics you have never heard, frequencies that register not in your ears but in your marrow, in the spaces between your cells.[paragraph break]There is a smell. It comes from nowhere and it is impossible: the scent of something dead — ancient, desiccated, the smell of tombs and dry bone — and simultaneously the smell of something violently alive — blood and growth and green things splitting stone. Death and birth occupying the same breath.[paragraph break]Your body is dissolving. You can feel it happening — your edges softening, your boundaries becoming suggestions. Your fingers are translucent. You can see through your hands to the light beyond. But there is no pain. Only a sense of expansion, as though you were always too small for yourself and are finally being allowed to fill the space you were meant to occupy.[paragraph break]And then you are not dissolving. You are reassembling. The light gathers. The note resolves.[paragraph break]You are somewhere.”
+
+Instead of doing anything in the Dissolution:
+	now the player is in the Threshold.
+
+Chapter 3 - The Other Side
+
+The Threshold is a room. The description of the Threshold is “You are lying on something warm.[paragraph break]Not warm like metal or stone warmed by sun. Warm like skin. The surface beneath you yields slightly when you move — resilient, organic, alive. You can feel a pulse through it. Slow. Vast. The heartbeat of something so large that you are a mote on its surface.[paragraph break]You open your eyes.[paragraph break]The sky is red. Not the red of sunset — a deep, arterial red, as though the atmosphere itself is suffused with blood. There are no clouds. Instead, the sky is threaded with structures that look like veins — branching, pulsing, carrying something luminous from horizon to horizon.[paragraph break]The ground is flesh. There is no other word for it. A landscape of living tissue stretching in every direction — ridged and folded like the surface of a brain, pink and glistening where it catches the red light, darker in the valleys between the folds. In the distance, structures rise from the surface: towers of bone and cartilage, wrapped in membranes that flutter in a wind you cannot feel.[paragraph break]The air tastes of copper and salt. The smell is organic — not rot, but process. The smell of a body working, of cells dividing, of wounds closing.[paragraph break]You are alive. You should not be. You don't know where you are.[paragraph break]You don't know what you are standing on.[paragraph break]But it knows you are here. You can feel it in the pulse beneath your feet — a subtle shift in rhythm, the way a sleeper stirs when touched.”
+
+The living-ground is scenery in the Threshold. The description of the living-ground is “The surface you stand on. It is tissue — organic, warm, yielding. The texture is smooth in places and ridged in others, like scar tissue or the folds of a brain. When you press your hand to it, the pulse is unmistakable: a deep, slow rhythm, vast and steady. The ground is breathing. You are standing on something that is breathing.” The printed name of the living-ground is “ground”. Understand “ground” or “floor” or “surface” or “flesh” or “tissue” or “skin” as the living-ground.
+
+The red-sky is scenery in the Threshold. The description of the red-sky is “A sky the color of arterial blood. No sun — the light seems to come from everywhere, diffuse and warm. The veins that thread the sky are translucent, and the luminous substance moving through them pulses in time with the ground beneath your feet. The same heartbeat. The sky and the ground are part of the same organism.” The printed name of the red-sky is “sky”. Understand “sky” or “red” or “veins” or “light” as the red-sky.
+
+The bone-towers are scenery in the Threshold. The description of the bone-towers is “Structures on the horizon — spires of what looks like bone, ivory-white against the red sky. They rise from the flesh-ground like ribs from a chest, curved and tapering. Membranes stretch between some of them, translucent sheets of tissue that catch the light and flutter. They could be natural formations. They could be architecture. Here, the distinction may not exist.” The printed name of the bone-towers is “towers”. Understand “towers” or “bone” or “spires” or “structures” or “cartilage” or “membranes” as the bone-towers.
+
+The Flesh Ridge is a room. The Flesh Ridge is east of the Threshold. The description of the Flesh Ridge is “A raised fold in the living landscape — a ridge of tissue three meters high, warm to the touch, its surface networked with capillaries visible just beneath the skin. From the top, you can see further across this impossible terrain. The ground ripples away in every direction, folded and creased like crumpled velvet. The bone-towers are closer here. In a valley to the north, something moves — a shape, vast and slow, sliding beneath the surface like a whale under ice.[paragraph break]The air is heavier here. Thicker. Each breath coats the inside of your mouth with the taste of living iron.”
+
+The ridge-capillaries are scenery in the Flesh Ridge. The description of the ridge-capillaries is “A web of fine vessels just beneath the translucent surface of the ridge. Dark fluid moves through them — not blood, or not only blood. It pulses with the same rhythm as everything else. When you place your palm flat against the surface, you can feel the fluid moving under your skin. It feels like it's trying to match your own heartbeat.” The printed name of the ridge-capillaries is “capillaries”. Understand “capillaries” or “vessels” or “veins” or “blood” as the ridge-capillaries.
+
+The subsurface-shape is scenery in the Flesh Ridge. The description of the subsurface-shape is “In the valley below, something enormous moves beneath the surface of the flesh-ground. A shadow — long, tapering, slow. It displaces the tissue above it as it passes, creating a wave in the landscape like a mole tunneling through earth. It is hundreds of meters long. It does not surface. It does not acknowledge you. But you have the profound and certain sense that it is aware of you in the way that an ocean is aware of a swimmer.” The printed name of the subsurface-shape is “shape beneath the surface”. Understand “shape” or “shadow” or “whale” or “creature” or “thing” or “movement” as the subsurface-shape.
+
+The Wound Valley is a room. The Wound Valley is north of the Flesh Ridge. The description of the Wound Valley is “A depression in the landscape where the tissue has split open — not torn, not injured, but opened deliberately, like lips parting. The interior of the wound is deeper red than the surface, glistening, and from its depths rises a warm updraft that smells of growth — of seeds splitting, of bones knitting, of cells remembering what they were supposed to become.[paragraph break]At the bottom of the wound, something glows. A light without source, pulsing with a rhythm faster than the great heartbeat of the ground. It is bright and it is warm and it is calling to you in a voice that is not sound.”
+
+The wound-interior is scenery in the Wound Valley. The description of the wound-interior is “The inside of the opening. Layers of tissue visible in cross-section — surface skin, a substrate of something fibrous, deeper layers that are dense and dark and shot through with luminous threads. It looks like the inside of a body. It looks like a geological stratum. It looks like both, because here, biology and geology are the same discipline.” The printed name of the wound-interior is “wound”. Understand “wound” or “opening” or “split” or “lips” or “interior” as the wound-interior.
+
+The calling-light is scenery in the Wound Valley. The description of the calling-light is “A glow from the depths of the wound. Not fire. Not phosphorescence. Something else — a light that seems to exist in more dimensions than three, that flickers not in space but in probability. Looking at it directly is difficult. Not painful — your eyes simply refuse to focus, as though the light exists at a frequency your visual cortex was not built to process.[paragraph break]It pulses. It calls. Not in words. In something older than words — in the electromagnetic language of cells, in the chemical grammar of hormones, in the deep syntax of DNA. Your body understands the call even if your mind does not.[paragraph break]Come closer, it says, in the language of your own biology.[paragraph break]Come closer.”
