@@ -24,16 +24,14 @@ Chapter 2 - Properties
 
 A room can be zero-grav or normal-grav. A room is usually normal-grav.
 
-A room has a text called the grav-description. The grav-description of a room is usually “”.
-
-After going to a zero-grav room (called the destination):
+After going to a zero-grav room:
 	if the room gone from is normal-grav:
-		say “Gravity falls away. Your stomach lurches as the floor ceases to mean anything — up and down become suggestions, not facts. You drift forward, catching a handhold to steady yourself.”;
+		say “Gravity falls away. Your stomach lurches as the floor ceases to mean anything — up and down become suggestions, not facts. You drift forward, catching a handhold to steady yourself.[paragraph break]”;
 	continue the action.
 
-After going to a normal-grav room (called the destination):
+After going to a normal-grav room:
 	if the room gone from is zero-grav:
-		say “Weight returns in a rush. Your boots find the deck and your knees bend to absorb the sudden pull. Gravity — ugly, heavy, reliable gravity.”;
+		say “Weight returns in a rush. Your boots find the deck and your knees bend to absorb the sudden pull. Gravity — ugly, heavy, reliable gravity.[paragraph break]”;
 	continue the action.
 
 Chapter 3 - Backdrops
@@ -44,7 +42,14 @@ The overhead-pipes is a backdrop. The overhead-pipes is everywhere. The descript
 
 The deck-plating is a backdrop. The deck-plating is everywhere. The description of the deck-plating is “Scuffed metal grating, worn smooth in the high-traffic areas and crusted with unidentifiable residue in the corners. Below the grate, you can see the dark gap of the service crawlspace.” The printed name of the deck-plating is “deck plating”. Understand “floor” or “deck” or “plating” or “grating” or “grate” as the deck-plating.
 
-Chapter 4 - The Transtube System
+Chapter 4 - Custom Actions
+
+Talking to is an action applying to one visible thing. Understand "talk to [someone]" or "speak to [someone]" or "talk [someone]" as talking to.
+
+Check talking to:
+	say "[The noun] doesn't seem interested in conversation." instead.
+
+Chapter 5 - The Transtube System
 
 Section 1 - The Pod
 
@@ -68,31 +73,34 @@ Carry out boarding-the-pod:
 
 Section 3 - Selecting Destinations
 
-Pod-travelling is an action applying to one topic. Understand “select [text]” or “travel to [text]” or “go to [text]” or “choose [text]” as pod-travelling.
+Pod-travelling is an action applying to one topic. Understand “select [text]” or “travel to [text]” or “choose [text]” as pod-travelling.
 
 Check pod-travelling:
 	if the player is not in the Transtube Pod, say “You're not in a transtube pod.” instead.
 
 Carry out pod-travelling:
-	if the topic understood matches the regular expression “(?i)warren|deck 7|warrens”:
+	if the topic understood matches “warren/warrens/deck 7”:
 		say “The pod seals with a pressurized click. A chime sounds. Then acceleration — brutal and brief — slams you into the couch. The pod screams through the mag-lev tunnel, the walls outside a blur of light-strips. Deceleration hits just as hard. The doors iris open onto familiar grime.[paragraph break]”;
 		now the player is in the Transtube Waiting Area;
-	else if the topic understood matches the regular expression “(?i)ring|docking”:
+	else if the topic understood matches “ring/docking ring/docking”:
 		say “The pod seals. A deep thrum builds beneath you as the mag-lev engages. Acceleration crushes you into the couch — then weightlessness as the pod arcs through the station's central axis, threading the gap between decks. You feel the station's spin fall away as the pod crosses into the non-rotating section. Deceleration. The doors open onto cleaner air and brighter lights.[paragraph break]”;
 		now the player is in the Ring Transtube Station;
-	else if the topic understood matches the regular expression “(?i)commerce”:
+	else if the topic understood matches “commerce/commerce deck”:
 		say “The pod seals and launches. The journey is longer — the Commerce Deck is on the far side of the station. You watch light-strips streak past through the tiny viewport. Eventually, deceleration. The doors open... but there's nothing here yet. The platform is under construction. You step back inside.[paragraph break]The pod returns you to where you started.”;
 	else:
 		say “The panel flashes red: DESTINATION NOT RECOGNIZED. Available stops: WARRENS, DOCKING RING, COMMERCE DECK.”
 
 Section 4 - Exiting
 
-Disembarking is an action applying to nothing. Understand “exit pod” or “leave pod” or “disembark” or “get out” or “exit” or “leave” as disembarking.
+Disembarking is an action applying to nothing. Understand “exit pod” or “leave pod” or “disembark” as disembarking.
 
 Check disembarking:
 	if the player is not in the Transtube Pod, say “You're not in anything to exit.” instead.
 
 Carry out disembarking:
+	say “You haven't selected a destination yet. Use the destination panel to choose where to go.”
+
+Instead of going outside in the Transtube Pod:
 	say “You haven't selected a destination yet. Use the destination panel to choose where to go.”
 
 Part 2 - The Warrens of Praxis
@@ -267,19 +275,17 @@ The cylift-warning-stripes are scenery in the Cylift Platform. The description o
 
 Section 1 - Cylift Travel
 
-Pressing-up is an action applying to nothing. Understand “press up” or “push up” or “go up” or “up” as pressing-up when the player is in the Cylift Platform.
-
-Check pressing-up:
-	if the player is not in the Cylift Platform, stop the action.
-
-Carry out pressing-up:
+Instead of going up in the Cylift Platform:
 	say “You grip a mag-clamp as the cylift engages. The car rises smoothly up the shaft, walls of grey metal sliding past. The ascent takes thirty seconds — then the car locks into place with a heavy clang and the grav-lock chamber opens before you.”;
 	now the player is in the Ring Grav-Lock.
 
-Pressing-down is an action applying to nothing. Understand “press down” or “push down” as pressing-down when the player is in the Cylift Platform.
-
-Carry out pressing-down:
+Instead of going down in the Cylift Platform:
 	say “The keycard reader blinks red. ACCESS RESTRICTED — MAINTENANCE PERSONNEL ONLY. You don't have the credentials.”
+
+Pressing-button is an action applying to nothing. Understand “press up” or “push up” as pressing-button when the player is in the Cylift Platform.
+
+Carry out pressing-button:
+	try going up.
 
 Chapter 4 - The Ring Grav-Lock
 
@@ -437,8 +443,7 @@ Chapter 7 - Shuttle Berths
 
 Section 1 - Shuttle Grav-Lock
 
-The Shuttle Grav-Lock is a room. The Shuttle Grav-Lock is zero-grav. The description of The Shuttle Grav-Lock is “A grav-lock chamber at the top of the Ring, smaller and cleaner than the one below. The walls are painted in transit authority yellow and marked with directional arrows. Below leads back to the Ring. Above, through a reinforced hatch, is the shuttle berth bay — the gateway to everywhere the transtube doesn't go.”
-The Shuttle Grav-Lock is above Ring Upper Central. The Shuttle Grav-Lock is a grav-lock-chamber.
+The Shuttle Grav-Lock is a grav-lock-chamber. The Shuttle Grav-Lock is zero-grav. The Shuttle Grav-Lock is above Ring Upper Central. The description of The Shuttle Grav-Lock is “A grav-lock chamber at the top of the Ring, smaller and cleaner than the one below. The walls are painted in transit authority yellow and marked with directional arrows. Below leads back to the Ring. Above, through a reinforced hatch, is the shuttle berth bay — the gateway to everywhere the transtube doesn't go.”
 
 The shuttle-lock-hatch is scenery in the Shuttle Grav-Lock. The description of the shuttle-lock-hatch is “A heavy hatch with SHUTTLE BERTH ACCESS stenciled on it in yellow. Through the viewport set into it, you can see the controlled bustle of the berth bay above.” The printed name of the shuttle-lock-hatch is “hatch”. Understand “hatch” or “door” as the shuttle-lock-hatch.
 
@@ -446,7 +451,7 @@ The shuttle-lock-arrows are scenery in the Shuttle Grav-Lock. The description of
 
 Section 2 - Shuttle Berth Bay
 
-The Shuttle Berth Bay is a room. The Shuttle Berth Bay is normal-grav. The Shuttle Berth Bay is above of the Shuttle Grav-Lock. The description of The Shuttle Berth Bay is “Gravity reasserts itself as you pass through the grav-lock — this bay has its own spin section, a small drum rotating to provide a comfortable pull. The shuttle berth bay is a long, vaulted hangar with berths on both sides, each one a recessed alcove with a shuttle parked nose-in. A central walkway runs the length of the bay, lined with departure gates and ticket kiosks. Overhead, a destination board lists shuttle routes to dozens of locations too far or too awkward for the transtube network. The grav-lock hatch is set into the floor at the south end.”
+The Shuttle Berth Bay is a room. The Shuttle Berth Bay is normal-grav. The Shuttle Berth Bay is above the Shuttle Grav-Lock. The description of The Shuttle Berth Bay is “Gravity reasserts itself as you pass through the grav-lock — this bay has its own spin section, a small drum rotating to provide a comfortable pull. The shuttle berth bay is a long, vaulted hangar with berths on both sides, each one a recessed alcove with a shuttle parked nose-in. A central walkway runs the length of the bay, lined with departure gates and ticket kiosks. Overhead, a destination board lists shuttle routes to dozens of locations too far or too awkward for the transtube network. The grav-lock hatch is set into the floor at the south end.”
 
 The shuttle-destination-board is a display-screen in the Shuttle Berth Bay. The description of the shuttle-destination-board is “A large board listing shuttle departures:[line break][line break]  REFINERY PLATFORMS .... GATE 1 .... 0:45[line break]  SALVAGE YARDS ........ GATE 3 .... 1:20[line break]  DEEP RANGE RELAY ..... GATE 5 .... 3:00[line break]  KETHANI DEBRIS FIELD . GATE 7 .... 4:30[line break]  ORBITAL HAB CLUSTER .. GATE 2 .... 0:30[line break][line break]Prices are listed in small text below each destination. None of them are cheap.” The printed name of the shuttle-destination-board is “destination board”. Understand “board” or “destination” or “departures” or “display” as the shuttle-destination-board.
 
