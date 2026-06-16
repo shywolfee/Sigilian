@@ -384,9 +384,15 @@ Chapter 6 - Docking Slips
 
 Section 1 - Slip 1A
 
-Docking Slip 1A is a room. Docking Slip 1A is zero-grav. Docking Slip 1A is west of Ring Upper West. The description of Docking Slip 1A is “The outermost berth in the Ring's upper-west quadrant. A massive set of docking clamps lines the outer wall, currently empty — the slip is vacant. Through the berth doors, sealed now, you would see open space. Tether points and fuel umbilicals hang loose, waiting for the next ship. The junction is back to the east.”
+Docking Slip 1A is a room. Docking Slip 1A is zero-grav. Docking Slip 1A is west of Ring Upper West. The description of Docking Slip 1A is “The outermost berth in the Ring's upper-west quadrant. A massive set of docking clamps lines the outer wall, currently empty — the slip is vacant. Through the berth doors, sealed now, you would see open space. Tether points and fuel umbilicals hang loose, waiting for the next ship. One of the clamp housings has a manual release wheel on its side — unusual, since these systems are normally automated. The junction is back to the east.”
 
-The slip-1a-clamps are scenery in Docking Slip 1A. The description of the slip-1a-clamps is “Heavy magnetic docking clamps, each one the size of a ground vehicle. They're retracted into their housings, waiting. When a ship docks, these lock onto the hull and hold it fast against the station's rotation.” The printed name of the slip-1a-clamps is “docking clamps”. Understand “clamps” or “docking” or “magnetic” as the slip-1a-clamps.
+The slip-1a-clamps are scenery in Docking Slip 1A. The description of the slip-1a-clamps is “Heavy magnetic docking clamps, each one the size of a ground vehicle. They're retracted into their housings, waiting. One housing — the third from the left — has a manual release wheel bolted to its side. The wheel is clean. No dust, no corrosion. Someone has been using it recently.” The printed name of the slip-1a-clamps is “docking clamps”. Understand “clamps” or “docking” or “magnetic” as the slip-1a-clamps.
+
+The clamp-release-wheel is a thing in Docking Slip 1A. The description of the clamp-release-wheel is “A heavy metal wheel, hand-sized, bolted to the side of the third clamp housing. It's clean — conspicuously so, given that everything else in this slip is coated in micro-corrosion. When you look closely, you can see faint wear marks on the metal. Someone turns this wheel regularly.” The printed name of the clamp-release-wheel is “release wheel”. Understand “wheel” or “release” or “manual” or “turn” as the clamp-release-wheel.
+
+Instead of turning the clamp-release-wheel:
+	say “You grip the wheel and turn it. It resists for a moment, then moves smoothly — too smoothly for station hardware. Three full rotations. On the third, something clicks deep inside the clamp housing, and the entire unit slides sideways on hidden rails, revealing a passage behind it. A passage that should not exist — the hull is right there, you should be looking at vacuum. Instead, there is a corridor, dimly lit, leading down into a space the station's blueprints don't know about.”;
+	now the player is in the Hidden Berth.
 
 The slip-1a-umbilicals are scenery in Docking Slip 1A. The description of the slip-1a-umbilicals is “Fuel lines, power feeds, data cables, and atmo hookups — everything a docked ship needs to keep running on station power instead of burning its own reserves. They drift like tentacles in the zero-grav.” The printed name of the slip-1a-umbilicals is “fuel umbilicals”. Understand “umbilicals” or “fuel” or “lines” or “hookups” as the slip-1a-umbilicals.
 
@@ -751,3 +757,303 @@ The Wound Valley is a room. The Wound Valley is north of the Flesh Ridge. The de
 The wound-interior is scenery in the Wound Valley. The description of the wound-interior is “The inside of the opening. Layers of tissue visible in cross-section — surface skin, a substrate of something fibrous, deeper layers that are dense and dark and shot through with luminous threads. It looks like the inside of a body. It looks like a geological stratum. It looks like both, because here, biology and geology are the same discipline.” The printed name of the wound-interior is “wound”. Understand “wound” or “opening” or “split” or “lips” or “interior” as the wound-interior.
 
 The calling-light is scenery in the Wound Valley. The description of the calling-light is “A glow from the depths of the wound. Not fire. Not phosphorescence. Something else — a light that seems to exist in more dimensions than three, that flickers not in space but in probability. Looking at it directly is difficult. Not painful — your eyes simply refuse to focus, as though the light exists at a frequency your visual cortex was not built to process.[paragraph break]It pulses. It calls. Not in words. In something older than words — in the electromagnetic language of cells, in the chemical grammar of hormones, in the deep syntax of DNA. Your body understands the call even if your mind does not.[paragraph break]Come closer, it says, in the language of your own biology.[paragraph break]Come closer.”
+
+Part 9 - The Hidden Berth and the Slipstream
+
+Chapter 1 - The Hidden Berth
+
+The Hidden Berth is a room. The description of the Hidden Berth is “The passage behind the clamp housing opens into a space that shouldn't exist — a berth carved into the station's bones, hidden between hull layers, invisible to schematics and scanners alike. The walls are smooth dark metal, unmarked, absorbing light. No rust. No corrosion. No dust. Someone maintains this place.[paragraph break]A single vessel sits in the cradle: a capsule, sleek and featureless, its hull a material you don't recognize — it shifts color when you look at it from different angles, now black, now deep blue, now something that isn't a color at all. There are no docking clamps. The capsule simply floats, motionless, held by nothing visible.[paragraph break]The passage back to Slip 1A is behind you.”
+
+Instead of going east in the Hidden Berth:
+	say “You step back through the passage. The clamp housing slides shut behind you with a soft click.”;
+	now the player is in Docking Slip 1A.
+
+The slipstream-capsule is scenery in the Hidden Berth. The description of the slipstream-capsule is “Unlike any vessel you've seen. No seams, no rivets, no visible propulsion. The hull is a single continuous surface of something that drinks light and returns it changed. When you place your hand near it — not touching, just near — the air between your palm and the hull hums with static. The capsule knows you're here.” The printed name of the slipstream-capsule is “capsule”. Understand “capsule” or “vessel” or “ship” or “pod” or “slipstream” as the slipstream-capsule.
+
+The berth-walls are scenery in the Hidden Berth. The description of the berth-walls is “Dark metal, seamless, absorbing light. No markings. No signage. No indication of who built this place or when. The walls feel warm to the touch, and if you press your ear to them, you can hear something — not the station hum, but something deeper, slower, older.” The printed name of the berth-walls is “walls”. Understand “walls” or “metal” or “dark” as the berth-walls.
+
+Chapter 2 - Boarding the Slipstream Capsule
+
+Boarding-slipstream is an action applying to nothing. Understand “board capsule” or “enter capsule” or “board” or “get in capsule” or “enter vessel” as boarding-slipstream when the player is in the Hidden Berth.
+
+Carry out boarding-slipstream:
+	say “You approach the capsule. Before you touch it, a seam appears in the hull — not opening, but dissolving, the material flowing apart like mercury. Beyond it, an interior that glows with soft, sourceless light. You step inside.[paragraph break]The hull reforms behind you. The interior is a single curved space — no seats, no controls, no instruments. Just smooth walls that pulse with a faint luminescence and, in the center, a pedestal of the same dark material with four symbols etched into its surface, each one glowing a different color.[paragraph break]Amber. Crimson. Blue. White.”;
+	now the player is in the Slipstream Interior.
+
+Chapter 3 - The Slipstream Interior
+
+The Slipstream Interior is a room. The description of the Slipstream Interior is “The inside of the capsule. Smooth curved walls pulse with sourceless light. There are no windows, no controls, no visible machinery — only the pedestal at the center, bearing four symbols. Each one glows with its own light, waiting to be touched.[paragraph break]  AMBER — a glyph like layered stone, warm and steady.[line break]  CRIMSON — a glyph like a tongue of flame, flickering.[line break]  BLUE — a glyph like a cresting wave, fluid and shifting.[line break]  WHITE — a glyph like a forking bolt, sharp and bright.[paragraph break]Type OUT to open the capsule and return to the berth.”
+
+The slipstream-pedestal is scenery in the Slipstream Interior. The description of the slipstream-pedestal is “A column of dark material rising from the capsule floor to waist height. Four symbols are etched into its flat upper surface, each glowing with inner light. They are not letters in any alphabet you know. They are older than alphabets — shapes that mean what they are, that communicate directly to something in you that predates language.” The printed name of the slipstream-pedestal is “pedestal”. Understand “pedestal” or “column” or “symbols” or “glyphs” as the slipstream-pedestal.
+
+The amber-glyph is scenery in the Slipstream Interior. The description of the amber-glyph is “A symbol like compressed strata — layers pressed together, dense and patient. It glows with the color of old honey, of autumn, of things buried deep. When your hand hovers over it, you feel weight — a phantom gravity pulling your palm down.” The printed name of the amber-glyph is “amber glyph”. Understand “amber” or “stone” or “earth” as the amber-glyph.
+
+The crimson-glyph is scenery in the Slipstream Interior. The description of the crimson-glyph is “A symbol like a flame caught mid-flicker — alive, restless, refusing to hold still even in carved stone. The crimson light it throws dances across the walls. When your hand hovers over it, heat rises — not enough to burn, but enough to warn.” The printed name of the crimson-glyph is “crimson glyph”. Understand “crimson” or “flame” or “fire” as the crimson-glyph.
+
+The blue-glyph is scenery in the Slipstream Interior. The description of the blue-glyph is “A symbol like a wave in cross-section — curved, layered, moving even though it is carved in stone. The blue light it casts shifts constantly, rippling across the walls. When your hand hovers over it, the air feels damp, and you taste salt.” The printed name of the blue-glyph is “blue glyph”. Understand “blue” or “wave” or “water” as the blue-glyph.
+
+The white-glyph is scenery in the Slipstream Interior. The description of the white-glyph is “A symbol like a lightning bolt frozen mid-strike — jagged, angular, violent in its precision. The white light it emits is sharp and cold, and it flickers at a frequency just fast enough to register as movement. When your hand hovers over it, the hair on your arm stands on end.” The printed name of the white-glyph is “white glyph”. Understand “white” or “bolt” or “lightning” or “electricity” as the white-glyph.
+
+Chapter 4 - Slipstream Travel
+
+Slipstream-travelling is an action applying to one topic. Understand “touch [text]” or “press [text]” or “select [text]” or “choose [text]” as slipstream-travelling when the player is in the Slipstream Interior.
+
+Carry out slipstream-travelling:
+	if the topic understood matches “amber/earth/stone”:
+		say “Your fingers touch the amber glyph.[paragraph break]The capsule lifts. You feel it rise through the station — through hull, through vacuum — and the walls become transparent. Stars wheel around you. Praxis Station falls away below, a dark mass against the light of the Maw.[paragraph break]Then the capsule stops. Ahead, a point of amber light appears in the void. It grows, expands, becomes a vertical tear in the fabric of space — a portal the color of desert sandstone, its edges rippling like heat haze. Through it you see a landscape of impossible scale: mountains of crystal and compressed stone rising from a plain of dark earth under a sky of perpetual amber twilight.[paragraph break]The capsule slides through the portal. The stars vanish. The amber light surrounds you, warm and heavy. The capsule's walls darken, thicken, change — the smooth luminescent surface becomes rough stone, the floor gritty with dust. The pedestal sinks into the floor and is replaced by a formation of natural crystal. You are no longer in a capsule. You are in a cavern that moves.”;
+		now the player is in the Earthen Vessel;
+	else if the topic understood matches “crimson/fire/flame”:
+		say “Your fingers touch the crimson glyph.[paragraph break]The capsule lifts. Through suddenly transparent walls, Praxis Station shrinks to a point of light. The Maw turns slowly in the distance.[paragraph break]A point of crimson light ignites ahead — not a portal but an eruption, space itself splitting open like skin over a burn, revealing fire beneath. The tear blazes with heat that you can feel through the capsule walls, its edges ragged and violent, and through it you see a world of flame — a sky of burning gas, a ground of molten glass, structures of obsidian rising from seas of lava.[paragraph break]The capsule plunges through. The fire swallows everything. The capsule's walls glow cherry-red, then white, then become something else entirely — black glass, veined with light, radiating heat. The floor is warm metal grating. The pedestal has become a column of obsidian with veins of molten light threading through it. The air tastes of sulfur and ozone.”;
+		now the player is in the Molten Vessel;
+	else if the topic understood matches “blue/water/wave”:
+		say “Your fingers touch the blue glyph.[paragraph break]The capsule lifts. The walls go transparent and the void opens around you — stars, the Maw, the diminishing shape of Praxis.[paragraph break]Ahead, a point of blue light blooms — not tearing space open but flooding it, the void filling with color like ink dropped in water. The portal is not a tear but a pool, vertical and shimmering, its surface rippling with waves that have no source. Through it you see depths — an ocean with no surface and no floor, where light comes from everywhere and nowhere and things move in the distance, vast and slow.[paragraph break]The capsule dives through. Water — or something like water — closes over the walls. The capsule's interior shifts: the walls become blue-green glass, smooth and cool to the touch. The floor is a grating over dark water that moves beneath you. The pedestal has become a pillar of coral, pale and branching. Bioluminescent motes drift through the air. The pressure in your ears changes.”;
+		now the player is in the Abyssal Vessel;
+	else if the topic understood matches “white/electricity/lightning/bolt”:
+		say “Your fingers touch the white glyph.[paragraph break]The capsule lifts. The walls dissolve to transparency. Stars. Void. The Maw.[paragraph break]The portal is instantaneous — no bloom, no tear, just a crack, a fracture in space that branches and forks like lightning frozen in three dimensions. Through the fractured edges you see a void that is not dark but bright — a space where the emptiness itself crackles with charge, where arcs of electricity bridge distances that make no sense, where the concept of matter is a rumor that never quite solidified.[paragraph break]The capsule punches through the fracture. Static swallows everything — your vision whites out, your skin crawls, every hair stands rigid. When sight returns, the capsule is changed. The walls are bare metal, brushed steel, humming with current. The floor vibrates. The pedestal has become a Tesla coil, silent but alive, St. Elmo's fire dancing at its tip. The air smells of ozone and burned copper. Sparks crawl across every surface.”;
+		now the player is in the Voltaic Vessel;
+	else:
+		say “The pedestal does not respond. The four glyphs glow patiently: AMBER, CRIMSON, BLUE, WHITE.”
+
+Leaving-slipstream is an action applying to nothing. Understand “out” or “leave” or “exit” or “leave capsule” or “exit capsule” as leaving-slipstream when the player is in the Slipstream Interior.
+
+Carry out leaving-slipstream:
+	say “The hull dissolves open and you step out onto the dark metal floor of the hidden berth. The capsule seals behind you, patient and waiting.”;
+	now the player is in the Hidden Berth.
+
+Part 10 - The Encapsulation of Earth
+
+Chapter 1 - The Earthen Vessel
+
+The Earthen Vessel is a room. The description of the Earthen Vessel is “What was a capsule is now a moving cavern — rough stone walls, a ceiling of compressed crystal that lets in amber light, a floor of packed earth that vibrates with motion. Through gaps in the stone, you can see the landscape sliding past: vast plains of dark soil under a sky the color of old gold, mountain ranges of raw crystal catching the light, canyons that descend into darkness.[paragraph break]The cavern is slowing. The vibration fades. Through the widening gaps in the walls, a plateau of dark stone stretches to the horizon under the amber sky. The crystal formation at the center pulses gently.[paragraph break]Type OUT to open the vessel and step onto the plateau.”
+
+The earth-crystal-formation is scenery in the Earthen Vessel. The description of the earth-crystal-formation is “What was the pedestal. Now it is a cluster of natural crystals — smoky quartz and amber citrine — growing from the cavern floor. The four glyphs are still visible, etched into the largest crystal face, but they are dormant now. Dark. The only one that glows is the amber, faintly, like an ember.” The printed name of the earth-crystal-formation is “crystal formation”. Understand “crystal” or “formation” or “pedestal” or “quartz” or “citrine” as the earth-crystal-formation.
+
+The earth-vessel-walls are scenery in the Earthen Vessel. The description of the earth-vessel-walls is “Rough-hewn stone. Not carved — grown, or compressed, as though the capsule's smooth hull was squeezed by geological pressure until it became rock. Veins of mineral ore thread the surface — copper green, iron red, the occasional glint of something precious.” The printed name of the earth-vessel-walls is “stone walls”. Understand “walls” or “stone” or “rock” or “ore” or “veins” as the earth-vessel-walls.
+
+Exiting-earth-vessel is an action applying to nothing. Understand “out” or “leave” or “exit” or “step out” or “disembark” as exiting-earth-vessel when the player is in the Earthen Vessel.
+
+Carry out exiting-earth-vessel:
+	say “The stone walls part — not opening but crumbling away, returning to the earth they came from. You step out onto dark stone. Behind you, the cavern collapses in on itself, the rubble sinking into the ground until only a ring of standing stones remains, marking where the vessel landed. Above you, the amber sky. Below you, a world made of stone and silence.”;
+	now the player is in the Basalt Plateau.
+
+Chapter 2 - The Basalt Plateau
+
+The Basalt Plateau is a room. The description of the Basalt Plateau is “A vast flat expanse of dark volcanic stone under an amber sky that has no sun — the light comes from everywhere, diffuse and warm, casting no shadows. The plateau stretches to the horizon in every direction, broken only by formations of crystal that erupt from the stone like frozen geysers, some rising hundreds of meters into the air. The silence is total. Not quiet — silence, the complete absence of sound, as though sound itself is a foreign concept here.[paragraph break]A ring of standing stones marks where your vessel landed. To the north, the plateau gives way to a canyon. To the east, a range of crystal mountains catches the amber light.”
+
+The earth-standing-stones are scenery in the Basalt Plateau. The description of the earth-standing-stones is “A circle of dark basalt columns, each one twice your height, arranged where the vessel dissolved. They hum with residual energy — a vibration you feel through the soles of your feet rather than hear. The glyphs from the pedestal are faintly visible on the central stone, dark and dormant.” The printed name of the earth-standing-stones is “standing stones”. Understand “stones” or “standing” or “circle” or “columns” or “ring” as the earth-standing-stones.
+
+The crystal-geysers are scenery in the Basalt Plateau. The description of the crystal-geysers is “Formations of crystal erupting from the basalt — not grown slowly but forced upward by pressure from below, their surfaces sharp-edged and glittering. Some are clear as glass. Others are clouded with mineral inclusions, amber and violet and deep green. They catch the light from the sunless sky and refract it into patterns on the ground.” The printed name of the crystal-geysers is “crystal formations”. Understand “crystal” or “formations” or “geysers” or “spires” as the crystal-geysers.
+
+Chapter 3 - The Crystal Canyon
+
+The Crystal Canyon is a room. The Crystal Canyon is north of the Basalt Plateau. The description of the Crystal Canyon is “The plateau breaks here, split by a canyon that descends into the earth — or into whatever passes for earth in a place that is itself the essence of earth. The canyon walls are layered strata of compressed stone, each band a different color: black basalt, red sandstone, white chalk, veins of emerald and sapphire running through them like arteries. The walls are close enough to touch on both sides.[paragraph break]At the bottom, far below, something glows — a vein of molten mineral, golden and slow, the lifeblood of this world flowing through its deepest channel. A path descends along the canyon wall to the west. The plateau is back to the south.”
+
+The canyon-strata are scenery in the Crystal Canyon. The description of the canyon-strata is “Geological epochs laid bare — each layer of stone a chapter in a history that was never written because no one was here to write it. The strata are compressed so tightly that individual crystals are visible in the rock face, glinting like embedded stars. If you press your palm to the wall, you can feel the stone vibrating — a deep, slow pulse, like a heartbeat measured in centuries.” The printed name of the canyon-strata is “strata”. Understand “strata” or “layers” or “bands” or “wall” or “walls” or “canyon” as the canyon-strata.
+
+The molten-vein is scenery in the Crystal Canyon. The description of the molten-vein is “Far below, at the canyon's nadir, a river of molten mineral flows without sound — gold and amber, thick as honey, casting warm light up the canyon walls. It is not lava. It is something purer — the essential fluid of this place, the molten idea of earth made liquid and given motion.” The printed name of the molten-vein is “molten vein”. Understand “molten” or “vein” or “river” or “gold” or “glow” as the molten-vein.
+
+Chapter 4 - The Descending Path
+
+The Descending Path is a room. The Descending Path is west of the Crystal Canyon. The description of the Descending Path is “A narrow path carved — or worn — into the canyon wall, switchbacking down toward the molten vein below. The stone underfoot is warm and grows warmer with each step. The light from below bathes everything in amber gold. The canyon walls press close, and the air is thick with mineral dust that coats your tongue with the taste of copper.[paragraph break]The path ends at a ledge overlooking the molten vein. To the east, the path leads back up to the canyon rim. Below the ledge, the vein pulses — and in its surface, you can see shapes. Reflections that are not your own.”
+
+The path-reflections are scenery in the Descending Path. The description of the path-reflections is “In the surface of the molten vein below — shapes that are not reflections, because you are not standing over the flow. They move independently, dark silhouettes against the golden light. Figures. Walking, standing, reaching upward. They are under the surface, or in it, or made of it. They do not look up at you. They do not need to. They have always been here.” The printed name of the path-reflections is “reflections”. Understand “reflections” or “shapes” or “figures” or “silhouettes” as the path-reflections.
+
+Every turn when the player is in the Descending Path:
+	say “The ledge cracks.[paragraph break]You feel it go — the stone splitting cleanly beneath your feet, calving from the canyon wall like a glacier shedding ice. You fall. Not into the molten vein — sideways, into the canyon wall itself, through a fissure that opens as you fall and closes behind you, the stone swallowing you whole. Darkness. Pressure. The weight of a world pressing in on every side.[paragraph break]You are inside the stone now. It is warm and close and it is crushing you, slowly, with infinite patience.”;
+	end the story saying “The earth takes back what it is owed”.
+
+Chapter 5 - The Crystal Mountains
+
+The Crystal Mountains is a room. The Crystal Mountains is east of the Basalt Plateau. The description of the Crystal Mountains is “A range of mountains made entirely of crystal — not stone with crystal in it, but crystal all the way through, translucent and luminous, refracting the amber light into prismatic cascades that paint the dark basalt foothills in shifting color. The mountains rise to impossible heights, their peaks lost in the amber sky. The silence here has a quality — not empty but full, as though the mountains are listening.[paragraph break]At the base of the nearest peak, a cave entrance opens — a geode split wide, its interior studded with amethyst clusters the size of your fist. Something inside the cave hums at a frequency that makes your molars ache.”
+
+The crystal-peaks are scenery in the Crystal Mountains. The description of the crystal-peaks is “Mountains of pure crystal, each one a single formation hundreds of meters tall. Quartz, citrine, amethyst — the light passes through them and emerges changed, split into spectra that don't exist in normal physics. Looking at the peaks directly produces afterimages that linger for minutes, patterns burned into your retina by light that carries more information than your eyes can process.” The printed name of the crystal-peaks is “crystal peaks”. Understand “peaks” or “mountains” or “mountain” or “crystal” as the crystal-peaks.
+
+Chapter 6 - The Resonance Cave
+
+The Resonance Cave is a room. The Resonance Cave is north of the Crystal Mountains. The description of the Resonance Cave is “The interior of the geode — a cathedral of amethyst, every surface studded with crystals that catch and multiply the ambient light until the cave blazes with violet and gold. The hum is stronger here, emanating from the crystals themselves, a chord that builds and layers and becomes almost music. At the center of the cave, a single crystal stands apart from the rest — a column of clear quartz, perfectly smooth, and inside it, suspended like an insect in amber, a point of light.[paragraph break]The light is a doorway. You can feel it — a thinning of the fabric of this place, a point where the Encapsulation of Earth wears thin and something else shows through. The light of the prime material. Home.”
+
+The resonance-crystal is scenery in the Resonance Cave. The description of the resonance-crystal is “A column of clear quartz rising from the cave floor. Inside it, a mote of light — not amber like this world, but white, the light of ordinary stars and ordinary suns. It pulses with a rhythm you recognize: the rhythm of a world with weather and seasons and entropy. Your world. Or close enough.” The printed name of the resonance-crystal is “quartz column”. Understand “column” or “quartz” or “crystal” or “clear” or “light” or “mote” as the resonance-crystal.
+
+Touching-resonance is an action applying to nothing. Understand “touch crystal” or “touch column” or “touch quartz” or “touch light” as touching-resonance when the player is in the Resonance Cave.
+
+Carry out touching-resonance:
+	say “You press your palm to the quartz column. The crystal is warm — blood warm — and the moment your skin touches it, the mote of light inside flares. The hum of the cave rises to a roar. The amethyst walls blaze white. Your hand sinks into the crystal as though it were water, and the light rushes up your arm, through your chest, behind your eyes.[paragraph break]The cave dissolves. The amber sky dissolves. Everything dissolves into white light and a sound like a tuning fork struck against the spine of the world.[paragraph break]When you can see again, you are somewhere else. Somewhere with weather and gravity that doesn't think about you.”;
+	now the player is in the Rustfield.
+
+Chapter 7 - Earth Return
+
+The Rustfield is a room. The description of the Rustfield is “You are standing in a field of red dirt under an open sky — an actual sky, blue-grey and overcast, with actual clouds and an actual wind that smells of rain and rust. The ground is hard-packed earth, iron-rich, staining your boots red. In the distance, a settlement — low buildings, smoke from chimneys, the glint of metal roofs.[paragraph break]You don't know where this is. It's not Praxis. It's not Aeteria. It's somewhere on the prime material, somewhere with soil and sky and the ordinary miracle of weather. A dirt road leads south toward the settlement.”
+
+The rustfield-sky is scenery in the Rustfield. The description of the rustfield-sky is “An overcast sky. Grey clouds heavy with rain. The light is flat and even — no amber twilight, no arterial red, just the honest grey of a world that has seasons and means it. After where you've been, it's the most beautiful thing you've ever seen.” The printed name of the rustfield-sky is “sky”. Understand “sky” or “clouds” or “overcast” as the rustfield-sky.
+
+Part 11 - The Encapsulation of Fire
+
+Chapter 1 - The Molten Vessel
+
+The Molten Vessel is a room. The description of the Molten Vessel is “What was a capsule is now a shell of black volcanic glass, veined with crawling lines of molten light. The walls radiate heat — not unbearable, but insistent, a constant reminder of where you are. Through the glass walls, you can see the landscape: a world on fire. Seas of lava stretch to horizons smudged with heat shimmer and volcanic ash. Obsidian towers rise from the magma like blackened teeth. The sky is a boiling ceiling of flame-lit cloud, orange and red and the deep purple of superheated gas.[paragraph break]The vessel has stopped moving. Outside, a shelf of cooled obsidian extends from the base of an enormous volcanic formation. The obsidian column at the center pulses with inner fire.[paragraph break]Type OUT to open the vessel and step onto the obsidian shelf.”
+
+The fire-obsidian-column is scenery in the Molten Vessel. The description of the fire-obsidian-column is “What was the pedestal. A column of obsidian, cracked and veined with lines of molten light that pulse like a heartbeat. The four glyphs are etched into it, but only the crimson one glows — the others are dark, sealed in stone.” The printed name of the fire-obsidian-column is “obsidian column”. Understand “column” or “obsidian” or “pedestal” as the fire-obsidian-column.
+
+Exiting-fire-vessel is an action applying to nothing. Understand “out” or “leave” or “exit” or “step out” or “disembark” as exiting-fire-vessel when the player is in the Molten Vessel.
+
+Carry out exiting-fire-vessel:
+	say “The black glass walls crack and fall away in sheets, shattering on the obsidian below. Heat hits you — a wall of it, dry and searing, like opening an oven the size of a world. You step out onto dark glass. Behind you, the vessel's remains sink into the obsidian, melting, absorbed. A circle of scorched stone marks where it stood. The sky burns above you. The world burns below.”;
+	now the player is in the Obsidian Shelf.
+
+Chapter 2 - The Obsidian Shelf
+
+The Obsidian Shelf is a room. The description of the Obsidian Shelf is “A shelf of cooled volcanic glass jutting from the base of a massive volcanic caldera. The obsidian is smooth and reflective — you can see yourself in it, distorted by heat shimmer. The air is furnace-hot and tastes of sulfur. To the north, the caldera rises in a wall of black rock. To the east, a bridge of cooled lava spans a river of molten stone, leading to a cluster of obsidian towers. Below the shelf's edge, a sea of magma stretches to the horizon, its surface crusted in places, cracked and glowing in others.[paragraph break]A circle of scorched stone marks where your vessel landed.”
+
+The fire-scorch-mark is scenery in the Obsidian Shelf. The description of the fire-scorch-mark is “A circle of darker stone where the vessel melted into the obsidian. The glass here is still warm — warmer than the ambient furnace heat, which is saying something. Faint glyphs are visible in the cooling surface, sinking deeper as the glass re-solidifies.” The printed name of the fire-scorch-mark is “scorch mark”. Understand “scorch” or “mark” or “circle” as the fire-scorch-mark.
+
+The magma-sea is scenery in the Obsidian Shelf. The description of the magma-sea is “An ocean of molten rock stretching to the horizon. Its surface moves with the sluggish patience of something too hot to hurry. Crusted plates of cooling stone form and crack and reform on its surface, carried along by currents visible as lines of brighter orange in the red-gold glow. Occasionally, a gout of gas erupts from below, throwing molten droplets skyward.” The printed name of the magma-sea is “magma sea”. Understand “magma” or “sea” or “lava” or “molten” as the magma-sea.
+
+Chapter 3 - The Lava Bridge
+
+The Lava Bridge is a room. The Lava Bridge is east of the Obsidian Shelf. The description of the Lava Bridge is “A natural bridge of cooled lava spanning a river of molten stone — a tributary of the greater magma sea. The bridge is three meters wide and twenty long, its surface rough and ridged with flow patterns from when it was still liquid. The heat from below is savage — the air above the river shimmers and distorts, making the far side waver like a mirage. The obsidian towers wait on the far bank. Below, the lava river flows with a sound like tearing fabric, slow and endless.”
+
+The lava-river is scenery in the Lava Bridge. The description of the lava-river is “A river of molten stone flowing beneath the bridge, its surface a shifting mosaic of red and orange and white-hot yellow. The current is slow but inexorable. Rocks of cooled stone float on its surface like dark islands, glowing at their edges where the magma laps against them. The heat is physical — a presence that pushes against you.” The printed name of the lava-river is “lava river”. Understand “river” or “lava” or “flow” or “current” as the lava-river.
+
+Chapter 4 - The Obsidian Towers
+
+The Obsidian Towers is a room. The Obsidian Towers is east of the Lava Bridge. The description of the Obsidian Towers is “A cluster of natural obsidian spires rising from a platform of cooled stone — each one twenty meters tall, smooth and black and reflective, arranged in a rough circle. Between them, the air shimmers with heat, and where the towers' reflective surfaces catch the light of the burning sky, they throw it back in concentrated beams that carve bright lines across the dark stone floor. At the center of the circle, a pool of liquid fire — not lava, something purer, brighter, hotter — churns in a basin of black glass.[paragraph break]The bridge is back to the west. A narrow passage between two towers leads north, toward the caldera.”
+
+The fire-pool is scenery in the Obsidian Towers. The description of the fire-pool is “A basin of obsidian glass containing liquid fire. Not magma — this is fire in its elemental state, without fuel, without ash, burning because burning is what it is. The light it throws is white at the center, bleeding through gold to red at the edges. Looking into it directly is like looking into a star. Shapes move in its depths — not reflections, not illusions, but things that live in fire and have no concept of cold.” The printed name of the fire-pool is “pool of fire”. Understand “pool” or “fire” or “basin” or “liquid” or “flames” as the fire-pool.
+
+Chapter 5 - The Caldera Interior
+
+The Caldera Interior is a room. The Caldera Interior is north of the Obsidian Towers. The description of the Caldera Interior is “Inside the caldera — a vast bowl of black rock, its walls rising on all sides like a colosseum built by geology. The floor is a cracked plain of cooling stone, veined with glowing fissures where magma pushes up from below. At the center, a column of fire rises from a vent in the stone — not a geyser, not an eruption, but a sustained pillar of flame, perfectly vertical, reaching from the caldera floor to the burning sky above. It has been burning forever. It will burn forever.[paragraph break]Near the fire column, a formation of obsidian has been shaped — or has shaped itself — into an archway. Through the arch, you can see something impossible: a flicker of blue. Cool blue. The blue of a sky that is not on fire.”
+
+The fire-column is scenery in the Caldera Interior. The description of the fire-column is “A sustained column of elemental fire, rising from the heart of the caldera. It produces no smoke, no ash — just light and heat, a pillar of pure combustion ten meters wide and stretching to the sky. The heat near it is lethal. From this distance, it merely blisters. It is the heart of this world, the furnace at the core of a plane that is the idea of fire made real.” The printed name of the fire-column is “fire column”. Understand “column” or “pillar” or “fire” or “flame” as the fire-column.
+
+The obsidian-archway is scenery in the Caldera Interior. The description of the obsidian-archway is “An arch of obsidian glass, three meters tall, standing near the fire column. Its surface is mirror-smooth, and in its reflection you can see the blue — not reflected from anywhere in this world, because there is no blue here. It comes from somewhere else. Through the arch, if you look at the right angle, you can see a sliver of another place: green, cool, alive in the way that growing things are alive, not the way fire is alive.” The printed name of the obsidian-archway is “obsidian archway”. Understand “archway” or “arch” or “obsidian” or “blue” as the obsidian-archway.
+
+Walking-through-arch is an action applying to nothing. Understand “enter arch” or “enter archway” or “walk through arch” or “go through arch” or “step through” as walking-through-arch when the player is in the Caldera Interior.
+
+Carry out walking-through-arch:
+	say “You walk toward the archway. The heat intensifies with every step — the fire column roars beside you, its light so bright the world goes white at the edges. You raise your arm to shield your face and step through the arch.[paragraph break]The heat vanishes. Instantly, completely, replaced by cool air that tastes of green things and water. The light changes from white-orange to the dappled gold of sunlight through leaves. Your boots land on soft ground — soil, actual soil, with grass and fallen leaves and the smell of rain.[paragraph break]Behind you, the archway stands in a forest clearing, its obsidian surface already dulling, cooling, losing its connection to the world of fire. The blue through the arch dims and goes dark. You are somewhere else.”;
+	now the player is in the Ashfall Clearing.
+
+Chapter 6 - Fire Death
+
+The Caldera Edge is a room. The Caldera Edge is west of the Caldera Interior. The description of the Caldera Edge is “The western rim of the caldera, where the rock is thinnest and the fissures glow brightest. The ground here is unstable — you can feel it shifting, the crust flexing over the magma chamber below. Heat vents hiss between the cracks. Every surface is hot enough to burn.”
+
+Every turn when the player is in the Caldera Edge:
+	say “The ground gives way.[paragraph break]Not cracking — dissolving, the stone thinning to nothing as the magma chamber below pushes upward. Your feet plunge through the crust. Lava. Actual lava, around your ankles, your knees. The pain is instant and total and then, mercifully, gone — nerves don't survive at these temperatures. You sink. The world narrows to a circle of burning sky above you, shrinking as the magma closes over your head.[paragraph break]The last thing you see is the fire column, still burning, indifferent.”;
+	end the story saying “Fire does not mourn what it consumes”.
+
+Chapter 7 - Fire Return
+
+The Ashfall Clearing is a room. The description of the Ashfall Clearing is “A clearing in a dense forest, carpeted with fallen leaves and a fine layer of grey ash — volcanic ash, though no volcano is visible. The trees are old-growth, massive trunks draped in moss, their canopy filtering the sunlight into shifting patterns on the forest floor. The air smells of loam and woodsmoke and recent rain. Birds call in the canopy. Insects drone.[paragraph break]In the center of the clearing, the obsidian archway stands like a monument to somewhere else, already going cold and dark. A trail leads south through the trees.”
+
+The ashfall-archway is scenery in the Ashfall Clearing. The description of the ashfall-archway is “The obsidian arch, transported from the caldera. Its surface is cooling rapidly — the mirror-shine fading to a matte black, hairline cracks spreading across its face. In an hour it will be rubble. In a day, indistinguishable from forest stone. The doorway is closed. Fire stays where fire belongs.” The printed name of the ashfall-archway is “archway”. Understand “archway” or “arch” or “obsidian” as the ashfall-archway.
+
+Part 12 - The Encapsulation of Water
+
+Chapter 1 - The Abyssal Vessel
+
+The Abyssal Vessel is a room. The description of the Abyssal Vessel is “What was a capsule is now a diving bell of blue-green glass. Water moves beyond the walls — not outside them but through them, the glass somehow permeable to light but not to pressure. You can see the ocean this world is made of: an infinite volume of water with no surface and no floor, lit from within by bioluminescence, populated by shapes that drift at the edge of visibility. The coral pedestal pulses with blue light. The pressure in your ears is constant but not painful.[paragraph break]The vessel has come to rest beside a reef formation — a wall of living coral rising from the darkness below into the luminous water above. The grating underfoot vibrates gently.[paragraph break]Type OUT to open the vessel and enter the water.”
+
+The water-coral-pedestal is scenery in the Abyssal Vessel. The description of the water-coral-pedestal is “What was the pedestal. A branching formation of pale coral, grown from the vessel floor, its surface pocked with tiny polyps that pulse with bioluminescent blue. The four glyphs are etched into its base — only the blue one glows.” The printed name of the water-coral-pedestal is “coral pedestal”. Understand “coral” or “pedestal” or “polyps” as the water-coral-pedestal.
+
+Exiting-water-vessel is an action applying to nothing. Understand “out” or “leave” or “exit” or “step out” or “disembark” as exiting-water-vessel when the player is in the Abyssal Vessel.
+
+Carry out exiting-water-vessel:
+	say “The glass walls dissolve — not shattering but dispersing, the molecules separating and joining the ocean around you. Water should rush in. It doesn't. The air around your body holds, a membrane of breathable atmosphere clinging to your skin like a second suit. You can breathe. You can move. You are underwater and you are not drowning.[paragraph break]The vessel is gone. The coral pedestal remains, rooted to the reef wall, a marker in an ocean without landmarks. The water is warm and clear and impossibly deep in every direction.”;
+	now the player is in the Reef Wall.
+
+Chapter 2 - The Reef Wall
+
+The Reef Wall is a room. The description of the Reef Wall is “A vertical wall of living coral, rising from darkness below to luminous water above — hundreds of meters of biological architecture in colors that have no names in languages evolved on land. Anemones pulse. Schools of translucent fish flow past like living rivers. The coral itself hums — a low, constant vibration that you feel in your chest.[paragraph break]You stand — float — beside the reef, wrapped in a membrane of breathable air that clings to you like a second skin. You can move freely. The coral pedestal from the vessel is embedded in the reef wall behind you, marking your arrival. The reef extends upward to the north and downward to the south. To the east, open ocean, luminous and depthless.”
+
+The reef-coral is scenery in the Reef Wall. The description of the reef-coral is “Living coral in forms you've never seen — branching fractals, bulbous formations, delicate fans that filter the water for food invisible to your eyes. The colors shift as you move: electric blue, deep violet, phosphorescent green. Some of the formations are warm to the touch. Some pulse with their own light. All of them are alive in the most fundamental sense — not merely existing but actively being, with a consciousness that isn't consciousness but is something.” The printed name of the reef-coral is “coral”. Understand “coral” or “reef” or “anemones” or “anemone” as the reef-coral.
+
+The reef-fish are scenery in the Reef Wall. The description of the reef-fish is “Schools of fish — if fish is the right word — that are more light than flesh. Translucent bodies with luminous organs visible through their skin, trailing bioluminescent filaments. They move in coordinated shoals, changing direction as one, flowing around you with incurious grace. You are a feature of the landscape to them, nothing more.” The printed name of the reef-fish is “fish”. Understand “fish” or “school” or “schools” as the reef-fish.
+
+Chapter 3 - The Upper Reef
+
+The Upper Reef is a room. The Upper Reef is north of the Reef Wall. The description of the Upper Reef is “Higher on the reef wall, where the water is brighter and the coral more colorful. Here the reef broadens into a plateau — a living shelf of coral and sponge and things that are neither, teeming with creatures. Jellyfish the size of houses drift past overhead, their tentacles trailing curtains of bioluminescence. The light here comes from everywhere — the water itself glows, suffused with a blue radiance that has no source.[paragraph break]To the east, a formation of enormous shells — each one large enough to enter — cluster at the reef's edge, overlooking the abyss.”
+
+The water-jellyfish are scenery in the Upper Reef. The description of the water-jellyfish is “Enormous jellyfish — bell-shaped bodies twenty meters across, translucent and pulsing with slow contractions that propel them through the water. Their tentacles hang in curtains of bioluminescent thread, trailing for hundreds of meters below them. They are beautiful and vast and completely indifferent to your presence, the way weather is indifferent.” The printed name of the water-jellyfish is “jellyfish”. Understand “jellyfish” or “jelly” or “tentacles” as the water-jellyfish.
+
+Chapter 4 - The Shell Grotto
+
+The Shell Grotto is a room. The Shell Grotto is east of the Upper Reef. The description of the Shell Grotto is “A cluster of enormous shells — each one the spiral home of a creature long departed or still sleeping — arranged at the reef's edge. The largest shell is open, its interior a nacreous cavern of mother-of-pearl, smooth and iridescent. Inside, the walls shimmer with reflected light, and at the deepest point of the spiral, a current of water moves — a current that flows inward, toward something, carrying warmth and light from another place.[paragraph break]The current tastes of salt and rain. It smells of shoreline. It comes from the prime material, leaking through a thin place in the boundary between this ocean and yours.”
+
+The pearl-shell is scenery in the Shell Grotto. The description of the pearl-shell is “The largest shell — a nautilus spiral five meters tall, its interior walls coated in mother-of-pearl that catches and multiplies every photon of light until the inside blazes with iridescent color. The spiral narrows toward its center, and at the deepest point, the current flows — pulling water, pulling light, pulling you gently inward.” The printed name of the pearl-shell is “shell”. Understand “shell” or “nautilus” or “pearl” or “mother” or “spiral” as the pearl-shell.
+
+Following-current is an action applying to nothing. Understand “follow current” or “enter shell” or “swim” or “enter current” or “go in” as following-current when the player is in the Shell Grotto.
+
+Carry out following-current:
+	say “You let the current take you. It pulls you into the narrowing spiral of the shell, the nacreous walls pressing close, the light intensifying until you are swimming through liquid pearl. The current strengthens — you couldn't resist it now even if you wanted to. The spiral tightens. The walls glow. The water changes — becoming warmer, becoming lighter, becoming less like water and more like light.[paragraph break]The membrane of air around your body pops. You are wet — truly wet, salt water, cold. You surface gasping in shallow water, waves lapping at your chest, sand under your hands. A shore. An actual shore, with actual waves and an actual sky and seabirds wheeling overhead.[paragraph break]Behind you, nothing. Just ocean. The shell, the reef, the Encapsulation — gone. You crawl onto the beach.”;
+	now the player is in the Tidebreak Shore.
+
+Chapter 5 - Water Death
+
+The Abyss is a room. The Abyss is south of the Reef Wall. The description of the Abyss is “You descend along the reef wall, deeper into the darkness below. The coral thins. The light fades. The water grows cold and heavy and the pressure builds — not painfully, but insistently, like the ocean is aware of you and is considering how tightly to squeeze.[paragraph break]Below, in the absolute dark, something moves. Something vast. You can feel the displacement of water as it passes — a current that shoves you against the reef wall, a shadow that blots out even the faint bioluminescence.”
+
+Every turn when the player is in the Abyss:
+	say “It finds you.[paragraph break]Not with malice — with the same incurious completeness with which an ocean swallows a stone. The membrane of air around your body fails — not torn, not broken, simply overwhelmed by the pressure of the deep and the proximity of something that exists on a scale your atmosphere cannot accommodate. Water fills your lungs. It is warm. It tastes of salt and the absolute age of a world that has been ocean since before the concept of land.[paragraph break]You dissolve. Not quickly. The ocean takes its time. It has nothing but time.”;
+	end the story saying “The deep remembers everything it takes”.
+
+Chapter 6 - Water Return
+
+The Tidebreak Shore is a room. The description of the Tidebreak Shore is “A grey sand beach under a white sky. Waves roll in from an ocean that stretches to the horizon, flat and calm and ordinary. Driftwood and sea-glass litter the tideline. The air is salt and wind and the cry of gulls. Behind the beach, dunes rise toward a coastal settlement — a fishing village, maybe, smoke rising from stone chimneys, nets drying on racks.[paragraph break]You are soaking wet and you don't know where this is. But the water is water, and the sky is sky, and nothing here is made of coral or bioluminescence. The prime material. Home, or close enough.”
+
+The shore-ocean is scenery in the Tidebreak Shore. The description of the shore-ocean is “Ordinary ocean. Waves, whitecaps, the distant grey line where water meets sky. No depth charge of bioluminescence, no reef walls stretching to infinity, no house-sized jellyfish. Just salt water doing what salt water does. The most ordinary and extraordinary thing you've ever seen.” The printed name of the shore-ocean is “ocean”. Understand “ocean” or “sea” or “waves” or “water” as the shore-ocean.
+
+Part 13 - The Proto-Plane of Electricity
+
+Chapter 1 - The Voltaic Vessel
+
+The Voltaic Vessel is a room. The description of the Voltaic Vessel is “What was a capsule is now a Faraday cage — bare metal walls humming with current, the air thick with ozone, sparks crawling across every surface in lazy arcs. Through the gaps in the metal mesh, you can see the proto-plane: a void that is not dark but crackling, a space where the emptiness itself is charged, where arcs of lightning bridge distances measured in kilometers, where luminous plasma forms and dissipates in shapes that almost mean something.[paragraph break]The Tesla coil at the center sparks and hums, its crown of St. Elmo's fire casting sharp, flickering shadows. The vessel has come to rest on a platform of fused glass — fulgurite, created by lightning striking sand that may or may not exist.[paragraph break]Type OUT to open the vessel and step onto the platform.”
+
+The vessel-tesla-coil is scenery in the Voltaic Vessel. The description of the vessel-tesla-coil is “What was the pedestal. A coil of copper wire wound around a core of something that isn't metal — something that conducts not just electricity but the idea of electricity. St. Elmo's fire dances at its tip, blue-white and constant. The four glyphs are visible on its base, etched in scorch marks. Only the white one glows.” The printed name of the vessel-tesla-coil is “Tesla coil”. Understand “coil” or “tesla” or “pedestal” or “elmo” as the vessel-tesla-coil.
+
+Exiting-volt-vessel is an action applying to nothing. Understand “out” or “leave” or “exit” or “step out” or “disembark” as exiting-volt-vessel when the player is in the Voltaic Vessel.
+
+Carry out exiting-volt-vessel:
+	say “The metal walls of the cage peel apart — each panel flying outward and dissolving into sparks that scatter into the crackling void. The air hits you and every hair on your body stands on end. Static charge crawls across your skin. Your teeth vibrate. The void around you is alive with electricity — arcs of lightning that bridge the space between platforms of fused glass, between structures of crystallized energy that shouldn't be solid but are.[paragraph break]The vessel is gone. Scattered. A ring of scorched fulgurite marks where it stood.”;
+	now the player is in the Fulgurite Platform.
+
+Chapter 2 - The Fulgurite Platform
+
+The Fulgurite Platform is a room. The description of the Fulgurite Platform is “A platform of fused glass — fulgurite, created by lightning striking ground that shouldn't exist in a place that is the idea of electricity given shape. The platform floats in the charged void, connected to other platforms and structures by arcs of sustained lightning that serve as bridges. The void is not dark — it crackles with potential, luminous with the blue-white light of constant discharge. There is no ground. There is no sky. There is only the space between charges.[paragraph break]A scorched ring marks where your vessel dissolved. To the north, a bridge of sustained lightning connects to a lattice of crystallized energy. To the east, another bridge leads to a formation that flickers between solid and plasma.”
+
+The fulgurite-surface is scenery in the Fulgurite Platform. The description of the fulgurite-surface is “Glass made by lightning — smooth, translucent, branching with the fractal pattern of the bolt that created it. Beneath the surface, frozen lightning is visible: bright threads of captured discharge, still glowing faintly, still carrying a charge that makes your feet tingle.” The printed name of the fulgurite-surface is “fulgurite”. Understand “fulgurite” or “glass” or “platform” or “surface” as the fulgurite-surface.
+
+The lightning-bridges are scenery in the Fulgurite Platform. The description of the lightning-bridges is “Sustained arcs of electricity connecting the platforms — not bolts that flash and fade but continuous discharges, held in place by forces you don't understand. They crackle and hiss and throw off sparks, but they are stable, walkable — if you trust electricity enough to walk on it. Your skin crawls at the thought.” The printed name of the lightning-bridges is “lightning bridges”. Understand “bridges” or “bridge” or “arc” or “arcs” or “lightning” as the lightning-bridges.
+
+Chapter 3 - The Lattice
+
+The Lattice is a room. The Lattice is north of the Fulgurite Platform. The description of the Lattice is “A structure of crystallized energy — not matter, but charge given form, a lattice of interlocking geometric shapes that hum with contained power. Each node in the lattice is a point of light, and between the nodes, energy flows in visible currents, tracing paths that branch and merge and branch again. The structure is vast — extending in every direction, above and below, a three-dimensional circuit board the size of a city.[paragraph break]You stand on a platform within the lattice, a node-point where multiple energy paths converge. The air smells of ozone. Your hair floats in a halo of static. To the south, the bridge back to the fulgurite platform. To the west, a passage through the lattice leads toward a formation that pulses with a different rhythm — slower, steadier, almost organic.”
+
+The lattice-nodes are scenery in the Lattice. The description of the lattice-nodes is “Points of concentrated charge, each one a sphere of contained lightning the size of your fist. They hover at the vertices of the lattice structure, connected by threads of visible current. When you pass your hand near one, the current bends toward you — attracted to the electrical impulses in your nervous system. Your own bioelectricity is a signal here, a beacon. The lattice knows you are alive.” The printed name of the lattice-nodes is “nodes”. Understand “nodes” or “node” or “points” or “light” or “lattice” as the lattice-nodes.
+
+Chapter 4 - The Pulse Chamber
+
+The Pulse Chamber is a room. The Pulse Chamber is west of the Lattice. The description of the Pulse Chamber is “A hollow in the lattice where the energy flows converge into a single pulse — a rhythmic discharge that beats like a heart made of lightning. The chamber walls are crystallized charge, translucent, and through them you can see the lattice structure extending outward in every direction. At the center of the chamber, a sphere of ball lightning hovers, perfectly stable, its surface crawling with miniature discharges. Inside the sphere — visible through the plasma — is a shape. A doorway. The outline of a door that leads somewhere without electricity.[paragraph break]The lattice passage leads back to the east. Beneath the sphere, a gap in the floor opens onto the void below — the raw, unchanneled chaos of the proto-plane.”
+
+The ball-lightning is scenery in the Pulse Chamber. The description of the ball-lightning is “A sphere of contained plasma, two meters in diameter, hovering at the chamber's center. Its surface is a constant roil of miniature lightning strikes, discharges that arc across the sphere's surface in patterns almost too fast to follow. But inside — look past the fire, past the static, past the crackling skin of plasma — you can see it. A doorway. A rectangle of calm, of silence, of the kind of space where electricity is a servant rather than a sovereign. The prime material shows through like a window in a storm.” The printed name of the ball-lightning is “ball lightning”. Understand “ball” or “lightning” or “sphere” or “plasma” or “doorway” as the ball-lightning.
+
+Entering-ball-lightning is an action applying to nothing. Understand “enter sphere” or “enter lightning” or “enter doorway” or “touch sphere” or “step through” or “enter ball” as entering-ball-lightning when the player is in the Pulse Chamber.
+
+Carry out entering-ball-lightning:
+	say “You reach for the sphere. Your hand passes through the plasma — it doesn't burn, it sings, every nerve in your arm firing at once in a cascade of sensation that is not pain but its electrical cousin. Your fingers find the doorway inside the sphere and push through.[paragraph break]The sphere collapses. All the contained charge releases at once — but not outward. Inward. Through you. Through the doorway. You are the circuit, the wire, the path of least resistance between this world and yours. Electricity screams through you and you scream with it and then —[paragraph break]Silence. Dark. The smell of rain on hot pavement. Your hair is standing straight up. Your skin tingles. You are lying on wet asphalt in an alley, rain coming down, neon signs reflecting in puddles. A city. A real city, with power lines and streetlights and the distant hum of a generator somewhere.[paragraph break]You sit up. Sparks crackle from your fingertips for a moment, then fade.”;
+	now the player is in the Storm Alley.
+
+Chapter 5 - Electricity Death
+
+The Unchanneled Void is a room. The Unchanneled Void is down from the Pulse Chamber. The description of the Unchanneled Void is “You drop through the gap in the floor and fall into the raw proto-plane — the space beneath the lattice, beneath the structures, beneath the organized patterns of energy that give this place what little shape it has. Here there is nothing but charge. Raw, unchanneled, purposeless electricity — the stuff of lightning before it learns to strike, the potential before it finds its ground.”
+
+Every turn when the player is in the Unchanneled Void:
+	say “You become the ground.[paragraph break]Every arc in the void finds you simultaneously. You are the path of least resistance in a space with no resistance at all, and the charge — all of it, the entire unchanneled potential of a proto-plane — flows through you. Not a bolt. Not a shock. A sustained, total discharge that erases the distinction between your bioelectricity and the ambient charge. Your nervous system fires every signal it has, all at once, a single white moment of absolute sensation.[paragraph break]Then nothing. The charge disperses. Where you were, a brief afterimage flickers in the void — the outline of a person, drawn in fading sparks — and then that too is gone.”;
+	end the story saying “Current flows. Current passes. Current forgets.”
+
+Chapter 6 - Electricity Return
+
+The Storm Alley is a room. The description of the Storm Alley is “A narrow alley between two buildings, rain coming down in sheets, neon signs casting colored light on wet asphalt. Dumpsters and fire escapes and the hum of power transformers mounted on poles overhead. Puddles reflect the neon — blue and red and green — and somewhere a radio plays music you almost recognize. It is a city. It is raining. It is the most mundane, most beautiful place you have ever been.[paragraph break]Your clothes are dry — impossibly, given the rain. Your hair still stands on end. Sparks dance on your fingertips if you rub them together. A street is visible at the mouth of the alley to the south.”
+
+The alley-neon is scenery in the Storm Alley. The description of the alley-neon is “Signs in a script you can read — a language you know, advertising things that exist: food, drinks, repair services. The neon hums with contained electricity, tame and useful, doing its job without ambition. After what you've seen, a neon sign is a miracle of restraint.” The printed name of the alley-neon is “neon signs”. Understand “neon” or “signs” or “sign” or “light” or “lights” as the alley-neon.
+
+The alley-rain is scenery in the Storm Alley. The description of the alley-rain is “Rain. Ordinary rain, made of ordinary water, falling from ordinary clouds pushed by ordinary wind. It tastes of nothing more exotic than the inside of a cloud. It is the most grounding thing you have ever experienced.” The printed name of the alley-rain is “rain”. Understand “rain” or “water” or “puddles” as the alley-rain.
