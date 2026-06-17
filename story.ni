@@ -1593,6 +1593,7 @@ The Sand-Filled Chamber is a room. The Sand-Filled Chamber is east of the Buried
 The chamber-sand are scenery in the Sand-Filled Chamber. The description of the chamber-sand is "Fine orange sand, packed dense by time and pressure, filling the chamber like water fills a bowl — slowly, inevitably, completely. The surface is smooth and undisturbed. No footprints. No one comes here. There is nothing to come for, unless you count the eerie silence and the muted hum of carvings being slowly silenced by the weight of a patient desert." The printed name of the chamber-sand is "sand". Understand "sand" or "dune" or "orange" as the chamber-sand.
 
 The chamber-carvings are scenery in the Sand-Filled Chamber. The description of the chamber-carvings is "The carvings above the sand line are exquisite — protected from weathering, sharp-edged, their geometric patterns as precise as the day they were cut. Below the sand line, they continue — you can feel them through the sand if you press your hand against it, the hum vibrating faintly through the grains. The desert is burying the carvings but it cannot silence them entirely. Not yet." The printed name of the chamber-carvings is "carvings". Understand "carvings" or "patterns" or "walls" or "geometric" as the chamber-carvings.
+
 Part 21 - The Rings of Acheron
 
 Chapter 1 - The Iron Road
