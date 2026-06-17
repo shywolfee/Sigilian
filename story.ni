@@ -61,7 +61,7 @@ Some acceleration-couches are an enterable supporter in the Transtube Pod. “Si
 
 Section 2 - Boarding
 
-Boarding-the-pod is an action applying to nothing. Understand “board pod” or “board transtube” or “enter pod” or “get in pod” or “board” as boarding-the-pod.
+Boarding-the-pod is an action applying to nothing. Understand “board pod/transtube” or “enter pod” or “board” as boarding-the-pod.
 
 Check boarding-the-pod:
 	if the player is in the Transtube Pod, say “You're already in a pod.” instead;
@@ -774,7 +774,7 @@ The berth-walls are scenery in the Hidden Berth. The description of the berth-wa
 
 Chapter 2 - Boarding the Slipstream Capsule
 
-Boarding-slipstream is an action applying to nothing. Understand “board capsule” or “enter capsule” or “board” or “get in capsule” or “enter vessel” as boarding-slipstream when the player is in the Hidden Berth.
+Boarding-slipstream is an action applying to nothing. Understand “board capsule” or “enter capsule/vessel” or “board” as boarding-slipstream when the player is in the Hidden Berth.
 
 Carry out boarding-slipstream:
 	say “You approach the capsule. Before you touch it, a seam appears in the hull — not opening, but dissolving, the material flowing apart like mercury. Beyond it, an interior that glows with soft, sourceless light. You step inside.[paragraph break]The hull reforms behind you. The interior is a single curved space — no seats, no controls, no instruments. Just smooth walls that pulse with a faint luminescence and, in the center, a pedestal of the same dark material with eight symbols etched into its surface, each one glowing a different color.[paragraph break]Amber. Crimson. Blue. White. Silver. Violet. Green. Gold.”;
@@ -1468,7 +1468,7 @@ The ferryman-vessel is scenery in the Embankment. The description of the ferryma
 
 Chapter 9 - The Return
 
-Boarding-the-ferry is an action applying to nothing. Understand “board ferry” or “board boat” or “enter ferry” or “enter boat” or “board vessel” or “cross river” or “cross” as boarding-the-ferry when the player is in the Embankment.
+Boarding-the-ferry is an action applying to nothing. Understand “board ferry/boat/vessel” or “enter ferry/boat” or “cross river” or “cross” as boarding-the-ferry when the player is in the Embankment.
 
 Carry out boarding-the-ferry:
 	say “You step into the vessel. The dark wood is warm underfoot. The figure pushes off from the bank with the pole, and the dark water — the not-water — parts silently around the hull. There is no sound. No splash. No ripple. Just motion, smooth and inevitable, the vessel sliding across the surface of a river that has been crossed in one direction or another since before rivers had names.[paragraph break]The city recedes behind you. The iron walls, the concentric rings, the reddish glow — they diminish, fade, dissolve into the dark. The figure poles in silence. The crossing takes — you don't know. A minute. An hour. A breath.[paragraph break]And you're already forgetting. You can feel it happening — the details softening, the iron walls becoming 'walls,' the Registrar's face becoming 'a face,' the inscription on the gate becoming 'something written.' The shape remains. The specifics go. You remember iron. You remember warmth. You remember a name spoken that was yours. You remember a river.[paragraph break]You close your eyes.[paragraph break]You open them.[paragraph break]You are in the sleeping cube. The coffin lid is closed above you. The station hum vibrates through the thin mattress. The Warrens smell of recycled air and too many bodies. You are exactly where you began.[paragraph break]You had a dream. You think you had a dream. Something about iron, and a city, and a river. The details are gone — melted, dissolved, taken as fare for a crossing you can't remember making. You are left with a name. Acheron. And even that is fading.”;
@@ -1886,7 +1886,7 @@ The fer-freighter is scenery in Ferrox Landing Field. The description of the fer
 
 The fer-field-ships is scenery in Ferrox Landing Field. The description of the fer-field-ships is “A motley collection of spacecraft parked on the packed earth: ore haulers with oversized cargo bays, sleek courier boats, utility skimmers with atmospheric wings. Most are coated in the same red dust that covers everything on Ferrox. Their landing gear sinks slightly into the soft ground.” The printed name of the fer-field-ships is “ships”. Understand “ships” or “craft” or “skimmers” or “haulers” as the fer-field-ships.
 
-Boarding-ferrox-freighter is an action applying to nothing. Understand “board freighter” or “board ship” or “enter freighter” as boarding-ferrox-freighter when the player is in Ferrox Landing Field.
+Boarding-ferrox-freighter is an action applying to nothing. Understand “board freighter/ship” or “enter freighter” as boarding-ferrox-freighter when the player is in Ferrox Landing Field.
 
 Carry out boarding-ferrox-freighter:
 	say “You climb the cargo ramp, stepping over tie-down chains and around sealed ore containers. A loadmaster waves you toward a jump seat bolted to the forward bulkhead. You strap in. The ramp whines shut. Engines spool up — a deep, bone-shaking vibration that builds until the freighter lifts on a column of superheated exhaust, the red desert falling away below.[paragraph break]The sky darkens from blood-red to black. Stars appear. The freighter punches through the upper atmosphere and into the cold silence of space. A brief, gut-twisting lurch as the slipstream drive engages — and then Praxis Station resolves from the dark, its lights strung like a jeweled belt around the void.[paragraph break]The freighter docks with a shudder and a clang. The loadmaster jerks a thumb toward the hatch.”;
@@ -1944,7 +1944,7 @@ The cin-shuttle is scenery in Cinderwood Airstrip. The description of the cin-sh
 
 The cin-runway is scenery in Cinderwood Airstrip. The description of the cin-runway is “A strip of packed earth running straight through the forest, the trees cut back just far enough to let a shuttle through without clipping its wings. Tire marks and skid scars pattern the surface. At the far end, the runway terminates in a wall of green — the forest reasserting itself, one trimming cycle at a time.” The printed name of the cin-runway is “runway”. Understand “runway” or “strip” or “field” as the cin-runway.
 
-Boarding-cinderwood-shuttle is an action applying to nothing. Understand “board shuttle” or “board aircraft” or “enter shuttle” as boarding-cinderwood-shuttle when the player is in Cinderwood Airstrip.
+Boarding-cinderwood-shuttle is an action applying to nothing. Understand “board shuttle/aircraft” or “enter shuttle” as boarding-cinderwood-shuttle when the player is in Cinderwood Airstrip.
 
 Carry out boarding-cinderwood-shuttle:
 	say “You climb into the shuttle through the side hatch. The cabin is cramped — survey equipment lashed to every surface, two passenger seats wedged between instrument racks. You buckle in. The pilot slides into her seat, runs through a checklist faster than you can follow, and pushes the throttle forward.[paragraph break]The shuttle surges down the runway, branches whipping past the canopy, and lifts. The forest drops away. The village shrinks to a smudge of smoke among the green. The volcanic peaks slide past the windows as the shuttle climbs, the sky darkening from blue to indigo to black.[paragraph break]The atmosphere falls away. Stars appear. The pilot taps a navigation screen, and the shuttle adjusts course. Ahead, Praxis Station emerges from the dark — lights, metal, the slow rotation of home.[paragraph break]The shuttle docks with a gentle thud.”;
@@ -2008,7 +2008,7 @@ The pel-vessel is scenery in Harbor Berth. The description of the pel-vessel is 
 
 The pel-captain is scenery in Harbor Berth. The description of the pel-captain is “A woman of indeterminate age, her face lined by sun and salt wind, wearing a heavy coat stained white at the cuffs by dried seawater. She moves along the gangway with the easy balance of someone who has spent more of her life on water than on land. Her eyes are steady and appraising — the look of someone who calculates risk for a living.” The printed name of the pel-captain is “captain”. Understand “captain” or “woman” as the pel-captain.
 
-Boarding-pelagos-vessel is an action applying to nothing. Understand “board vessel” or “board ship” or “enter vessel” as boarding-pelagos-vessel when the player is in Harbor Berth.
+Boarding-pelagos-vessel is an action applying to nothing. Understand “board vessel/ship” or “enter vessel” as boarding-pelagos-vessel when the player is in Harbor Berth.
 
 Carry out boarding-pelagos-vessel:
 	say “You cross the gangway and duck through the hatch into the passenger cabin — a small compartment with four bunks and a porthole. The captain calls an order. Lines are cast off. The vessel eases away from the jetty, engines rumbling, and turns toward the harbor mouth.[paragraph break]The open ocean stretches ahead, grey and vast. Then the engines shift pitch — deeper, harder — and the bow lifts. The sea falls away below as the ship rises, water streaming from its hull, the horizon curving as altitude builds. The sky darkens. Stars appear. The ocean becomes a disc, then a sphere, then a blue marble shrinking in the porthole.[paragraph break]Ahead, Praxis Station grows from a point of light into a sprawl of metal and illumination.”;
@@ -2072,7 +2072,7 @@ The neo-maglev is scenery in Maglev Dock. The description of the neo-maglev is �
 
 The neo-rails is scenery in Maglev Dock. The description of the neo-rails is “Electromagnetic rails, mirror-polished and perfectly parallel, running the length of the platform and into the launch tunnel. Superconducting coils are visible through inspection panels at regular intervals, frost forming on their housings despite the warm rain. The engineering is beautiful — a precisely calibrated gradient of magnetic force that will accelerate the shuttle from rest to escape velocity in a continuous, silent push.” The printed name of the neo-rails is “electromagnetic rails”. Understand “rails” or “rail” or “track” or “tunnel” as the neo-rails.
 
-Boarding-neonfall-train is an action applying to nothing. Understand “board train” or “board shuttle” or “board maglev” or “enter train” as boarding-neonfall-train when the player is in Maglev Dock.
+Boarding-neonfall-train is an action applying to nothing. Understand “board train/shuttle/maglev” or “enter train” as boarding-neonfall-train when the player is in Maglev Dock.
 
 Carry out boarding-neonfall-train:
 	say “You step through the hatch and drop into an acceleration couch. The restraint bar lowers automatically, pressing you firmly into the padding. The hatch seals. A chime sounds — once, twice, three times.[paragraph break]Then acceleration. Not brutal but relentless, a steady, building pressure that pushes you deeper into the couch as the electromagnetic rails hurl the shuttle forward. The platform vanishes. The tunnel walls blur. A vibration builds — not the shuttle, but the atmosphere, screaming against the hull as velocity climbs past the speed of sound, past the speed of anything that has business being on the ground.[paragraph break]The tunnel opens. Rain streaks the hull for one instant, and then the clouds fall away below and the sky goes from grey to blue to black. The acceleration eases. The stars come out. The shuttle is in orbit, coasting on momentum, the planet a rain-veiled sphere below.[paragraph break]An orbital transfer vehicle matches velocity and docks. You transfer through a pressurized umbilical. The transfer vehicle's engines fire, and Praxis Station resolves from the dark — massive, spinning, home.”;
@@ -2123,7 +2123,7 @@ The win-destination-placard is scenery in Windhollow Gondola. The description of
 Chapter 2 - Windhollow Return
 
 
-Boarding-windhollow-airship is an action applying to nothing. Understand “board airship” or “board gondola” or “enter gondola” or “enter airship” as boarding-windhollow-airship when the player is in Windhollow Gondola.
+Boarding-windhollow-airship is an action applying to nothing. Understand “board airship/gondola” or “enter airship/gondola” as boarding-windhollow-airship when the player is in Windhollow Gondola.
 
 Carry out boarding-windhollow-airship:
 	say “You settle into one of the leather bench seats and grip the brass handrail. A bell rings twice — the departure signal. Outside the windows, the ground crew releases the docking lines one by one, each rope dropping away with a snap. The gondola lurches, rises, and then — smoothly, steadily — the Highland Zephyr lifts free of the mooring mast and climbs into the wind.[paragraph break]The valley falls away below you. The village shrinks to a cluster of grey rooftops. The windmills become toys, then specks, then nothing. The airship rises through the cloud layer and breaks into brilliant sunlight above — a sea of white cloud stretching to the horizon, the sky deepening from blue to indigo as the atmosphere thins.[paragraph break]Higher still. The sky darkens. Stars appear — first a few, then dozens, then thousands, the cloud layer now a white floor far below. The engine nacelles shift pitch as the airship transitions from atmospheric to vacuum operation, and through the forward windows, a shape resolves against the stars: Praxis Station, turning slowly in its orbit, bristling with docking arms and running lights.[paragraph break]The Highland Zephyr slides into its berth with a gentle clang of magnetic clamps.”;
@@ -2175,7 +2175,7 @@ The hes-coach-driver is scenery in Hespereth Departure Yard. The description of 
 Chapter 2 - Hespereth Return
 
 
-Boarding-hespereth-coach is an action applying to nothing. Understand “board coach” or “enter coach” or “board carriage” as boarding-hespereth-coach when the player is in Hespereth Departure Yard.
+Boarding-hespereth-coach is an action applying to nothing. Understand “board coach/carriage” or “enter coach” as boarding-hespereth-coach when the player is in Hespereth Departure Yard.
 
 Carry out boarding-hespereth-coach:
 	say “You step up into the coach. The seat is red leather, soft and warm, and the door closes behind you with a solid click. Through the glass-paned windows, you see the driver flick the reins. The horses move. The cobblestones pass beneath you, and the gaslamps of the village slide by like slow-moving stars.[paragraph break]The coach passes through the village, past dark hedgerows and farmsteads with lamplit windows, down a long road under the blazing sky. You doze. The rhythm of the horses is hypnotic, the leather seat impossibly comfortable, the darkness outside the windows gentle and undemanding.[paragraph break]You wake when the coach stops. Through the window: a starport — low buildings, landing pads, a shuttle warming its engines, the sky reflected in rain-slicked tarmac. You transfer from coach to shuttle in a daze, and the shuttle lifts off, climbing through the starlit atmosphere, the ground falling away, the darkness of Hespereth giving way to the larger darkness between worlds.[paragraph break]You doze again. When you open your eyes, Praxis fills the viewport — a vast grey shape turning against the stars, its running lights blinking, its docking arms extended.”;
@@ -2227,7 +2227,7 @@ The evr-river-view is scenery in Evernfield Barge Deck. The description of the e
 Chapter 2 - Evernfield Return
 
 
-Departing-evernfield-barge is an action applying to nothing. Understand “depart” or “cast off” or “leave” as departing-evernfield-barge when the player is in Evernfield Barge Deck.
+Departing-evernfield-barge is an action applying to nothing. Understand “depart” or “cast off” as departing-evernfield-barge when the player is in Evernfield Barge Deck.
 
 Carry out departing-evernfield-barge:
 	say “You call out to the deckhand. He grins, spits the straw into the river, and puts the tiller over. The barge eases away from the dock, caught by the current, swinging into the center of the channel. The town slides past — the granary, the general store, the willows — and then there is only the river, wide and slow, and the fields on either side, golden with harvest.[paragraph break]The river widens. The banks recede. The fields give way to marshland, then estuary, then open water — a vast, calm expanse that stretches to a horizon you can barely see. The barge changes. You feel it before you see it — a vibration in the deck, a hum building beneath your feet, the flat bottom reshaping itself, the hull rising, the water falling away below as something that was a river barge becomes something else entirely.[paragraph break]The barge lifts free of the water. The engine hum deepens. The estuary shrinks below you, the coastline curving away, the atmosphere thinning, the sky darkening from blue to indigo to black. Stars appear. The planet falls away — green and brown and beautiful — and ahead, growing from a point of light to a shape to a structure, Praxis Station waits in its orbit.[paragraph break]The barge — the shuttle — docks with a gentle thud.”;
@@ -2279,7 +2279,7 @@ The sky-panoramic-view is scenery in Skyreach Ascent Car. The description of the
 Chapter 2 - Skyreach Return
 
 
-Ascending-skyreach is an action applying to nothing. Understand “ascend” or “go up” or “launch” or “depart” as ascending-skyreach when the player is in Skyreach Ascent Car.
+Ascending-skyreach is an action applying to nothing. Understand “ascend” or “go up” as ascending-skyreach when the player is in Skyreach Ascent Car.
 
 Carry out ascending-skyreach:
 	say “You strap into one of the acceleration couches. The control console chimes once — a clear, bell-like tone — and the magnetic drive coils engage. The car shudders, then rises. Slowly at first, then faster, the mountain falling away below, the village shrinking, the snow-capped peaks descending into the panorama of a world seen from above.[paragraph break]The sky darkens. The blue deepens to indigo, to violet, to black. Stars appear — not gradually but suddenly, a curtain of light unveiled as the atmosphere thins to nothing. Through the windows, the curvature of the planet becomes visible — a vast arc of blue and white and brown, the mountain range a wrinkle on the skin of a world too large to comprehend from its surface.[paragraph break]The car continues to climb. The tether cable hums through its transparent housing, the magnetic coils pulsing in rhythm, drawing the car upward along a thread of carbon that connects the ground to the sky. Hours pass. The planet shrinks. The stars wheel slowly as the car rotates with the tether.[paragraph break]Finally — the orbital transfer platform. The car docks with a soft clang. Through the forward window, Praxis Station is visible, turning in its orbit, and a transfer shuttle is already maneuvering to carry you the final distance.”;
