@@ -125,6 +125,15 @@
       this.tags.add('item');
       this.portable = spec.portable !== false;  // gettable by default
       this.weight = spec.weight != null ? spec.weight : 1;
+
+      // Equipment properties. A weapon has `damage` [min,max] (+ optional
+      // `accuracy`); armor has `armor` soak (+ optional `accuracy` deflection).
+      this.damage = spec.damage || null;
+      this.armor = spec.armor != null ? spec.armor : null;
+      this.accuracy = spec.accuracy || 0;
+      if (this.damage) this.tags.add('weapon');
+      if (this.armor != null) this.tags.add('armor');
+
       // Optional custom behaviours.
       if (typeof spec.onGet === 'function') this.on('get', spec.onGet);
       if (typeof spec.onDrop === 'function') this.on('drop', spec.onDrop);
@@ -155,6 +164,12 @@
       this.hp = spec.hp != null ? spec.hp : this.maxHp;
       this.alive = true;
 
+      // Combat. `attackDamage` is an innate [min,max] dice (mobs); players
+      // get theirs from a wielded weapon. `armorValue` is innate soak.
+      this.attackDamage = spec.damage || null;
+      this.armorValue = spec.armor != null ? spec.armor : 0;
+      this.equipment = { weapon: null, armor: null };
+
       // An actor's `contents` IS its inventory.
     }
 
@@ -162,6 +177,46 @@
 
     carrying(token) {
       return this.find(token, (o) => o.is('item'));
+    }
+
+    /* ---- combat maths (see js/combat.js for how these are used) ---- */
+    weapon() { return this.equipment.weapon; }
+
+    /** Chance-to-hit rating: brawn, skill (level), and weapon accuracy. */
+    attackRating() {
+      let r = Math.floor(this.stats.str / 2) + this.level;
+      const w = this.weapon();
+      if (w && w.accuracy) r += w.accuracy;
+      return r;
+    }
+
+    /** Avoidance rating: agility plus all worn/innate armor's deflection. */
+    defenseRating() {
+      let d = Math.floor(this.stats.dex / 2);
+      const a = this.equipment.armor;
+      if (a && a.accuracy) d += a.accuracy;
+      return d;
+    }
+
+    /** Damage-soak: innate toughness plus worn armor. */
+    armorTotal() {
+      let a = this.armorValue;
+      const worn = this.equipment.armor;
+      if (worn && worn.armor) a += worn.armor;
+      return a;
+    }
+
+    /** The [min,max] damage dice for this actor's current attack. */
+    damageDice() {
+      const w = this.weapon();
+      if (w && w.damage) return w.damage;
+      if (this.attackDamage) return this.attackDamage;
+      return [1, 3]; // unarmed
+    }
+
+    rollDamage() {
+      const dice = this.damageDice();
+      return util.randInt(dice[0], dice[1]) + Math.floor(this.stats.str / 4);
     }
 
     damage(amount) {
@@ -189,11 +244,20 @@
       spec = spec || {};
       super(spec);
       this.tags.add('mob');
-      this.hostile = !!spec.hostile;
-      this.dialogue = spec.dialogue || null;  // string or fn(player)->string
+      this.hostile = !!spec.hostile;           // attacks on sight?
+      this.dialogue = spec.dialogue || null;   // string or fn(player)->string
+      // Combat. `xp` is the reward for killing this mob; `respawns` (seconds)
+      // lets it return after death. Sensible defaults scale with level.
+      this.xp = spec.xp != null ? spec.xp : this.level * 15;
+      this.respawns = spec.respawns != null ? spec.respawns : null;
+      this.spawnRoom = null;                   // remembered for respawn
+      if (!this.attackDamage) this.attackDamage = [1, 2 + this.level];
       if (typeof spec.onTalk === 'function') this.on('talk', spec.onTalk);
       if (typeof spec.onTick === 'function') this.on('tick', spec.onTick);
+      if (typeof spec.onDeath === 'function') this.on('death', spec.onDeath);
     }
+
+    get combatant() { return this.attackDamage != null && this.maxHp > 0; }
 
     roomLine() {
       if (this.short) return this.short;
@@ -220,6 +284,7 @@
       this.tags.add('player');
       this.proper = true; // "you" needs no article
       this.capacity = spec.capacity != null ? spec.capacity : 20; // max carry weight
+      this.xp = spec.xp || 0;   // experience accumulated toward the next level
     }
 
     get room() {
@@ -228,6 +293,40 @@
 
     carriedWeight() {
       return this.inventory.reduce((sum, o) => sum + (o.weight || 0), 0);
+    }
+
+    /* ---- leveling ---- */
+
+    /** Experience needed to advance from the current level to the next. */
+    xpToNext() {
+      return this.level * 100;
+    }
+
+    /**
+     * Award experience and level up as many times as the total allows.
+     * `game` (optional) receives the announcements.
+     */
+    gainXp(amount, game) {
+      if (amount <= 0) return;
+      this.xp += amount;
+      if (game) game.print('You gain ' + amount + ' experience.');
+      while (this.xp >= this.xpToNext()) {
+        this.xp -= this.xpToNext();
+        this.levelUp(game);
+      }
+      if (game) game.updateHud();
+    }
+
+    levelUp(game) {
+      this.level++;
+      this.maxHp += 8;
+      this.stats.str += 1;
+      this.stats.con += 1;
+      this.hp = this.maxHp; // a fresh level restores you
+      if (game) {
+        game.heading('*** You have reached level ' + this.level + '! ***');
+        game.print('Power settles into your bones. (+8 HP, +1 STR, +1 CON)');
+      }
     }
   }
 

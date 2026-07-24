@@ -120,6 +120,7 @@ html, body {
 }
 .hud-fill.warn { background: var(--warn); }
 .hud-fill.danger { background: var(--danger); }
+.hud-fill.xp { background: var(--echo); }
 
 /* Prompt */
 #prompt {

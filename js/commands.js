@@ -330,12 +330,128 @@
       handler(ctx) {
         const p = ctx.player;
         ctx.print('--- ' + util.capitalize(p.name) + ' ---');
-        ctx.print('Level ' + p.level + '   HP ' + p.hp + '/' + p.maxHp);
+        ctx.print('Level ' + p.level + '   XP ' + p.xp + '/' + p.xpToNext());
+        ctx.print('HP ' + p.hp + '/' + p.maxHp);
         const s = p.stats;
         ctx.print(
           'STR ' + s.str + '  DEX ' + s.dex + '  CON ' + s.con + '  INT ' + s.int
         );
+        const w = p.equipment.weapon;
+        const a = p.equipment.armor;
+        ctx.print('Wielded: ' + (w ? util.aName(w) : 'bare hands') +
+          '   Worn: ' + (a ? util.aName(a) : 'nothing'));
         ctx.print('Load ' + p.carriedWeight() + '/' + p.capacity);
+      },
+    });
+
+    reg.register({
+      name: 'attack',
+      aliases: ['kill', 'k', 'hit'],
+      usage: 'attack <target>',
+      help: 'Attack a creature. With no target, press an ongoing fight.',
+      handler(ctx) {
+        if (!ctx.rest) {
+          if (ctx.game.combat.engaged()) return ctx.game.combat.round();
+          return ctx.print('Attack what?');
+        }
+        const mob = ctx.room.find(ctx.rest, (o) => o.is('mob') && o.alive);
+        if (!mob) return ctx.print("There's no living \"" + ctx.rest + '" here.');
+        if (mob.combatant === false) {
+          return ctx.print(util.capitalize(util.theName(mob)) +
+            ' cannot be fought.');
+        }
+        ctx.game.combat.start(mob);
+      },
+    });
+
+    reg.register({
+      name: 'flee',
+      aliases: ['fl'],
+      usage: 'flee',
+      help: 'Break off a fight and bolt through a random exit.',
+      handler(ctx) { ctx.game.combat.flee(); },
+    });
+
+    reg.register({
+      name: 'consider',
+      aliases: ['con', 'cons'],
+      usage: 'consider <target>',
+      help: 'Size up a creature before picking a fight.',
+      handler(ctx) {
+        if (!ctx.rest) return ctx.print('Consider whom?');
+        const mob = ctx.room.find(ctx.rest, (o) => o.is('mob'));
+        if (!mob) return ctx.print("There's no \"" + ctx.rest + '" here.');
+        const diff = (mob.level || 1) - ctx.player.level;
+        let verdict;
+        if (diff <= -3) verdict = 'You could kill it in your sleep.';
+        else if (diff < 0) verdict = 'You have the clear advantage.';
+        else if (diff === 0) verdict = 'An even match — it could go either way.';
+        else if (diff < 3) verdict = 'This would be a hard fight.';
+        else verdict = 'It would almost certainly be the end of you.';
+        ctx.print('You size up ' + util.theName(mob) + ' (level ' +
+          (mob.level || 1) + '). ' + verdict);
+      },
+    });
+
+    reg.register({
+      name: 'wield',
+      aliases: ['wi'],
+      usage: 'wield <weapon>',
+      help: 'Ready a weapon from your pack.',
+      handler(ctx) {
+        if (!ctx.rest) return ctx.print('Wield what?');
+        const item = ctx.player.carrying(ctx.rest);
+        if (!item) return ctx.print("You aren't carrying \"" + ctx.rest + '".');
+        if (!item.is('weapon') && !item.damage) {
+          return ctx.print("You can't fight with " + util.theName(item) + '.');
+        }
+        ctx.player.equipment.weapon = item;
+        ctx.print('You ready ' + util.theName(item) + '.');
+        ctx.game.updateHud();
+      },
+    });
+
+    reg.register({
+      name: 'wear',
+      aliases: [],
+      usage: 'wear <armor>',
+      help: 'Put on a piece of armor from your pack.',
+      handler(ctx) {
+        if (!ctx.rest) return ctx.print('Wear what?');
+        const item = ctx.player.carrying(ctx.rest);
+        if (!item) return ctx.print("You aren't carrying \"" + ctx.rest + '".');
+        if (!item.is('armor') && item.armor == null) {
+          return ctx.print("You can't wear " + util.theName(item) + '.');
+        }
+        ctx.player.equipment.armor = item;
+        ctx.print('You don ' + util.theName(item) + '.');
+        ctx.game.updateHud();
+      },
+    });
+
+    reg.register({
+      name: 'remove',
+      aliases: ['unwield', 'unwear'],
+      usage: 'remove <weapon|armor>',
+      help: 'Unequip a wielded weapon or worn armor.',
+      handler(ctx) {
+        const eq = ctx.player.equipment;
+        if (!ctx.rest) {
+          if (eq.weapon) { ctx.print('You put away ' + util.theName(eq.weapon) + '.'); eq.weapon = null; }
+          else if (eq.armor) { ctx.print('You take off ' + util.theName(eq.armor) + '.'); eq.armor = null; }
+          else ctx.print('You have nothing equipped.');
+          return ctx.game.updateHud();
+        }
+        if (eq.weapon && MUD.match.score(ctx.rest, eq.weapon) > 0) {
+          ctx.print('You put away ' + util.theName(eq.weapon) + '.');
+          eq.weapon = null;
+        } else if (eq.armor && MUD.match.score(ctx.rest, eq.armor) > 0) {
+          ctx.print('You take off ' + util.theName(eq.armor) + '.');
+          eq.armor = null;
+        } else {
+          ctx.print("You don't have \"" + ctx.rest + '" equipped.');
+        }
+        ctx.game.updateHud();
       },
     });
 

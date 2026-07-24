@@ -27,6 +27,11 @@
       this._tickHandlers = [];
       this._tickTimer = null;
       this.tickMs = opts.tickMs || 3000;
+
+      // Combat + respawn.
+      this.combat = new MUD.Combat(this);
+      this.recallId = opts.recallId || null;   // where the slain wake; defaults to start
+      this._respawns = [];                      // pending mob respawns
     }
 
     /* ---- output -------------------------------------------------- */
@@ -108,13 +113,56 @@
         this.print(exit.lockedMsg || 'That way is locked.');
         return false;
       }
+      // Leaving a room breaks off any fight (you outran it).
+      if (this.combat.engaged()) this.combat.end();
+
       const to = exit.room;
       from.emit('exit', this.player, dir, to);
       to.add(this.player);          // Container.add re-parents the player
       to.emit('enter', this.player, dir, from);
       this.describeRoom(to);
       this.tick();                  // moving advances the world a step
+      this.checkAggro();            // hostile locals may set upon you
       return true;
+    }
+
+    /** If a hostile, living mob shares the room and no fight is on, it strikes. */
+    checkAggro() {
+      if (this.combat.engaged()) return;
+      const room = this.player.room;
+      if (!room) return;
+      const foe = room.actors(
+        (a) => a.is('mob') && a.alive && a.hostile && a !== this.player
+      )[0];
+      if (foe) this.combat.start(foe, foe); // foe is the aggressor
+    }
+
+    /* ---- respawn / recall --------------------------------------- */
+
+    scheduleRespawn(mob) {
+      if (!mob || !mob.respawns) return;
+      if (typeof setTimeout !== 'function') return; // headless: no timers
+      const self = this;
+      setTimeout(function () {
+        mob.hp = mob.maxHp;
+        mob.alive = true;
+        mob.hostile = mob.hostile; // preserved
+        if (self.player.room === mob.location) {
+          self.print(util.capitalize(util.aName(mob)) + ' appears.');
+          self.checkAggro();
+        }
+      }, mob.respawns * 1000);
+    }
+
+    respawnPlayer() {
+      const p = this.player;
+      const recall = (this.recallId && this.world.get(this.recallId)) ||
+        this.world.startRoom();
+      p.alive = true;
+      p.hp = Math.max(1, Math.floor(p.maxHp / 2));
+      recall.add(p);
+      this.heading('You wake, gasping, somewhere safe.');
+      this.describeRoom(recall);
     }
 
     /* ---- HUD ----------------------------------------------------- */
@@ -129,6 +177,18 @@
         d.hpFill.className = 'hud-fill' + (pct <= 25 ? ' danger' : pct <= 50 ? ' warn' : '');
       }
       if (d.hpText) d.hpText.textContent = p.hp + '/' + p.maxHp;
+      if (d.level) d.level.textContent = String(p.level);
+      if (d.xpFill) {
+        const need = p.xpToNext();
+        d.xpFill.style.width = Math.round((p.xp / need) * 100) + '%';
+      }
+      if (d.xpText) d.xpText.textContent = p.xp + '/' + p.xpToNext();
+      if (d.target) {
+        const foe = this.combat.enemy;
+        d.target.textContent = foe
+          ? util.capitalize(util.theName(foe)) + '  ' + foe.hp + '/' + foe.maxHp
+          : '—';
+      }
       if (d.room) d.room.textContent = p.room ? p.room.title : '—';
       if (d.exits) {
         const dirs = p.room ? p.room.exitDirs() : [];
@@ -186,6 +246,7 @@
         for (const line of opts.banner) this.heading(line);
       }
       this.describeRoom(start);
+      this.checkAggro();
     }
   }
 

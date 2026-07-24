@@ -21,6 +21,10 @@
       output: document.getElementById('output'),
       hpFill: document.getElementById('hp-fill'),
       hpText: document.getElementById('hp-text'),
+      level: document.getElementById('hud-level'),
+      xpFill: document.getElementById('xp-fill'),
+      xpText: document.getElementById('hud-xp'),
+      target: document.getElementById('hud-target'),
       room: document.getElementById('hud-room'),
       exits: document.getElementById('hud-exits'),
     };
@@ -30,6 +34,7 @@
       player,
       dom,
       tickMs: 4000,
+      recallId: built.recallId,   // where the slain wake
     });
 
     // Expose for tinkering in the console.
@@ -37,8 +42,8 @@
 
     game.begin({
       banner: [
-        '== MOURNFALL ==',
-        'The city between worlds, at the end of everything.',
+        '== SIGILIAN ==',
+        'Empyrean, capital of the Seven-Star Empire, upon the world of Kaelinu.',
         'Type "help" for commands, "where" for your bearings, "areas" for a map.',
         '',
       ],
