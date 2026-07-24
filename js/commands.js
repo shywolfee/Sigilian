@@ -340,6 +340,52 @@
     });
 
     reg.register({
+      name: 'where',
+      aliases: ['wh'],
+      usage: 'where',
+      help: 'Name the area you are in and how many rooms it holds.',
+      handler(ctx) {
+        const area = ctx.room && ctx.room.area;
+        if (!area) {
+          ctx.print('You are nowhere in particular.');
+          return;
+        }
+        const n = area.roomCount;
+        ctx.print('You are in ' + area.name + '.');
+        ctx.print(
+          'This area contains ' + n + ' room' + (n === 1 ? '' : 's') + '.'
+        );
+      },
+    });
+
+    reg.register({
+      name: 'areas',
+      aliases: ['ar'],
+      usage: 'areas',
+      help: 'List every area of the world and its room count.',
+      handler(ctx) {
+        const areas = ctx.world.allAreas();
+        if (!areas.length) {
+          ctx.print('The world has no named areas.');
+          return;
+        }
+        const here = ctx.room && ctx.room.area;
+        ctx.print('Known areas:');
+        let total = 0;
+        for (const a of areas) {
+          total += a.roomCount;
+          const mark = a === here ? ' *' : '';
+          ctx.print(
+            '  ' + a.name + ' — ' + a.roomCount +
+              ' room' + (a.roomCount === 1 ? '' : 's') + mark
+          );
+        }
+        ctx.print('(' + areas.length + ' area' + (areas.length === 1 ? '' : 's') +
+          ', ' + total + ' rooms total; * = current)');
+      },
+    });
+
+    reg.register({
       name: 'help',
       aliases: ['?', 'commands'],
       usage: 'help [command]',

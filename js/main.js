@@ -37,13 +37,14 @@
 
     game.begin({
       banner: [
-        '== SIGILIAN ==',
-        'A tiny MUD framework. Type "help" for commands.',
+        '== MOURNFALL ==',
+        'The city between worlds, at the end of everything.',
+        'Type "help" for commands, "where" for your bearings, "areas" for a map.',
         '',
       ],
     });
 
-    // Ambient world clock so the Warden stirs even if you stand still.
+    // Ambient world clock so the city stirs even if you stand still.
     game.startClock();
 
     /* ---- input wiring ---- */

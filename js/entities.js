@@ -240,6 +240,7 @@
       super(spec);
       this.tags.add('room');
       this.title = spec.title || this.name;
+      this.area = null;                   // set when the room joins an Area
       this.exits = Object.create(null);   // canonicalDir -> { room, locked, ... }
       if (typeof spec.onEnter === 'function') this.on('enter', spec.onEnter);
       if (typeof spec.onExit === 'function') this.on('exit', spec.onExit);

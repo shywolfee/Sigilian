@@ -5,8 +5,9 @@ entirely in the browser. No build step, no server: **open `index.html`** and
 play. The engine is plain ES5-ish JavaScript organised under a single `MUD`
 global, so it also runs headless (in Node/tests) exactly as it does in the page.
 
-The repo ships a two-room testbed to exercise every feature, but the point is
-the framework in `js/` — the content is meant to be replaced.
+The repo ships a full 158-room area — **the City of Mournfall** — as its
+testbed, but the point is the framework in `js/`; the content is meant to be
+replaced.
 
 ```
 index.html          # page shell + HUD, loads the scripts in order
@@ -14,14 +15,14 @@ styles.css          # terminal look & responsive layout
 js/
   core.js           # utilities, name-matching, event emitter
   entities.js       # GameObject → Item / Actor → Mob / Player, Room, directions
-  world.js          # World registry + content factories
+  world.js          # World registry, Area, content factories
   commands.js       # command registry, parser, built-in verbs
   game.js           # engine: output, movement, HUD, tick loop, input
-  world-data.js     # the two-room testbed (replace with your content)
+  world-data.js     # the City of Mournfall (158 rooms; replace with your world)
   main.js           # bootstrap: wires the DOM and starts the game
 ```
 
-## Playing the testbed
+## Playing
 
 Type `help` in-game. Highlights:
 
@@ -31,13 +32,36 @@ Type `help` in-game. Highlights:
   `use <thing>`.
 - **People**: `talk to <someone>`.
 - **Character**: `stats`.
+- **Geography**: `where` (your area + its room count), `areas` (all areas and
+  their counts).
 
-Everything abbreviates. `l sig` looks at the sigil, `x tor` examines the torch,
-`get rusty` grabs the rusty key, `inv` shows your pack. Up/Down arrows recall
-command history.
+Everything abbreviates. `l clerk` looks at the warden-clerk, `x ward` examines
+it, `get entropy` grabs a shard of entropy-glass, `inv` shows your pack, `wh`
+is `where`. Up/Down arrows recall command history.
 
-The testbed's puzzle: the north door is locked; find the key, go `down`, and
-`talk` to the Warden while carrying it.
+### The City of Mournfall
+
+The testbed world is a city caught between worlds, in the Far-Land at the end of
+everything, roofed by an obsidian dome that holds back the Void — its poorer
+quarters patched with a magical substance called *entropy-glass*. It is laid out
+the way a MUD zone is built: 158 rooms in ten districts, stitched together with
+compass exits.
+
+| District | Rooms | |
+|---|---|---|
+| The Worldgate / Threshold | 10 | arrival between worlds |
+| The Obsidian Concourse | 8 | the spine avenue |
+| Highmournt (the Dome-Crown) | 22 | the wealthy, intact quarter |
+| The Ashmarket | 20 | the great bazaar |
+| The Cinder Wards | 26 | slums under the broken dome |
+| The Voidquays | 16 | moorings at the dome's rim |
+| The Sepulchre District | 16 | temples to the End |
+| The Pale Assembly | 12 | the wardens and their law |
+| The Undermourn | 18 | catacombs and undercity |
+| The Guttering Rows | 10 | the working poor's tenements |
+
+You start on the Threshold Stone; the Mournfall Plaza (north up the Concourse)
+is the hub the districts fan out from.
 
 ## Core concepts
 
@@ -75,6 +99,20 @@ reciprocal `south` exit (pass `{ oneWay: true }` to skip, `{ locked: true,
 lockedMsg }` to bar it). Directions accept full names or abbreviations
 everywhere.
 
+### Areas
+
+Every room belongs to an **`Area`** — a named division of the world (a city, a
+forest, a dungeon). Create one with `world.area({ id, name, description })`; it
+becomes the *active* area, and every `world.room(...)` after it joins that area
+automatically (or pass `area:` on a room to override). An area knows its
+`roomCount`, and the world tracks them all via `world.allAreas()`.
+
+Two commands surface this to the player:
+
+- **`where`** — names your current area and how many rooms it holds.
+- **`areas`** — lists every area with its room count and the world total,
+  marking the one you're in.
+
 ### Events / hooks
 
 Every entity is an event emitter. Handlers run with `this` bound to the entity,
@@ -104,6 +142,7 @@ Replace `js/world-data.js`. Minimal example:
 ```js
 MUD.buildWorld = function () {
   const world = new MUD.World();
+  world.area({ id: 'keep', name: 'The Old Keep' }); // rooms below join this area
 
   const hall = world.room({ id: 'hall', title: 'Great Hall',
     description: 'A vast hall. A door leads east.' });
@@ -118,6 +157,11 @@ MUD.buildWorld = function () {
   return { world, hall, yard };
 };
 ```
+
+For a larger world, the Mournfall build in `js/world-data.js` shows the
+zone-file pattern: create rooms into an id-keyed table, collect all the exits,
+then apply them once every room exists — so districts can reference each other
+freely regardless of definition order.
 
 To add a verb, register it on the command registry (see `js/commands.js` for the
 `ctx` shape):
