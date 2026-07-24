@@ -5,10 +5,10 @@ entirely in the browser. No build step, no server: **open `index.html`** and
 play. The engine is plain ES5-ish JavaScript organised under a single `MUD`
 global, so it also runs headless (in Node/tests) exactly as it does in the page.
 
-The repo ships four hand-written areas — three 200-room capitals, **Empyrean**,
-**Lunden**, and **Miyako**, and a 158-room city between worlds, **Mournfall**
-(758 rooms in all) — as its testbed, but the point is the framework in `js/`;
-the content is meant to be replaced.
+The repo ships one large hand-written area — **Coruscant**, the galactic
+capital, a 200-room vertical slice through the ecumenopolis from the Senate
+heights down to Level 1313 — as a *Star Wars* fan-game testbed. The point,
+though, is the framework in `js/`; the content is meant to be replaced.
 
 ```
 index.html          # page shell + HUD, loads the scripts in order
@@ -20,110 +20,80 @@ js/
   commands.js       # command registry, parser, built-in verbs
   combat.js         # round-based combat engine
   game.js           # engine: output, movement, HUD, ticks, combat, respawn, ferry
-  empyrean.js       # content: Empyrean, capital of the Seven-Star Empire (200)
-  lunden.js         # content: Lunden, capital of the kingdom of Albeon (200)
-  miyako.js         # content: Miyako, capital of Yamato / Zipang (200)
-  mournfall.js      # content: the City of Mournfall (158)
-  world-data.js     # orchestrator: builds all areas into one world
-  main.js           # bootstrap: the start-city chooser, DOM wiring, game start
+  coruscant.js      # content: Coruscant, the crown of the galaxy (200)
+  world-data.js     # orchestrator: builds the area into one world
+  main.js           # bootstrap: the arrival screen, DOM wiring, game start
 ```
 
 ## Playing
 
-At launch the game asks which capital to begin in — **Empyrean**, **Lunden**, or
-**Miyako** — then drops you in. Type `help` in-game. Highlights:
+At launch the game welcomes you and drops you at **Westport** spaceport on
+Coruscant — press ENTER to arrive. Type `help` in-game. Highlights:
 
 - **Movement**: `n s e w u d ne nw se sw`, or `go <dir>`. Bare directions work.
+  `u`/`d` ride the **turbolifts** between the levels of the city.
 - **Looking**: `look`, `look at <thing>`, `examine <thing>` / `x <thing>`.
 - **Items**: `get <thing>` (`get all`), `drop <thing>`, `inventory` / `i`,
   `use <thing>`.
 - **Combat**: `attack <foe>` / `kill` / `k`, `consider <foe>` (size it up),
   `flee`. `wield <weapon>`, `wear <armor>`, `remove <item>`.
-- **Travel**: `board` a ferry moored at a dock, to cross to its far dock.
+- **Travel**: `board` an air-taxi where one is idling, to skim across the
+  district.
 - **People**: `talk to <someone>`.
 - **Character**: `stats` (level, XP, HP, stats, gear).
 - **Geography**: `where` (your area + its room count), `areas` (all areas and
   their counts).
 
-Everything abbreviates. `k rat` attacks the rat, `wi saber` wields the saber,
-`con coesre` sizes up the King of Thieves, `inv` shows your pack, `wh` is
-`where`. Up/Down arrows recall command history.
+Everything abbreviates. `k scurrier` attacks the scurrier, `wi blaster` wields
+the blaster pistol, `con vigo` sizes up the Black Sun overlord, `inv` shows your
+pack, `wh` is `where`. Up/Down arrows recall command history.
 
-Kaelinu, the world Sigilian is set on, reads as ordinary fantasy only if you
-aren't paying attention — look closer and it's a world that went *differently*
-from ours, its countries, seas, and ideas the linguistic cousins of names you
-half-know. Two rival capitals face each other across a narrow sea called the
-Sleeve — Empyrean and Lunden — and a third, Miyako, lies months' sail to the
-east; you choose which to begin in.
+### Coruscant — the crown of the galaxy
 
-### Empyrean — capital of the Seven-Star Empire
+Set in the last years of the Republic, this is Coruscant, the galactic
+capital — not a city on a planet but a planet made city, ten thousand years of
+building stacked kilometres deep, so that the folk of the sunlit spires and the
+folk of the sunless undercity are as far apart as two worlds and know each other
+about as well.
 
-The France that might have been; Empyrean its Paris, astride the river Sequane.
-You start on the Isle, at the Carrefour of the Seven Stars. 200 rooms in ten
-districts: the Isle, the Quays of the Sequane, the Astrarium (the imperial
-palace), Les Grènes (the great market), the Collegium (the university), the
-Sanctuary, the Gilded Marais (the nobles' quarter), Montcorbeau (the butte of
-artists), the Bastion & Faubourg (fortress and restive workers), and the Cour
-des Miracles (the thieves' slum). The state faith venerates the **Heptad** —
-the seven stars of imperial heaven.
+The area is a **vertical slice** of the ecumenopolis: 200 rooms in ten districts
+strung along a single **turbolift spine**, so you can ride both above and below
+the level you start on. From top to bottom:
 
-**The way to Mournfall.** Very near the start, off the Carrefour, the neglected
-Saints' Cut drops into the Cour des Miracles. Deep in the Cour, past the
-Cutpurse's Nook, is the **Impasse of the Last Saint** — an alley that does not
-end in a wall but in something else, that isn't, or is, or never was. Walk north
-into the not-wall and you cross, one way and no way back, onto the Threshold
-Stone of Mournfall.
+- **The Senate District** — the government heights, where a thousand worlds'
+  delegations float over the well of the Grand Convocation Chamber and the
+  Chancellor asks, again, for emergency powers.
+- **The Jedi Temple Precinct** — the great five-spired ziggurat on its own
+  plateau, bridged to the Senate by the Temple Skywalk; the Archives, the
+  Council Chamber, the Room of a Thousand Fountains.
+- **Monument Plaza & the Skydecks** — the upper, sunlit tourist band, built
+  around Umate: the one bare nub of the planet's original rock left uncovered.
+- **Column Commons & the Skylanes** — the upper-mid residential city, honest
+  and stacked and endlessly in motion.
+- **Westport Spaceport** — *where you begin.* A great public port where a
+  hundred worlds arrive at once, and the turbolift core drops away below the
+  arrivals hall.
+- **CoCo Town** — Collective Commerce, a working mid-level of small foundries,
+  cheap eateries, and Dex's Diner.
+- **The Uscru Entertainment District** — the neon strip: the Outlander Club,
+  the Galaxies Opera House, the gambling halls, and Deathstick Alley. Reachable
+  on foot from CoCo Town, or by **air-taxi** from Westport.
+- **The Works** — the industrial deep-city, where Coruscant's power is
+  generated and its air scrubbed, and the sun is only a rumour.
+- **The Coruscant Underworld** — the sunless levels, where the law is a rumour
+  and the **Black Sun** syndicate is the government.
+- **The Undercity & Level 1313** — the very bottom: the infamous Level 1313,
+  the buried old city, the drowned foundations, and the dianoga-haunted dark.
 
-### Lunden — capital of the kingdom of Albeon
+**The turbolift spine.** From the port's Turbolift Core, `u` climbs toward
+Column Commons, Monument Plaza, and the Senate heights; `d` drops through CoCo
+Town and the Works into the Underworld and, if you keep riding, to the very
+foundations of the world. Danger scales as you descend: a scurrier in the vents
+is a first fight; the elder dianoga at the bottom is not.
 
-The England that might have been, across the Sleeve; Lunden its London, sprawled
-in coal-smoke along the tidal river Tamis. Where Empyrean is gilded, absolutist,
-and venerates the seven stars, Lunden is foggy, mercantile, and parliamentary,
-and keeps its own hard reformed creed — the **Church of the Lone Star**, which
-holds that a soul answers to one light alone. You start in the walled City, at
-the Great Chepe. 200 rooms in ten districts: the City & the Chepe, the Ravenkeep
-(the royal fortress), the Pool & Wapping (the docklands), the Great Bridge & the
-Tamis, Westmyn (the Crown & the Moot), the Suthwork (theatres, stews & prisons),
-the Strand & the Inns (law and the press), Smithsfield & the Shambles (market
-and gallows), the Rookery of Gyles (the slum), and the West End.
-
-**The ferry between the capitals.** The cross-Sleeve packet joins Empyrean and
-Lunden: `board` at the Custom-House in Empyrean to sail to Lunden's
-Packet-Stairs, and `board` again there to sail back — a two-way passage you can
-make from either side, however you began.
-
-### Miyako — capital of Yamato, the Empire of the Morning Sun
-
-Far to the east across the Sunrise Sea, months' sail from the western kingdoms,
-lies the closed empire the sailors of Empyrean call **Zipang** — the land of
-gold and locked doors — but which its own people name **Yamato**. This is
-Kaelinu's answer to imperial Japan: a realm that has sealed itself against the
-world, penned its tolerated "sea-barbarians" on a single fan-shaped island, and
-turned inward into an exquisite, rigid, frozen perfection. Its capital, Miyako,
-is a castle-town of concentric rings, shared between two powers — the **Radiant
-Emperor**, a living god descended from the sun-mother Amateru who reigns in
-sacred seclusion and rules nothing, and the **Shogun**, lord of the
-tent-government, who rules everything from the White Heron Keep. You start in the
-merchant Low City, at the Great Avenue. 200 rooms in ten districts: the Low City,
-the Harbor & Fan-Island, the Great Bridge & Riverside, the Warriors' Quarter,
-the White Heron Keep, the Ninefold Enclosure (the Emperor), the Willow-World
-(the floating pleasure-quarter), the Temple District, the Shrine Precinct, and
-the Outer Wards.
-
-**The Eastern voyage.** From a *second* Empyrean dock — the Sea-Gate, downriver
-of the Custom-House — the Eastern Company carrack makes the long ocean crossing:
-`board` there to sail months east to Miyako's Company Anchorage, and `board`
-again to sail the long way home.
-
-### The City of Mournfall
-
-A city caught between worlds, in the Far-Land at the end of everything, roofed by
-an obsidian dome that holds back the Void — its poorer quarters patched with a
-magical substance called *entropy-glass*. 158 rooms in ten districts (the
-Worldgate, the Obsidian Concourse, Highmournt, the Ashmarket, the Cinder Wards,
-the Voidquays, the Sepulchre, the Pale Assembly, the Undermourn, the Guttering
-Rows), fanning out from the Mournfall Plaza. Where Empyrean worships the seven
-stars, Mournfall has a sky with none — and no way home.
+**The air-taxi.** On Westport's air-taxi platform, `board` a cab to skim across
+the district to the Uscru strip; `board` again on the strip to ride back — a
+two-way hop you can make from either side.
 
 ## Core concepts
 
@@ -224,10 +194,11 @@ lets mobs act. `game.handleInput(line)` runs the parser.
 zone-file builder context (a room table `R`, plus terse `room()`/`link()`
 helpers), hands that context to each area's builder in turn, then applies every
 collected link at once — so areas may reference each other's rooms freely, in
-any order. Each area lives in its own file (`empyrean.js`, `lunden.js`,
-`mournfall.js`) as a `MUD.buildXxx(ctx)` function that calls `world.area(...)`
-and populates it. The orchestrator also returns the list of `starts` the
-launcher offers the player to choose between.
+any order. Each area lives in its own file (`coruscant.js`) as a
+`MUD.buildXxx(ctx)` function that calls `world.area(...)` and populates it. The
+orchestrator also returns the list of `starts` the launcher offers the player
+(here just one — Westport). Add more area files and hand each to a `buildXxx`
+call in `world-data.js` to grow the world.
 
 A minimal single-area world looks like:
 
@@ -252,14 +223,20 @@ MUD.buildWorld = function () {
 };
 ```
 
-The four shipped areas show the pattern at scale, including cross-area links: a
-one-way exit (Empyrean's impasse → Mournfall's Threshold Stone) and two-way
-**ferries** (Empyrean ↔ Lunden, and Empyrean ↔ Miyako, from two different
-Empyrean docks). A ferry is just a property on a dock room —
-`room.ferry = { toId, moored, crossing }` — that the `board` command follows,
-teleporting the player to the room named by `toId` (resolved by id, so the two
-docks can live in different area files). Set matching `ferry` blocks on both
-docks to make it round-trip.
+The shipped Coruscant area shows the pattern at scale, including two kinds of
+non-compass link. **Turbolifts** are just ordinary `up`/`down` exits: the whole
+area hangs on a vertical spine of them, so `u`/`d` carry the player between the
+level-bands of the city. A **ferry** (here, the air-taxi) is a property on a
+room — `room.ferry = { toId, moored, crossing }` — that the `board` command
+follows, teleporting the player to the room named by `toId` (resolved by id, so
+the two ends can live in different area files). Set matching `ferry` blocks on
+both ends to make it round-trip.
+
+> **Gotcha — reciprocal exits.** `link('a', dir, 'b')` auto-creates the reverse
+> exit on `b` *only if that slot is free*. If a later link reuses `b`'s
+> opposite-direction slot, it silently overwrites the auto-reciprocal, and the
+> player can walk in but not back out. Reachability from the start doesn't catch
+> this (it's forward-only); check that every room can also *return* to the start.
 
 To add a verb, register it on the command registry (see `js/commands.js` for the
 `ctx` shape):
@@ -286,6 +263,6 @@ node test/smoke.js
 ```
 
 It checks the framework (name-matching, abbreviation, area commands, combat,
-leveling, equipment, the one-way impasse, both ferries, death/recall) and the
-integrity of the shipped world (758 rooms, all four areas' counts, and full
-internal reachability of each).
+leveling, equipment, the turbolift spine up and down, the Temple skywalk, the
+air-taxi, death/recall) and the integrity of the shipped world (200 rooms, all
+ten districts present, and full internal reachability from Westport).

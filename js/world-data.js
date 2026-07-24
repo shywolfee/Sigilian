@@ -1,25 +1,20 @@
 /*
- * world-data.js — the world of Kaelinu: the orchestrator.
+ * world-data.js — the world of Coruscant: the orchestrator.
  *
  * This file owns the shared World and the zone-file builder context (a room
- * table plus terse room()/link() helpers), hands that context to each area's
- * builder in turn, then applies every collected link at once — so areas may
- * reference each other's rooms freely, in any order.
+ * table plus terse room()/link() helpers), hands that context to the area
+ * builder, then applies every collected link at once — so the area may wire its
+ * rooms freely, in any order.
  *
- * Areas:
- *   Empyrean  — capital of the Seven-Star Empire, on Kaelinu (js/empyrean.js)
- *   Lunden    — capital of the kingdom of Albeon, over the Sleeve (js/lunden.js)
- *   Miyako    — capital of Yamato/Zipang, far east over the ocean (js/miyako.js)
- *   Mournfall — the city between worlds, at the end of everything (js/mournfall.js)
+ * Area:
+ *   Coruscant — the galactic capital, a vertical slice of the ecumenopolis from
+ *   the Senate heights down to Level 1313 (js/coruscant.js).
  *
- * From Empyrean's quays two ships sail: the cross-Sleeve packet to Lunden (board
- * at the Custom-House), and the Eastern Company carrack to Miyako (board at the
- * Sea-Gate). Each is board-able from either end. The player chooses which of the
- * three capitals to begin in.
- *
- * Empyrean is also joined to Mournfall by one uncanny, one-way thread: an
- * impasse in the Cour des Miracles that does not end in a wall, and lets out on
- * the Threshold Stone of Mournfall — with no way back.
+ * The whole 200-room area hangs on a single turbolift spine (u/d exits) that
+ * runs from the sunlit government heights at the top, through the Westport
+ * spaceport where you begin, down to the drowned foundations at the bottom of
+ * the world — so you may ride the lifts both above and below the level you
+ * start on. An air-taxi links Westport to the Uscru entertainment strip.
  */
 (function (global) {
   'use strict';
@@ -29,7 +24,7 @@
   MUD.buildWorld = function buildWorld() {
     const world = new MUD.World();
 
-    // Shared builder context passed to every area.
+    // Shared builder context passed to the area.
     const R = Object.create(null);
     const pendingLinks = [];
     const ctx = {
@@ -48,50 +43,31 @@
       },
     };
 
-    // Build each area. Order is irrelevant to linking (links are deferred).
-    const emp = MUD.buildEmpyrean(ctx);
-    const lun = MUD.buildLunden(ctx);
-    const miy = MUD.buildMiyako(ctx);
-    const mourn = MUD.buildMournfall(ctx);
+    // Build the area. Links are deferred, so order within it is irrelevant.
+    const cor = MUD.buildCoruscant(ctx);
 
-    // The one-way thread between worlds: the impasse that isn't a wall.
-    ctx.link(emp.impasseId, emp.impasseDir, mourn.arrivalId, {
-      oneWay: true,
-    });
-
-    // Apply every link now that all rooms of every area exist.
+    // Apply every link now that all rooms exist.
     for (const [a, dir, b, opts] of pendingLinks) {
       if (!R[a]) throw new Error('link from missing room: ' + a);
       if (!R[b]) throw new Error('link to missing room: ' + b);
       R[a].link(dir, R[b], opts);
     }
 
-    // The capitals the player may choose between at the start.
+    // The single start the launcher offers (the great spaceport of Westport).
     const starts = [
       {
-        key: 'empyrean', name: 'Empyrean', roomId: emp.startId,
-        blurb: 'capital of the Seven-Star Empire',
-      },
-      {
-        key: 'lunden', name: 'Lunden', roomId: lun.startId,
-        blurb: 'capital of the kingdom of Albeon, across the Sleeve',
-      },
-      {
-        key: 'miyako', name: 'Miyako', roomId: miy.startId,
-        blurb: 'capital of Yamato, the far empire of the Morning Sun',
+        key: 'coruscant', name: 'Coruscant', roomId: cor.startId,
+        blurb: 'the crown of the galaxy, at Westport spaceport',
       },
     ];
 
-    world.setStart(emp.startId); // a sane default if no choice is made
+    world.setStart(cor.startId);
     return {
       world,
-      empyrean: emp.area,
-      lunden: lun.area,
-      miyako: miy.area,
-      mournfall: mourn.area,
+      coruscant: cor.area,
       R,
       starts,
-      recallId: emp.startId, // overridden per chosen start in main.js
+      recallId: cor.startId,
     };
   };
 })(typeof window !== 'undefined' ? window : this);

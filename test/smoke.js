@@ -2,9 +2,9 @@
  * smoke.js — headless test harness. Run with: `node test/smoke.js`
  *
  * Loads the framework into a shared sandbox (no DOM, no timers), builds the
- * world of Kaelinu (Empyrean + Mournfall), and drives it through
- * game.handleInput(...), asserting on printed output and on state. This is the
- * same code path the browser uses, minus rendering and the combat clock.
+ * world of Coruscant, and drives it through game.handleInput(...), asserting on
+ * printed output and on state. This is the same code path the browser uses,
+ * minus rendering and the combat clock.
  */
 const fs = require('fs');
 const path = require('path');
@@ -13,8 +13,7 @@ const vm = require('vm');
 const base = path.join(__dirname, '..');
 const files = [
   'js/core.js', 'js/entities.js', 'js/world.js', 'js/commands.js',
-  'js/combat.js', 'js/game.js', 'js/empyrean.js', 'js/lunden.js',
-  'js/miyako.js', 'js/mournfall.js', 'js/world-data.js',
+  'js/combat.js', 'js/game.js', 'js/coruscant.js', 'js/world-data.js',
 ];
 
 const sandbox = { console };
@@ -44,21 +43,15 @@ function run(line) { captured.length = 0; game.handleInput(line); return capture
 
 /* ---- world integrity ---- */
 const rooms = world.allRooms();
-assert(rooms.length === 758, 'world has 758 rooms (got ' + rooms.length + ')');
-assert(world.getArea('empyrean').roomCount === 200, 'Empyrean holds 200 rooms');
-assert(world.getArea('lunden').roomCount === 200, 'Lunden holds 200 rooms');
-assert(world.getArea('miyako').roomCount === 200, 'Miyako holds 200 rooms');
-assert(world.getArea('mournfall').roomCount === 158, 'Mournfall holds 158 rooms');
-assert(world.allAreas().length === 4, 'world has four areas');
+assert(rooms.length === 200, 'world has 200 rooms (got ' + rooms.length + ')');
+assert(world.getArea('coruscant').roomCount === 200, 'Coruscant holds 200 rooms');
+assert(world.allAreas().length === 1, 'world has one area');
 
-// three start cities offered by the chooser
-assert(built.starts.length === 3, 'three start cities are offered');
-assert(built.starts.some((s) => s.roomId === 'isle_carrefour') &&
-       built.starts.some((s) => s.roomId === 'city_cross') &&
-       built.starts.some((s) => s.roomId === 'low_odori'),
-       'the chooser offers Empyrean, Lunden and Miyako');
+// one start city offered by the chooser
+assert(built.starts.length === 1, 'one start city is offered');
+assert(built.starts[0].roomId === 'port_concourse', 'the chooser offers Westport (port_concourse)');
 
-// each area is internally fully connected from its own start
+// the area is internally fully connected from its own start
 function reachFrom(id) {
   const s = world.get(id);
   const seen = new Set([s.id]);
@@ -72,45 +65,48 @@ function reachFrom(id) {
   }
   return seen;
 }
-const lunReach = reachFrom('city_cross');
-const lunRooms = rooms.filter((r) => r.area.id === 'lunden');
-assert(lunRooms.every((r) => lunReach.has(r.id)), 'all 200 Lunden rooms reachable from city_cross');
-const miyReach = reachFrom('low_odori');
-const miyRooms = rooms.filter((r) => r.area.id === 'miyako');
-assert(miyRooms.every((r) => miyReach.has(r.id)), 'all 200 Miyako rooms reachable from low_odori');
-const empReach = reachFrom('isle_carrefour');
-const empMourn = rooms.filter((r) => r.area.id === 'empyrean' || r.area.id === 'mournfall');
-assert(empMourn.every((r) => empReach.has(r.id)), 'Empyrean+Mournfall (358) reachable from Empyrean start');
+const reach = reachFrom('port_concourse');
+assert(rooms.every((r) => reach.has(r.id)), 'all 200 rooms reachable from Westport');
 
-/* ---- start & area commands across four areas ---- */
-assert(player.room.id === 'isle_carrefour', 'player starts at the Carrefour in Empyrean');
+// every district is represented (its prefix appears among the rooms)
+const prefixes = ['port_', 'sky_', 'plaza_', 'senate_', 'temple_',
+  'coco_', 'uscru_', 'works_', 'under_', 'deep_'];
+assert(prefixes.every((p) => rooms.some((r) => r.id.indexOf(p) === 0)),
+  'all ten districts are present');
+
+/* ---- start & area commands ---- */
+assert(player.room.id === 'port_concourse', 'player starts at the Grand Concourse of Westport');
 let out = run('where');
-assert(/Empyrean/.test(out) && /200 rooms/.test(out), 'where reports Empyrean and 200 rooms');
+assert(/Coruscant/.test(out) && /200 rooms/.test(out), 'where reports Coruscant and 200 rooms');
 out = run('areas');
-assert(/Empyrean[^\n]*200 rooms/.test(out), 'areas lists Empyrean (200)');
-assert(/Lunden[^\n]*200 rooms/.test(out), 'areas lists Lunden (200)');
-assert(/Miyako[^\n]*200 rooms/.test(out), 'areas lists Miyako (200)');
-assert(/Mournfall[^\n]*158 rooms/.test(out), 'areas lists Mournfall (158)');
-assert(/4 areas, 758 rooms total/.test(out), 'areas prints the world total');
+assert(/Coruscant[^\n]*200 rooms/.test(out), 'areas lists Coruscant (200)');
+assert(/1 area, 200 rooms total/.test(out), 'areas prints the world total');
 
-/* ---- the Eastern voyage: board Empyrean -> Miyako and back ---- */
-built.R.quai_watergate.add(player);
-run('board');
-assert(player.room.id === 'bay_wharf', 'boarding at the Sea-Gate lands you at the Miyako Anchorage');
-assert(/Miyako/.test(run('where')), 'the carrack crossed you into Miyako');
-run('board');
-assert(player.room.id === 'quai_watergate', 'boarding again returns you to the Empyrean Sea-Gate');
-built.R.isle_carrefour.add(player); // reset
+/* ---- the turbolift spine: ride ABOVE and BELOW the start band ---- */
+built.R.port_nexus.add(player);
+run('u'); assert(player.room.id === 'sky_nexus', 'up one turbolift: Column Commons');
+run('u'); assert(player.room.id === 'plaza_skydeck', 'up again: Monument Plaza skydeck');
+run('u'); assert(player.room.id === 'senate_transit', 'up again: the Senate District heights');
+built.R.port_nexus.add(player); // back to the start band
+run('d'); assert(player.room.id === 'coco_lift', 'down one turbolift: CoCo Town');
+run('d'); assert(player.room.id === 'works_shaft', 'down again: the Works');
+run('d'); assert(player.room.id === 'under_shaft', 'down again: the Underworld');
+run('d'); assert(player.room.id === 'deep_bottom', 'down again: the undercity bottom');
+built.R.port_concourse.add(player); // reset
 
-/* ---- the cross-Sleeve ferry: board there and back ---- */
-built.R.pool_packet.add(player);
-out = run('board');
-assert(player.room.id === 'quai_customs', 'boarding at Lunden lands you at the Empyrean Custom-House');
-assert(/Empyrean/.test(run('where')), 'the ferry crossed you into Empyrean');
-out = run('board');
-assert(player.room.id === 'pool_packet', 'boarding again returns you to the Lunden Packet-Stairs');
-assert(/Lunden/.test(run('where')), 'the return crossing put you back in Lunden');
-built.R.isle_carrefour.add(player); // reset for later assertions
+/* ---- the Jedi Temple is bridged from the Senate heights ---- */
+built.R.senate_skywalk.add(player);
+run('e');
+assert(player.room.id === 'temple_gates', 'the Temple skywalk crosses to the Jedi Temple gates');
+built.R.port_concourse.add(player);
+
+/* ---- the air-taxi: board Westport -> Uscru and back ---- */
+built.R.port_taxi.add(player);
+run('board');
+assert(player.room.id === 'uscru_strip', 'the air-taxi carries you to the Uscru strip');
+run('board');
+assert(player.room.id === 'port_taxi', 'boarding again returns you to the Westport platform');
+built.R.port_concourse.add(player); // reset
 
 /* ---- equipment ---- */
 player.add(world.item({ name: 'test dirk', keywords: ['dirk'], damage: [3, 6], accuracy: 1 }));
@@ -120,23 +116,23 @@ assert(/ready the test dirk/.test(out), 'wield readies a weapon');
 assert(player.equipment.weapon && player.equipment.weapon.name === 'test dirk', 'weapon equipped');
 assert(player.attackRating() === bareAtk + 1, 'weapon accuracy raises attack rating');
 
-/* ---- combat: hunt a market rat to death ---- */
-const ratRoom = built.R.gren_rats;
-ratRoom.add(player);
-const rat = ratRoom.actors((a) => a.is('mob') && a.name === 'market rat')[0];
-assert(!!rat, 'a market rat lairs in the rat-runs');
+/* ---- combat: hunt a scurrier to death ---- */
+const ventRoom = built.R.sky_vents;
+ventRoom.add(player);
+const scurrier = ventRoom.actors((a) => a.is('mob') && a.name === 'scurrier')[0];
+assert(!!scurrier, 'a scurrier nests in the ventilation gallery');
 const xpBefore = player.xp;
-run('attack rat');
+run('attack scurrier');
 let guard = 0;
 while (game.combat.engaged() && player.alive && guard++ < 50) run('attack');
-assert(!rat.alive, 'the rat is slain');
-assert(player.xp > xpBefore || player.level > 1, 'killing the rat granted experience');
+assert(!scurrier.alive, 'the scurrier is slain');
+assert(player.xp > xpBefore || player.level > 1, 'killing the scurrier granted experience');
 assert(!game.combat.engaged(), 'combat ends when the foe dies');
 
 /* ---- consider sizes up a foe ---- */
-built.R.cour_throne.add(player);
-out = run('consider coesre');
-assert(/Grand Co/.test(out) && /level 8/i.test(out), 'consider reports a foe\'s level');
+built.R.under_ganghideout.add(player);
+out = run('consider vigo');
+assert(/vigo/i.test(out) && /level 8/i.test(out), 'consider reports the Vigo\'s level');
 
 /* ---- leveling: a big XP grant levels the player up ---- */
 const lvlBefore = player.level;
@@ -145,21 +141,12 @@ player.gainXp(1000, game);
 assert(player.level > lvlBefore, 'a large XP award raises the level');
 assert(player.maxHp > hpBefore, 'leveling up raises max HP');
 
-/* ---- the one-way impasse into Mournfall ---- */
-built.R.cour_nook.add(player);
-run('e');  // into the impasse
-assert(player.room.id === 'cour_impasse', 'you reach the Impasse of the Last Saint');
-run('n');  // through the not-wall
-assert(player.room.id === 'gate_arrival', 'the impasse lets out on Mournfall\'s Threshold Stone');
-out = run('where');
-assert(/Mournfall/.test(out), 'you are now in the City of Mournfall');
-assert(!player.room.exits.south, 'there is no way back south from the Threshold Stone');
-
 /* ---- death & recall ---- */
 player.hp = 1;
 game.respawnPlayer();
 assert(player.room.id === built.recallId, 'the slain wake at the recall point');
 assert(player.alive && player.hp > 0, 'the recalled player lives');
+assert(built.recallId === 'port_concourse', 'the recall point is Westport');
 
 console.log('\n' + pass + ' passed, ' + fail + ' failed');
 process.exit(fail ? 1 : 0);

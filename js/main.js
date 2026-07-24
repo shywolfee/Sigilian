@@ -50,24 +50,24 @@
 
     function showChooser() {
       game.heading('== SIGILIAN ==');
-      game.print('Upon the world of Kaelinu, two capitals face each other ' +
-        'across the narrow sea called the Sleeve.');
+      game.print('Coruscant. The crown of the galaxy — a single city grown to ' +
+        'cover a world, from the sunlit spires of the Senate to the drowned ' +
+        'foundations of the undercity, kilometres below.');
       game.print('');
       for (const s of starts) {
         game.print('  ' + s.name.toUpperCase() + ' — ' + s.blurb + '.');
       }
       game.print('');
-      game.print('Where will you begin? Type ' +
-        starts.map((s) => s.name).join(' or ') + '.');
+      game.print('Press ENTER to arrive at Westport.');
     }
 
     function matchStart(text) {
+      // A single destination: any input (including a bare ENTER) arrives there.
+      if (starts.length === 1) return starts[0];
       const t = String(text || '').trim().toLowerCase();
       if (!t) return null;
-      // by number
       const n = parseInt(t, 10);
       if (n >= 1 && n <= starts.length) return starts[n - 1];
-      // by name prefix (empyrean/emp/e, lunden/lun/l, ...)
       return starts.find((s) => s.name.toLowerCase().indexOf(t) === 0) || null;
     }
 
@@ -79,8 +79,10 @@
       game.begin({
         banner: [
           '== SIGILIAN ==',
-          choice.name + ', ' + choice.blurb + ', upon the world of Kaelinu.',
-          'Type "help" for commands, "where" for your bearings, "areas" for a map.',
+          choice.name + ' — ' + choice.blurb + '.',
+          'The turbolifts run both ways: ride UP toward the Senate and the ' +
+            'Jedi Temple, or DOWN into the Works and the undercity.',
+          'Type "help" for commands, "where" for your bearings.',
           '',
         ],
         startRoom: startRoom,
