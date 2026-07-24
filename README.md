@@ -5,9 +5,12 @@ entirely in the browser. No build step, no server: **open `index.html`** and
 play. The engine is plain ES5-ish JavaScript organised under a single `MUD`
 global, so it also runs headless (in Node/tests) exactly as it does in the page.
 
-The repo ships one large hand-written area — **Coruscant**, the galactic
-capital, a 200-room vertical slice through the ecumenopolis from the Senate
-heights down to Level 1313 — as a *Star Wars* fan-game testbed. The point,
+The repo ships three hand-written *Star Wars* fan-game areas (450 rooms in all):
+**Coruscant**, the galactic capital, a 200-room vertical slice of the
+ecumenopolis from the Senate heights to Level 1313; **Nar Shaddaa**, the
+Smugglers' Moon (150); and **Nal Hutta**, the Hutt homeworld (100). The last two
+are deliberately *unfinished* — built to be expanded, with sealed doors and
+"not-yet-mapped" seams pointing at content a later pass will add. The point,
 though, is the framework in `js/`; the content is meant to be replaced.
 
 ```
@@ -21,7 +24,9 @@ js/
   combat.js         # round-based combat engine
   game.js           # engine: output, movement, HUD, ticks, combat, respawn, ferry
   coruscant.js      # content: Coruscant, the crown of the galaxy (200)
-  world-data.js     # orchestrator: builds the area into one world
+  narshaddaa.js     # content: Nar Shaddaa, the Smugglers' Moon (150, to expand)
+  nalhutta.js       # content: Nal Hutta, the Hutt homeworld (100, to expand)
+  world-data.js     # orchestrator: builds the areas + the transit network
   main.js           # bootstrap: the arrival screen, DOM wiring, game start
 ```
 
@@ -38,7 +43,8 @@ Coruscant — press ENTER to arrive. Type `help` in-game. Highlights:
 - **Combat**: `attack <foe>` / `kill` / `k`, `consider <foe>` (size it up),
   `flee`. `wield <weapon>`, `wear <armor>`, `remove <item>`.
 - **Travel**: `board` an air-taxi where one is idling, to skim across the
-  district.
+  district. At a **transit terminal**, `transit` lists numbered destinations and
+  `transit <n>` makes the (interstellar) journey.
 - **People**: `talk to <someone>`.
 - **Character**: `stats` (level, XP, HP, stats, gear).
 - **Geography**: `where` (your area + its room count), `areas` (all areas and
@@ -94,6 +100,33 @@ is a first fight; the elder dianoga at the bottom is not.
 **The air-taxi.** On Westport's air-taxi platform, `board` a cab to skim across
 the district to the Uscru strip; `board` again on the strip to ride back — a
 two-way hop you can make from either side.
+
+### Leaving the planet — the transit network
+
+Some rooms are **transit terminals**. Type `transit` there to see a numbered
+list of destinations, and `transit <n>` to travel — each route printing its own
+journey. From Coruscant's **Westport Departures Gate** you can transit off-world
+to **Nar Shaddaa**; from Nar Shaddaa's Hutt shuttle berth, down to **Nal
+Hutta**; and every hop can be made back the way it came.
+
+### Nar Shaddaa — the Smugglers' Moon (150 rooms, *a work in progress*)
+
+Coruscant's dark twin: another kilometres-deep vertical city, but a Hutt-owned
+one, running on spice, contraband, refugees, and neon. You land in the **Docking
+Sector**; from there the blazing **Promenade** branches to the **Corellian
+Sector**, the **Refugee Sector**, the **Slums**, the **Red-Light Sector**, the
+**Hutt Heights** (the palaces, up), and **the Meltdown** (the factories, down).
+This area is deliberately unfinished: sealed lifts and boarded passages mark
+where whole further levels of the moon are meant to be built later.
+
+### Nal Hutta — the Glorious Jewel (100 rooms, *a landing quarter*)
+
+The Hutt homeworld, a poisoned swamp the Hutts boast is a jewel. Per the brief,
+only the place you land is built for now: the **Bilbousa Spaceport** and a slice
+of the capital around it — the **Bazaar**, the edge of a Hutt lord's **estate**,
+the worker **warrens**, and the **swamp fringe** where the built city gives out
+onto the bog. Its sealed gates and hidden paths point at the vast rest of the
+city and the world, to be expanded a great deal later.
 
 ## Core concepts
 
@@ -223,14 +256,34 @@ MUD.buildWorld = function () {
 };
 ```
 
-The shipped Coruscant area shows the pattern at scale, including two kinds of
-non-compass link. **Turbolifts** are just ordinary `up`/`down` exits: the whole
-area hangs on a vertical spine of them, so `u`/`d` carry the player between the
-level-bands of the city. A **ferry** (here, the air-taxi) is a property on a
+The shipped areas show the pattern at scale, including three kinds of
+non-compass link. **Turbolifts** are just ordinary `up`/`down` exits: Coruscant
+hangs on a vertical spine of them, so `u`/`d` carry the player between the
+level-bands of the city. A **ferry** (the air-taxi) is a property on a
 room — `room.ferry = { toId, moored, crossing }` — that the `board` command
 follows, teleporting the player to the room named by `toId` (resolved by id, so
 the two ends can live in different area files). Set matching `ferry` blocks on
 both ends to make it round-trip.
+
+A **transit terminal** is the multi-destination cousin of a ferry, wired in
+`world-data.js` after every area is built:
+
+```js
+room.transit = {
+  here:  'A transit gate hums here',            // shown in the room description
+  intro: 'This gate books passage to:',         // header for the `transit` list
+  destinations: [
+    { toId: 'nard_arrival', label: 'Nar Shaddaa', note: 'the Smugglers\' Moon',
+      arrival: ['line one of the journey', 'line two', '...'] },  // its own message
+    // ...more destinations
+  ],
+};
+```
+
+`transit` lists the destinations by number; `transit <n>` moves the player to
+`destinations[n-1].toId` and prints that destination's `arrival` lines — so
+every route reads differently. Terminals are one-per-direction, so set one on
+each end (with the other as its destination) to make a route round-trip.
 
 > **Gotcha — reciprocal exits.** `link('a', dir, 'b')` auto-creates the reverse
 > exit on `b` *only if that slot is free*. If a later link reuses `b`'s
@@ -264,5 +317,6 @@ node test/smoke.js
 
 It checks the framework (name-matching, abbreviation, area commands, combat,
 leveling, equipment, the turbolift spine up and down, the Temple skywalk, the
-air-taxi, death/recall) and the integrity of the shipped world (200 rooms, all
-ten districts present, and full internal reachability from Westport).
+air-taxi, the cross-world transit network, death/recall) and the integrity of
+the shipped world (450 rooms across three areas, every district present, and
+full internal reachability of each area from its own entry).

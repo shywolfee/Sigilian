@@ -13,7 +13,8 @@ const vm = require('vm');
 const base = path.join(__dirname, '..');
 const files = [
   'js/core.js', 'js/entities.js', 'js/world.js', 'js/commands.js',
-  'js/combat.js', 'js/game.js', 'js/coruscant.js', 'js/world-data.js',
+  'js/combat.js', 'js/game.js', 'js/coruscant.js', 'js/narshaddaa.js',
+  'js/nalhutta.js', 'js/world-data.js',
 ];
 
 const sandbox = { console };
@@ -43,15 +44,17 @@ function run(line) { captured.length = 0; game.handleInput(line); return capture
 
 /* ---- world integrity ---- */
 const rooms = world.allRooms();
-assert(rooms.length === 200, 'world has 200 rooms (got ' + rooms.length + ')');
+assert(rooms.length === 450, 'world has 450 rooms (got ' + rooms.length + ')');
 assert(world.getArea('coruscant').roomCount === 200, 'Coruscant holds 200 rooms');
-assert(world.allAreas().length === 1, 'world has one area');
+assert(world.getArea('narshaddaa').roomCount === 150, 'Nar Shaddaa holds 150 rooms');
+assert(world.getArea('nalhutta').roomCount === 100, 'Nal Hutta holds 100 rooms');
+assert(world.allAreas().length === 3, 'world has three areas');
 
 // one start city offered by the chooser
 assert(built.starts.length === 1, 'one start city is offered');
 assert(built.starts[0].roomId === 'port_concourse', 'the chooser offers Westport (port_concourse)');
 
-// the area is internally fully connected from its own start
+// reachability within an area, following only its own exits (transit is not a link)
 function reachFrom(id) {
   const s = world.get(id);
   const seen = new Set([s.id]);
@@ -65,14 +68,25 @@ function reachFrom(id) {
   }
   return seen;
 }
-const reach = reachFrom('port_concourse');
-assert(rooms.every((r) => reach.has(r.id)), 'all 200 rooms reachable from Westport');
+const corReach = reachFrom('port_concourse');
+assert(rooms.filter((r) => r.area.id === 'coruscant').every((r) => corReach.has(r.id)),
+  'all 200 Coruscant rooms reachable from Westport');
+const narReach = reachFrom('nard_arrival');
+assert(rooms.filter((r) => r.area.id === 'narshaddaa').every((r) => narReach.has(r.id)),
+  'all 150 Nar Shaddaa rooms reachable from the arrival berth');
+const nalReach = reachFrom('nal_port_arrival');
+assert(rooms.filter((r) => r.area.id === 'nalhutta').every((r) => nalReach.has(r.id)),
+  'all 100 Nal Hutta rooms reachable from the landing pad');
 
-// every district is represented (its prefix appears among the rooms)
-const prefixes = ['port_', 'sky_', 'plaza_', 'senate_', 'temple_',
-  'coco_', 'uscru_', 'works_', 'under_', 'deep_'];
+// every district of every area is represented (its prefix appears among the rooms)
+const prefixes = [
+  'port_', 'sky_', 'plaza_', 'senate_', 'temple_', 'coco_', 'uscru_',
+  'works_', 'under_', 'deep_',              // Coruscant
+  'nard_', 'narp_', 'narc_', 'narf_', 'nars_', 'narr_', 'narh_', 'nari_', // Nar Shaddaa
+  'nal_port_', 'nal_baz_', 'nal_quarter_', 'nal_slum_', 'nal_swamp_',     // Nal Hutta
+];
 assert(prefixes.every((p) => rooms.some((r) => r.id.indexOf(p) === 0)),
-  'all ten districts are present');
+  'every district of every area is present');
 
 /* ---- start & area commands ---- */
 assert(player.room.id === 'port_concourse', 'player starts at the Grand Concourse of Westport');
@@ -80,7 +94,45 @@ let out = run('where');
 assert(/Coruscant/.test(out) && /200 rooms/.test(out), 'where reports Coruscant and 200 rooms');
 out = run('areas');
 assert(/Coruscant[^\n]*200 rooms/.test(out), 'areas lists Coruscant (200)');
-assert(/1 area, 200 rooms total/.test(out), 'areas prints the world total');
+assert(/Nar Shaddaa[^\n]*150 rooms/.test(out), 'areas lists Nar Shaddaa (150)');
+assert(/Nal Hutta[^\n]*100 rooms/.test(out), 'areas lists Nal Hutta (100)');
+assert(/3 areas, 450 rooms total/.test(out), 'areas prints the world total');
+
+/* ---- the transit network: Coruscant -> Nar Shaddaa -> Nal Hutta and back ---- */
+// The Westport departures gate is a transit terminal to Nar Shaddaa.
+built.R.port_departures.add(player);
+out = run('transit');
+assert(/Nar Shaddaa/.test(out) && /1\./.test(out), 'transit lists Nar Shaddaa as a destination');
+const toNarMsg = run('transit 1');
+assert(player.room.id === 'nard_arrival', 'transit 1 flies you to the Nar Shaddaa arrival berth');
+assert(/Smugglers/.test(toNarMsg), 'the journey to Nar Shaddaa has its own message');
+assert(/Nar Shaddaa/.test(run('where')), 'you are now on Nar Shaddaa');
+
+// From another berth on Nar Shaddaa, a Hutt shuttle drops to Nal Hutta.
+built.R.nard_huttberth.add(player);
+out = run('transit');
+assert(/Nal Hutta/.test(out), 'the Hutt berth lists Nal Hutta');
+const toNalMsg = run('transit 1');
+assert(player.room.id === 'nal_port_arrival', 'transit 1 drops you at Bilbousa Spaceport');
+assert(/Nal Hutta[\s\S]*from you/.test(run('where')) || /Nal Hutta/.test(run('where')),
+  'you are now on Nal Hutta');
+assert(toNalMsg !== toNarMsg, 'each destination has a different journey message');
+assert(/homeworld|Bilbousa|Hutt/.test(toNalMsg), 'the journey to Nal Hutta has its own message');
+
+// Return: Nal Hutta -> Nar Shaddaa -> Coruscant.
+built.R.nal_port_concourse.add(player);
+run('transit 1');
+assert(player.room.id === 'nard_arrival', 'the shuttle back lands on Nar Shaddaa');
+built.R.nard_concourse.add(player);
+run('transit 1');
+assert(player.room.id === 'port_concourse', 'the transit back reaches Coruscant Westport');
+
+// transit with no terminal, and a bad number, are handled gracefully
+built.R.plaza_plaza.add(player);
+assert(/no transit terminal/i.test(run('transit')), 'transit off-terminal is refused');
+built.R.port_departures.add(player);
+assert(/No such destination/i.test(run('transit 9')), 'an out-of-range transit number is refused');
+built.R.port_concourse.add(player); // reset
 
 /* ---- the turbolift spine: ride ABOVE and BELOW the start band ---- */
 built.R.port_nexus.add(player);

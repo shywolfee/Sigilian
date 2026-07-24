@@ -103,6 +103,12 @@
           '. Type "board" to embark.');
       }
 
+      // A transit terminal offers passage to one or more far destinations.
+      if (room.transit && room.transit.destinations && room.transit.destinations.length) {
+        this.print('» ' + (room.transit.here || 'A transit terminal stands here') +
+          '. Type "transit" to see where it goes.');
+      }
+
       this.updateHud();
     }
 

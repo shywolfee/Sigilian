@@ -247,6 +247,53 @@
     });
 
     reg.register({
+      name: 'transit',
+      aliases: ['tr'],
+      usage: 'transit [number]',
+      help: 'At a transit terminal: list destinations, or "transit <n>" to go.',
+      handler(ctx) {
+        const t = ctx.room.transit;
+        if (!t || !t.destinations || !t.destinations.length) {
+          ctx.print('There is no transit terminal here.');
+          return;
+        }
+        const dests = t.destinations;
+        const pick = (ctx.rest || '').trim();
+
+        // No argument: print the numbered list of destinations.
+        if (!pick) {
+          ctx.print(t.intro || 'Departures from this terminal:');
+          dests.forEach((d, i) => {
+            ctx.print('  ' + (i + 1) + '. ' + d.label +
+              (d.note ? ' — ' + d.note : ''));
+          });
+          ctx.print('Type "transit <number>" to depart.');
+          return;
+        }
+
+        // An argument: it must name a destination by its list number.
+        const n = parseInt(pick, 10);
+        if (!(n >= 1 && n <= dests.length)) {
+          ctx.print('No such destination. Type "transit" for the list.');
+          return;
+        }
+        const d = dests[n - 1];
+        const dest = ctx.world.get(d.toId);
+        if (!dest) {
+          ctx.print('That service is not running just now.');
+          return;
+        }
+        if (ctx.game.combat.engaged()) ctx.game.combat.end();
+        // Each destination has its own journey message.
+        for (const line of d.arrival || []) ctx.print(line);
+        dest.add(ctx.player);
+        ctx.game.describeRoom(dest);
+        ctx.game.tick();
+        ctx.game.checkAggro();
+      },
+    });
+
+    reg.register({
       name: 'inventory',
       aliases: ['inv', 'i'],
       usage: 'inventory',
