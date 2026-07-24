@@ -266,7 +266,9 @@
       `A pompous little palace of gilt and greed where the Empire taxes everything ` +
       `that floats. The clerks are the most hated men on the river and know it, ` +
       `and take their comfort in the certainty that hatred, unlike wine, is ` +
-      `not dutiable.`);
+      `not dutiable. At the stairs below, the cross-Sleeve packet-boat lies at ` +
+      `her moorings: the long grey passage down the Sequane and over the sea to ` +
+      `Lunden, in the kingdom of Albeon.`);
     room('quai_watergate', 'The Water-Gate',
       `An iron portcullis where a canal slips under the embankment into the ` +
       `city's hidden waterways. A bored gendarme checks the barges for contraband ` +
@@ -1552,6 +1554,22 @@
       xp: 200,
       respawns: 120,
     }));
+
+    // The cross-Sleeve packet: board at the Custom-House to sail to Lunden.
+    R.quai_customs.ferry = {
+      toId: 'pool_packet',
+      moored: 'The Lunden packet lies at the stairs, taking on passengers',
+      crossing: [
+        'You pay the fare and step down into the packet-boat.',
+        'She casts off, and the Custom-House slides away astern. The Sequane ' +
+          'widens, the banks fall back, and Empyrean sinks into its own coal- ' +
+          'grey haze.',
+        'For a long grey while there is only the heave of the open Sleeve, and ' +
+          'the gulls, and the cold. Then, low on the water ahead, a smudge of ' +
+          'smoke resolves into a forest of masts, and the packet noses in past ' +
+          'the moored hulks toward the stairs of Lunden.',
+      ],
+    };
 
     return {
       area: empyrean,

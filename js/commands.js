@@ -222,6 +222,31 @@
     });
 
     reg.register({
+      name: 'board',
+      aliases: ['embark'],
+      usage: 'board',
+      help: 'Board a ferry moored here, to sail to its far dock.',
+      handler(ctx) {
+        const ferry = ctx.room.ferry;
+        if (!ferry) {
+          ctx.print('There is nothing to board here.');
+          return;
+        }
+        const dest = ctx.world.get(ferry.toId);
+        if (!dest) {
+          ctx.print('The ferry is not running just now.');
+          return;
+        }
+        if (ctx.game.combat.engaged()) ctx.game.combat.end();
+        for (const line of ferry.crossing || []) ctx.print(line);
+        dest.add(ctx.player);
+        ctx.game.describeRoom(dest);
+        ctx.game.tick();
+        ctx.game.checkAggro();
+      },
+    });
+
+    reg.register({
       name: 'inventory',
       aliases: ['inv', 'i'],
       usage: 'inventory',

@@ -13,8 +13,8 @@ const vm = require('vm');
 const base = path.join(__dirname, '..');
 const files = [
   'js/core.js', 'js/entities.js', 'js/world.js', 'js/commands.js',
-  'js/combat.js', 'js/game.js', 'js/empyrean.js', 'js/mournfall.js',
-  'js/world-data.js',
+  'js/combat.js', 'js/game.js', 'js/empyrean.js', 'js/lunden.js',
+  'js/mournfall.js', 'js/world-data.js',
 ];
 
 const sandbox = { console };
@@ -44,31 +44,58 @@ function run(line) { captured.length = 0; game.handleInput(line); return capture
 
 /* ---- world integrity ---- */
 const rooms = world.allRooms();
-assert(rooms.length === 358, 'world has 358 rooms (got ' + rooms.length + ')');
+assert(rooms.length === 558, 'world has 558 rooms (got ' + rooms.length + ')');
 assert(world.getArea('empyrean').roomCount === 200, 'Empyrean holds 200 rooms');
+assert(world.getArea('lunden').roomCount === 200, 'Lunden holds 200 rooms');
 assert(world.getArea('mournfall').roomCount === 158, 'Mournfall holds 158 rooms');
-assert(world.allAreas().length === 2, 'world has two areas');
+assert(world.allAreas().length === 3, 'world has three areas');
 
-const start = world.startRoom();
-const seen = new Set([start.id]);
-const q = [start];
-while (q.length) {
-  const r = q.shift();
-  for (const d of r.exitDirs()) {
-    const to = r.exits[d].room;
-    if (to && !seen.has(to.id)) { seen.add(to.id); q.push(to); }
+// two start cities offered by the chooser
+assert(built.starts.length === 2, 'two start cities are offered');
+assert(built.starts.some((s) => s.roomId === 'isle_carrefour') &&
+       built.starts.some((s) => s.roomId === 'city_cross'),
+       'the chooser offers Empyrean and Lunden');
+
+// each area is internally fully connected from its own start
+function reachFrom(id) {
+  const s = world.get(id);
+  const seen = new Set([s.id]);
+  const q = [s];
+  while (q.length) {
+    const r = q.shift();
+    for (const d of r.exitDirs()) {
+      const to = r.exits[d].room;
+      if (to && !seen.has(to.id)) { seen.add(to.id); q.push(to); }
+    }
   }
+  return seen;
 }
-assert(seen.size === 358, 'all 358 rooms reachable from start (got ' + seen.size + ')');
+const lunReach = reachFrom('city_cross');
+const lunRooms = rooms.filter((r) => r.area.id === 'lunden');
+assert(lunRooms.every((r) => lunReach.has(r.id)), 'all 200 Lunden rooms reachable from city_cross');
+const empReach = reachFrom('isle_carrefour');
+const empMourn = rooms.filter((r) => r.area.id === 'empyrean' || r.area.id === 'mournfall');
+assert(empMourn.every((r) => empReach.has(r.id)), 'Empyrean+Mournfall (358) reachable from Empyrean start');
 
-/* ---- start & area commands across two areas ---- */
+/* ---- start & area commands across three areas ---- */
 assert(player.room.id === 'isle_carrefour', 'player starts at the Carrefour in Empyrean');
 let out = run('where');
 assert(/Empyrean/.test(out) && /200 rooms/.test(out), 'where reports Empyrean and 200 rooms');
 out = run('areas');
 assert(/Empyrean[^\n]*200 rooms/.test(out), 'areas lists Empyrean (200)');
+assert(/Lunden[^\n]*200 rooms/.test(out), 'areas lists Lunden (200)');
 assert(/Mournfall[^\n]*158 rooms/.test(out), 'areas lists Mournfall (158)');
-assert(/2 areas, 358 rooms total/.test(out), 'areas prints the world total');
+assert(/3 areas, 558 rooms total/.test(out), 'areas prints the world total');
+
+/* ---- the cross-Sleeve ferry: board there and back ---- */
+built.R.pool_packet.add(player);
+out = run('board');
+assert(player.room.id === 'quai_customs', 'boarding at Lunden lands you at the Empyrean Custom-House');
+assert(/Empyrean/.test(run('where')), 'the ferry crossed you into Empyrean');
+out = run('board');
+assert(player.room.id === 'pool_packet', 'boarding again returns you to the Lunden Packet-Stairs');
+assert(/Lunden/.test(run('where')), 'the return crossing put you back in Lunden');
+built.R.isle_carrefour.add(player); // reset for later assertions
 
 /* ---- equipment ---- */
 player.add(world.item({ name: 'test dirk', keywords: ['dirk'], damage: [3, 6], accuracy: 1 }));

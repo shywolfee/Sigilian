@@ -5,9 +5,10 @@ entirely in the browser. No build step, no server: **open `index.html`** and
 play. The engine is plain ES5-ish JavaScript organised under a single `MUD`
 global, so it also runs headless (in Node/tests) exactly as it does in the page.
 
-The repo ships two hand-written areas — a 200-room capital, **Empyrean**, and a
-158-room city between worlds, **Mournfall** (358 rooms in all) — as its testbed,
-but the point is the framework in `js/`; the content is meant to be replaced.
+The repo ships three hand-written areas — two 200-room rival capitals,
+**Empyrean** and **Lunden**, and a 158-room city between worlds, **Mournfall**
+(558 rooms in all) — as its testbed, but the point is the framework in `js/`;
+the content is meant to be replaced.
 
 ```
 index.html          # page shell + HUD, loads the scripts in order
@@ -18,16 +19,18 @@ js/
   world.js          # World registry, Area, content factories
   commands.js       # command registry, parser, built-in verbs
   combat.js         # round-based combat engine
-  game.js           # engine: output, movement, HUD, ticks, combat, respawn
+  game.js           # engine: output, movement, HUD, ticks, combat, respawn, ferry
   empyrean.js       # content: Empyrean, capital of the Seven-Star Empire (200)
+  lunden.js         # content: Lunden, capital of the kingdom of Albeon (200)
   mournfall.js      # content: the City of Mournfall (158)
-  world-data.js     # orchestrator: builds both areas into one world
-  main.js           # bootstrap: wires the DOM and starts the game
+  world-data.js     # orchestrator: builds all areas into one world
+  main.js           # bootstrap: the start-city chooser, DOM wiring, game start
 ```
 
 ## Playing
 
-Type `help` in-game. Highlights:
+At launch the game asks which capital to begin in — **Empyrean** or **Lunden**
+— then drops you in. Type `help` in-game. Highlights:
 
 - **Movement**: `n s e w u d ne nw se sw`, or `go <dir>`. Bare directions work.
 - **Looking**: `look`, `look at <thing>`, `examine <thing>` / `x <thing>`.
@@ -35,6 +38,7 @@ Type `help` in-game. Highlights:
   `use <thing>`.
 - **Combat**: `attack <foe>` / `kill` / `k`, `consider <foe>` (size it up),
   `flee`. `wield <weapon>`, `wear <armor>`, `remove <item>`.
+- **Travel**: `board` a ferry moored at a dock, to cross to its far dock.
 - **People**: `talk to <someone>`.
 - **Character**: `stats` (level, XP, HP, stats, gear).
 - **Geography**: `where` (your area + its room count), `areas` (all areas and
@@ -44,36 +48,47 @@ Everything abbreviates. `k rat` attacks the rat, `wi saber` wields the saber,
 `con coesre` sizes up the King of Thieves, `inv` shows your pack, `wh` is
 `where`. Up/Down arrows recall command history.
 
+Kaelinu, the world Sigilian is set on, reads as ordinary fantasy only if you
+aren't paying attention — look closer and it's a world that went *differently*
+from ours, its countries, seas, and ideas the linguistic cousins of names you
+half-know. Its two great rival capitals face each other across a narrow sea
+called the Sleeve, and you choose which to begin in.
+
 ### Empyrean — capital of the Seven-Star Empire
 
-You start on the Isle, at the Carrefour of the Seven Stars, in Empyrean: the
-capital of the Seven-Star Empire, astride the river Sequane, upon the world of
-**Kaelinu**. Kaelinu reads as ordinary fantasy only if you aren't paying
-attention — look closer and it's a world that went *differently* from ours, its
-countries, seas, and ideas the linguistic cousins of names you half-know. The
-Seven-Star Empire is the France that might have been; Empyrean its Paris; across
-the narrow sea called the Sleeve lies the kingdom of Albeon. 200 rooms in ten
-districts:
+The France that might have been; Empyrean its Paris, astride the river Sequane.
+You start on the Isle, at the Carrefour of the Seven Stars. 200 rooms in ten
+districts: the Isle, the Quays of the Sequane, the Astrarium (the imperial
+palace), Les Grènes (the great market), the Collegium (the university), the
+Sanctuary, the Gilded Marais (the nobles' quarter), Montcorbeau (the butte of
+artists), the Bastion & Faubourg (fortress and restive workers), and the Cour
+des Miracles (the thieves' slum). The state faith venerates the **Heptad** —
+the seven stars of imperial heaven.
 
-| District | Rooms | |
-|---|---|---|
-| The Isle | 24 | the ancient island heart (**start**) |
-| The Quays of the Sequane | 18 | banks & bridges |
-| The Astrarium | 22 | the imperial palace |
-| Les Grènes | 20 | the great market |
-| The Collegium | 22 | the university, Left Bank |
-| The Sanctuary | 16 | churches of the Left Bank |
-| The Gilded Marais | 18 | the nobles' quarter |
-| Montcorbeau | 18 | the butte of artists |
-| The Bastion & Faubourg | 20 | fortress & restive workers |
-| The Cour des Miracles | 22 | the thieves' slum |
+**The way to Mournfall.** Very near the start, off the Carrefour, the neglected
+Saints' Cut drops into the Cour des Miracles. Deep in the Cour, past the
+Cutpurse's Nook, is the **Impasse of the Last Saint** — an alley that does not
+end in a wall but in something else, that isn't, or is, or never was. Walk north
+into the not-wall and you cross, one way and no way back, onto the Threshold
+Stone of Mournfall.
 
-**The way between worlds.** Very near the start, off the Carrefour, the
-neglected Saints' Cut drops into the Cour des Miracles. Deep in the Cour, past
-the Cutpurse's Nook, is the **Impasse of the Last Saint** — an alley that does
-not end in a wall but in something else, that isn't, or is, or never was. Walk
-north into the not-wall and you cross, one way and no way back, onto the
-Threshold Stone of Mournfall.
+### Lunden — capital of the kingdom of Albeon
+
+The England that might have been, across the Sleeve; Lunden its London, sprawled
+in coal-smoke along the tidal river Tamis. Where Empyrean is gilded, absolutist,
+and venerates the seven stars, Lunden is foggy, mercantile, and parliamentary,
+and keeps its own hard reformed creed — the **Church of the Lone Star**, which
+holds that a soul answers to one light alone. You start in the walled City, at
+the Great Chepe. 200 rooms in ten districts: the City & the Chepe, the Ravenkeep
+(the royal fortress), the Pool & Wapping (the docklands), the Great Bridge & the
+Tamis, Westmyn (the Crown & the Moot), the Suthwork (theatres, stews & prisons),
+the Strand & the Inns (law and the press), Smithsfield & the Shambles (market
+and gallows), the Rookery of Gyles (the slum), and the West End.
+
+**The ferry between the capitals.** The cross-Sleeve packet joins the two
+cities: `board` at the Custom-House in Empyrean to sail to Lunden's
+Packet-Stairs, and `board` again there to sail back — a two-way passage you can
+make from either side, however you began.
 
 ### The City of Mournfall
 
@@ -184,8 +199,10 @@ lets mobs act. `game.handleInput(line)` runs the parser.
 zone-file builder context (a room table `R`, plus terse `room()`/`link()`
 helpers), hands that context to each area's builder in turn, then applies every
 collected link at once — so areas may reference each other's rooms freely, in
-any order. Each area lives in its own file (`empyrean.js`, `mournfall.js`) as a
-`MUD.buildXxx(ctx)` function that calls `world.area(...)` and populates it.
+any order. Each area lives in its own file (`empyrean.js`, `lunden.js`,
+`mournfall.js`) as a `MUD.buildXxx(ctx)` function that calls `world.area(...)`
+and populates it. The orchestrator also returns the list of `starts` the
+launcher offers the player to choose between.
 
 A minimal single-area world looks like:
 
@@ -210,8 +227,13 @@ MUD.buildWorld = function () {
 };
 ```
 
-The two shipped areas show the pattern at scale, including a one-way exit
-stitched *between* areas (Empyrean's impasse → Mournfall's Threshold Stone).
+The three shipped areas show the pattern at scale, including cross-area links: a
+one-way exit (Empyrean's impasse → Mournfall's Threshold Stone) and a two-way
+**ferry**. A ferry is just a property on a dock room —
+`room.ferry = { toId, moored, crossing }` — that the `board` command follows,
+teleporting the player to the room named by `toId` (resolved by id, so the two
+docks can live in different area files). Set matching `ferry` blocks on both
+docks to make it round-trip.
 
 To add a verb, register it on the command registry (see `js/commands.js` for the
 `ctx` shape):
@@ -238,6 +260,6 @@ node test/smoke.js
 ```
 
 It checks the framework (name-matching, abbreviation, area commands, combat,
-leveling, equipment, the one-way impasse, death/recall) and the integrity of the
-shipped world (358 rooms, both areas' counts, and full reachability from the
-start).
+leveling, equipment, the one-way impasse, the cross-Sleeve ferry, death/recall)
+and the integrity of the shipped world (558 rooms, all three areas' counts, and
+full internal reachability of each).

@@ -97,6 +97,12 @@
           : 'There are no obvious exits.'
       );
 
+      // A moored ferry is a special, non-compass way out.
+      if (room.ferry) {
+        this.print('» ' + (room.ferry.moored || 'A ferry is moored here') +
+          '. Type "board" to embark.');
+      }
+
       this.updateHud();
     }
 
