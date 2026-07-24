@@ -1,0 +1,166 @@
+/* styles.css — a warm terminal look for the Sigilian MUD. */
+
+:root {
+  --bg: #0d0f13;
+  --panel: #14181f;
+  --ink: #cfe3d4;
+  --dim: #6f8a78;
+  --accent: #7fd1a3;
+  --heading: #f0c674;
+  --echo: #6ea9d8;
+  --danger: #e06c75;
+  --warn: #e5c07b;
+  --border: #232a33;
+  --mono: "SF Mono", "JetBrains Mono", "Fira Code", Consolas, "Courier New", monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+#screen {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "title  title"
+    "view   hud"
+    "prompt prompt";
+  height: 100vh;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 12px;
+  gap: 10px;
+}
+
+#titlebar {
+  grid-area: title;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel);
+}
+#titlebar .title {
+  color: var(--heading);
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+#titlebar .subtitle { color: var(--dim); font-size: 0.85em; }
+
+#viewport {
+  grid-area: view;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel);
+}
+
+#output {
+  height: 100%;
+  overflow-y: auto;
+  padding: 14px 16px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.line { margin: 0 0 2px; }
+.line-heading {
+  color: var(--heading);
+  font-weight: 700;
+  margin-top: 10px;
+  letter-spacing: 0.5px;
+}
+.line-echo { color: var(--echo); }
+.line-msg { color: var(--ink); }
+
+/* HUD */
+#hud {
+  grid-area: hud;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel);
+}
+.hud-label {
+  color: var(--dim);
+  font-size: 0.72em;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 4px;
+}
+.hud-value { color: var(--accent); font-size: 0.95em; }
+.hud-bar {
+  height: 10px;
+  background: #0a0c10;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+.hud-fill {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: var(--accent);
+  transition: width 0.25s ease;
+}
+.hud-fill.warn { background: var(--warn); }
+.hud-fill.danger { background: var(--danger); }
+
+/* Prompt */
+#prompt {
+  grid-area: prompt;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel);
+}
+#prompt .chevron { color: var(--accent); font-weight: 700; }
+#input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 1em;
+  caret-color: var(--accent);
+}
+
+/* Scrollbar */
+#output::-webkit-scrollbar { width: 8px; }
+#output::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+@media (max-width: 640px) {
+  #screen {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "title"
+      "hud"
+      "view"
+      "prompt";
+    grid-template-rows: auto auto 1fr auto;
+  }
+  #hud { flex-direction: row; flex-wrap: wrap; }
+  .hud-block { flex: 1 1 30%; }
+}

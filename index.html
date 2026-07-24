@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sigilian &mdash; a MUD</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="screen">
+    <header id="titlebar">
+      <span class="title">SIGILIAN</span>
+      <span class="subtitle">a browser MUD</span>
+    </header>
+
+    <main id="viewport">
+      <div id="output" role="log" aria-live="polite"></div>
+    </main>
+
+    <aside id="hud">
+      <div class="hud-block">
+        <div class="hud-label">HP</div>
+        <div class="hud-bar"><span id="hp-fill" class="hud-fill"></span></div>
+        <div id="hp-text" class="hud-value">-/-</div>
+      </div>
+      <div class="hud-block">
+        <div class="hud-label">Location</div>
+        <div id="hud-room" class="hud-value">&mdash;</div>
+      </div>
+      <div class="hud-block">
+        <div class="hud-label">Exits</div>
+        <div id="hud-exits" class="hud-value">&mdash;</div>
+      </div>
+    </aside>
+
+    <form id="prompt" autocomplete="off">
+      <span class="chevron">&gt;</span>
+      <input id="input" type="text" autofocus autocomplete="off"
+             spellcheck="false" aria-label="Command input">
+    </form>
+  </div>
+
+  <!-- Framework (load order matters: classic scripts, one MUD namespace) -->
+  <script src="js/core.js"></script>
+  <script src="js/entities.js"></script>
+  <script src="js/world.js"></script>
+  <script src="js/commands.js"></script>
+  <script src="js/game.js"></script>
+  <!-- Content / testbed -->
+  <script src="js/world-data.js"></script>
+  <!-- Bootstrap -->
+  <script src="js/main.js"></script>
+</body>
+</html>
