@@ -5,9 +5,9 @@ entirely in the browser. No build step, no server: **open `index.html`** and
 play. The engine is plain ES5-ish JavaScript organised under a single `MUD`
 global, so it also runs headless (in Node/tests) exactly as it does in the page.
 
-The repo ships three hand-written areas — two 200-room rival capitals,
-**Empyrean** and **Lunden**, and a 158-room city between worlds, **Mournfall**
-(558 rooms in all) — as its testbed, but the point is the framework in `js/`;
+The repo ships four hand-written areas — three 200-room capitals, **Empyrean**,
+**Lunden**, and **Miyako**, and a 158-room city between worlds, **Mournfall**
+(758 rooms in all) — as its testbed, but the point is the framework in `js/`;
 the content is meant to be replaced.
 
 ```
@@ -22,6 +22,7 @@ js/
   game.js           # engine: output, movement, HUD, ticks, combat, respawn, ferry
   empyrean.js       # content: Empyrean, capital of the Seven-Star Empire (200)
   lunden.js         # content: Lunden, capital of the kingdom of Albeon (200)
+  miyako.js         # content: Miyako, capital of Yamato / Zipang (200)
   mournfall.js      # content: the City of Mournfall (158)
   world-data.js     # orchestrator: builds all areas into one world
   main.js           # bootstrap: the start-city chooser, DOM wiring, game start
@@ -29,8 +30,8 @@ js/
 
 ## Playing
 
-At launch the game asks which capital to begin in — **Empyrean** or **Lunden**
-— then drops you in. Type `help` in-game. Highlights:
+At launch the game asks which capital to begin in — **Empyrean**, **Lunden**, or
+**Miyako** — then drops you in. Type `help` in-game. Highlights:
 
 - **Movement**: `n s e w u d ne nw se sw`, or `go <dir>`. Bare directions work.
 - **Looking**: `look`, `look at <thing>`, `examine <thing>` / `x <thing>`.
@@ -51,8 +52,9 @@ Everything abbreviates. `k rat` attacks the rat, `wi saber` wields the saber,
 Kaelinu, the world Sigilian is set on, reads as ordinary fantasy only if you
 aren't paying attention — look closer and it's a world that went *differently*
 from ours, its countries, seas, and ideas the linguistic cousins of names you
-half-know. Its two great rival capitals face each other across a narrow sea
-called the Sleeve, and you choose which to begin in.
+half-know. Two rival capitals face each other across a narrow sea called the
+Sleeve — Empyrean and Lunden — and a third, Miyako, lies months' sail to the
+east; you choose which to begin in.
 
 ### Empyrean — capital of the Seven-Star Empire
 
@@ -85,10 +87,33 @@ Tamis, Westmyn (the Crown & the Moot), the Suthwork (theatres, stews & prisons),
 the Strand & the Inns (law and the press), Smithsfield & the Shambles (market
 and gallows), the Rookery of Gyles (the slum), and the West End.
 
-**The ferry between the capitals.** The cross-Sleeve packet joins the two
-cities: `board` at the Custom-House in Empyrean to sail to Lunden's
+**The ferry between the capitals.** The cross-Sleeve packet joins Empyrean and
+Lunden: `board` at the Custom-House in Empyrean to sail to Lunden's
 Packet-Stairs, and `board` again there to sail back — a two-way passage you can
 make from either side, however you began.
+
+### Miyako — capital of Yamato, the Empire of the Morning Sun
+
+Far to the east across the Sunrise Sea, months' sail from the western kingdoms,
+lies the closed empire the sailors of Empyrean call **Zipang** — the land of
+gold and locked doors — but which its own people name **Yamato**. This is
+Kaelinu's answer to imperial Japan: a realm that has sealed itself against the
+world, penned its tolerated "sea-barbarians" on a single fan-shaped island, and
+turned inward into an exquisite, rigid, frozen perfection. Its capital, Miyako,
+is a castle-town of concentric rings, shared between two powers — the **Radiant
+Emperor**, a living god descended from the sun-mother Amateru who reigns in
+sacred seclusion and rules nothing, and the **Shogun**, lord of the
+tent-government, who rules everything from the White Heron Keep. You start in the
+merchant Low City, at the Great Avenue. 200 rooms in ten districts: the Low City,
+the Harbor & Fan-Island, the Great Bridge & Riverside, the Warriors' Quarter,
+the White Heron Keep, the Ninefold Enclosure (the Emperor), the Willow-World
+(the floating pleasure-quarter), the Temple District, the Shrine Precinct, and
+the Outer Wards.
+
+**The Eastern voyage.** From a *second* Empyrean dock — the Sea-Gate, downriver
+of the Custom-House — the Eastern Company carrack makes the long ocean crossing:
+`board` there to sail months east to Miyako's Company Anchorage, and `board`
+again to sail the long way home.
 
 ### The City of Mournfall
 
@@ -227,9 +252,10 @@ MUD.buildWorld = function () {
 };
 ```
 
-The three shipped areas show the pattern at scale, including cross-area links: a
-one-way exit (Empyrean's impasse → Mournfall's Threshold Stone) and a two-way
-**ferry**. A ferry is just a property on a dock room —
+The four shipped areas show the pattern at scale, including cross-area links: a
+one-way exit (Empyrean's impasse → Mournfall's Threshold Stone) and two-way
+**ferries** (Empyrean ↔ Lunden, and Empyrean ↔ Miyako, from two different
+Empyrean docks). A ferry is just a property on a dock room —
 `room.ferry = { toId, moored, crossing }` — that the `board` command follows,
 teleporting the player to the room named by `toId` (resolved by id, so the two
 docks can live in different area files). Set matching `ferry` blocks on both
@@ -260,6 +286,6 @@ node test/smoke.js
 ```
 
 It checks the framework (name-matching, abbreviation, area commands, combat,
-leveling, equipment, the one-way impasse, the cross-Sleeve ferry, death/recall)
-and the integrity of the shipped world (558 rooms, all three areas' counts, and
-full internal reachability of each).
+leveling, equipment, the one-way impasse, both ferries, death/recall) and the
+integrity of the shipped world (758 rooms, all four areas' counts, and full
+internal reachability of each).

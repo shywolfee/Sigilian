@@ -9,11 +9,13 @@
  * Areas:
  *   Empyrean  — capital of the Seven-Star Empire, on Kaelinu (js/empyrean.js)
  *   Lunden    — capital of the kingdom of Albeon, over the Sleeve (js/lunden.js)
+ *   Miyako    — capital of Yamato/Zipang, far east over the ocean (js/miyako.js)
  *   Mournfall — the city between worlds, at the end of everything (js/mournfall.js)
  *
- * Empyrean and Lunden are joined by the cross-Sleeve packet: board at the
- * Custom-House in Empyrean, arrive at the Packet-Stairs in Lunden, and board
- * again to return. The player chooses which of the two capitals to begin in.
+ * From Empyrean's quays two ships sail: the cross-Sleeve packet to Lunden (board
+ * at the Custom-House), and the Eastern Company carrack to Miyako (board at the
+ * Sea-Gate). Each is board-able from either end. The player chooses which of the
+ * three capitals to begin in.
  *
  * Empyrean is also joined to Mournfall by one uncanny, one-way thread: an
  * impasse in the Cour des Miracles that does not end in a wall, and lets out on
@@ -49,6 +51,7 @@
     // Build each area. Order is irrelevant to linking (links are deferred).
     const emp = MUD.buildEmpyrean(ctx);
     const lun = MUD.buildLunden(ctx);
+    const miy = MUD.buildMiyako(ctx);
     const mourn = MUD.buildMournfall(ctx);
 
     // The one-way thread between worlds: the impasse that isn't a wall.
@@ -63,7 +66,7 @@
       R[a].link(dir, R[b], opts);
     }
 
-    // The two capitals the player may choose between at the start.
+    // The capitals the player may choose between at the start.
     const starts = [
       {
         key: 'empyrean', name: 'Empyrean', roomId: emp.startId,
@@ -73,6 +76,10 @@
         key: 'lunden', name: 'Lunden', roomId: lun.startId,
         blurb: 'capital of the kingdom of Albeon, across the Sleeve',
       },
+      {
+        key: 'miyako', name: 'Miyako', roomId: miy.startId,
+        blurb: 'capital of Yamato, the far empire of the Morning Sun',
+      },
     ];
 
     world.setStart(emp.startId); // a sane default if no choice is made
@@ -80,6 +87,7 @@
       world,
       empyrean: emp.area,
       lunden: lun.area,
+      miyako: miy.area,
       mournfall: mourn.area,
       R,
       starts,

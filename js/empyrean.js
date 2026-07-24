@@ -269,10 +269,14 @@
       `not dutiable. At the stairs below, the cross-Sleeve packet-boat lies at ` +
       `her moorings: the long grey passage down the Sequane and over the sea to ` +
       `Lunden, in the kingdom of Albeon.`);
-    room('quai_watergate', 'The Water-Gate',
-      `An iron portcullis where a canal slips under the embankment into the ` +
-      `city's hidden waterways. A bored gendarme checks the barges for contraband ` +
-      `and, more attentively, for the bribes that make contraband invisible.`);
+    room('quai_watergate', 'The Sea-Gate',
+      `The deep-water gate of the river, an iron portcullis raised only for the ` +
+      `great ocean-going ships that the lesser wharves upstream cannot take. At ` +
+      `the stairs below lies the pride and folly of the Eastern Company: a ` +
+      `towering carrack rigged for the long voyage, bound half across the world ` +
+      `to the golden, secretive empire the sailors call Zipang, and back — ` +
+      `a passage of months, and gold, and the not-small chance of never ` +
+      `returning at all.`);
     room('quai_fishmarket', 'The River Fish-Market',
       `Slabs of glistening river-catch under a haze of gulls: pike and eel and ` +
       `the ugly bottom-feeders the poor stew for days. The fishwives' arms are ` +
@@ -1554,6 +1558,26 @@
       xp: 200,
       respawns: 120,
     }));
+
+    // The Eastern Company voyage: board at the Sea-Gate to sail to Miyako.
+    R.quai_watergate.ferry = {
+      toId: 'bay_wharf',
+      moored: 'The Eastern carrack lies at the sea-gate stairs, victualling for ' +
+        'the long voyage',
+      crossing: [
+        'You take passage aboard the Eastern carrack, and she drops down the ' +
+          'Sequane on the ebb and stands out at last into the open sea.',
+        'Then the world becomes only the ship: week upon week upon week of it, ' +
+          'the trade-winds and the calms, the flying fish and the storms, the ' +
+          'stars wheeling slowly to a stranger sky as the carrack claws her way ' +
+          'east across the whole breadth of the world.',
+        'Months on, gaunt and salt-cured, you raise a coast of terraced hills ' +
+          'and, floating above it, a single perfect snow-white cone. The ship ' +
+          'is met by guard-junks and stripped of her guns before she may ' +
+          'approach, and warped at last to a lonely berth beneath the shore- ' +
+          'battery of Miyako, in the closed empire of Yamato.',
+      ],
+    };
 
     // The cross-Sleeve packet: board at the Custom-House to sail to Lunden.
     R.quai_customs.ferry = {
