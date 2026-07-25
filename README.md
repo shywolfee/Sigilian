@@ -5,14 +5,15 @@ entirely in the browser. No build step, no server: **open `index.html`** and
 play. The engine is plain ES5-ish JavaScript organised under a single `MUD`
 global, so it also runs headless (in Node/tests) exactly as it does in the page.
 
-The repo ships five hand-written *Star Wars* fan-game areas (650 rooms in all):
+The repo ships six hand-written *Star Wars* fan-game areas (850 rooms in all):
 **Coruscant**, the galactic capital, a 200-room vertical slice of the
 ecumenopolis from the Senate heights to Level 1313; **Nar Shaddaa**, the
 Smugglers' Moon (150); **Nal Hutta**, the Hutt homeworld (100); **Sullust**, the
-SoroSuub company-world (100); and **Ryloth**, the Twi'lek homeworld (100). All
-but Coruscant are deliberately *unfinished* — built to be expanded, with sealed
-doors and "not-yet-mapped" seams pointing at content a later pass will add. The
-point, though, is the framework in `js/`; the content is meant to be replaced.
+SoroSuub company-world (100); **Ryloth**, the Twi'lek homeworld (100); and
+**Corellia**, the shipwright of the galaxy, a whole 200-room world of Coronet
+City and its coast. Nar Shaddaa, Nal Hutta, Sullust, and Ryloth are deliberately
+*unfinished* — built to be expanded, with sealed doors and "not-yet-mapped"
+seams. The point, though, is the framework in `js/`; the content is replaceable.
 
 ```
 index.html          # page shell + HUD, loads the scripts in order
@@ -29,6 +30,7 @@ js/
   nalhutta.js       # content: Nal Hutta, the Hutt homeworld (100, to expand)
   sullust.js        # content: Sullust, the SoroSuub company-world (100, to expand)
   ryloth.js         # content: Ryloth, the Twi'lek homeworld (100, to expand)
+  corellia.js       # content: Corellia, the shipwright of the galaxy (200)
   world-data.js     # orchestrator: builds the areas + the transit network
   main.js           # bootstrap: the arrival screen, DOM wiring, game start
 ```
@@ -108,10 +110,10 @@ two-way hop you can make from either side.
 
 Some rooms are **transit terminals**. Type `transit` there to see a numbered
 list of destinations, and `transit <n>` to travel — each route printing its own
-journey. Coruscant's **Westport Departures Gate** is a departures board to three
-worlds — **Nar Shaddaa**, **Sullust**, and **Ryloth**; from Nar Shaddaa's Hutt
-shuttle berth you can drop further to **Nal Hutta**; and every hop can be made
-back the way it came.
+journey. Coruscant's **Westport Departures Gate** is a departures board to four
+worlds — **Nar Shaddaa**, **Sullust**, **Ryloth**, and **Corellia**; from Nar
+Shaddaa's Hutt shuttle berth you can drop further to **Nal Hutta**; and every hop
+can be made back the way it came.
 
 ### Nar Shaddaa — the Smugglers' Moon (150 rooms, *a work in progress*)
 
@@ -155,6 +157,24 @@ cave-city of **Kala'uun** you can descend to the pale-spice **Ryll Mines**, clim
 to the **Head-Clan's Hold** where the terrible bargains are struck, or brave the
 **Bright Lands**, the storm-scoured surface with its lyleks and its plasma bridge
 to the far clans. The wider world lies unbuilt beyond the shimmering horizon.
+
+### Corellia — the Shipwright of the Stars (200 rooms)
+
+Eldest of the **Five Brothers** of the Corellian system, and a whole world in
+itself: proud, independent, and built of spacers and steel. You land at
+**Coronet Spaceport** and can range across the entire capital and its
+surroundings — the roaring cosmopolitan bazaar of **Treasure Ship Row**; the
+civic centre with its **CorSec** headquarters and the seat of the **Diktat**;
+the vast **CEC Shipyards** where the galaxy's freighters and corvettes are born;
+the shipyard slum of **Blue Sector**, ruled by the **White Worm** gang; the
+cantinas and sabacc dens of the **Spacer's Quarter**; the sea-cliff enclave of
+the **Green Jedi**, Corellia's own stubborn Force tradition that kept its
+families and broke with Coruscant; the sunlit **Gold Coast**; the pastoral
+**Hinterland** of vineyards and farm-villages; and, beneath it all, the **Old
+Quarter and the Undertunnels** — the drowned first city, the Selonian dark, and
+an ancient chamber that hints at how the Five Brothers were *made*. Ten
+districts, richly interconnected, with Centerpoint's cold star hanging over
+everything.
 
 ## Core concepts
 
@@ -346,5 +366,5 @@ node test/smoke.js
 It checks the framework (name-matching, abbreviation, area commands, combat,
 leveling, equipment, the turbolift spine up and down, the Temple skywalk, the
 air-taxi, the cross-world transit network, death/recall) and the integrity of
-the shipped world (650 rooms across five areas, every district present, and
+the shipped world (850 rooms across six areas, every district present, and
 full internal reachability of each area from its own entry).

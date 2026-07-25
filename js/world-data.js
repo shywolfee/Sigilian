@@ -19,11 +19,13 @@
  *                 surface (js/sullust.js, 100)
  *   Ryloth      — the harsh Twi'lek homeworld of the wandering twilight
  *                 (js/ryloth.js, 100)
+ *   Corellia    — the shipwright of the galaxy, Coronet City and its coast, a
+ *                 whole 200-room world (js/corellia.js, 200)
  *
  * TRANSIT connects them. Coruscant's Westport departures gate is a board that
- * books Nar Shaddaa, Sullust, and Ryloth; from a second berth on Nar Shaddaa a
- * Hutt shuttle drops to Nal Hutta; and every hop can be made back the way it
- * came. A transit terminal is a room property — `room.transit = { here, intro,
+ * books Nar Shaddaa, Sullust, Ryloth, and Corellia; from a second berth on Nar
+ * Shaddaa a Hutt shuttle drops to Nal Hutta; and every hop can be made back the
+ * way it came. A transit terminal is a room property — `room.transit = { here, intro,
  * destinations: [...] }` — that the `transit` command reads: `transit` lists the
  * numbered destinations, `transit <n>` travels, printing that destination's own
  * journey message.
@@ -61,6 +63,7 @@
     const nal = MUD.buildNalHutta(ctx);
     const sul = MUD.buildSullust(ctx);
     const ryl = MUD.buildRyloth(ctx);
+    const cel = MUD.buildCorellia(ctx);
 
     // Apply every link now that all rooms of every area exist.
     for (const [a, dir, b, opts] of pendingLinks) {
@@ -131,6 +134,24 @@
               'a rock-cut hangar-mouth in the flank of a mountain, the great ' +
               'blast-shutter grinding closed behind against the killing day. You ' +
               'have come to Kala\'uun, and to the grief and grace of the Twi\'leks.',
+          ],
+        },
+        {
+          toId: cel.arrivalId,
+          label: 'Corellia',
+          note: 'the shipwright of the galaxy',
+          arrival: [
+            'You catch a fast CEC packet — half the ships on the apron were built ' +
+              'there anyway — and it slips its berth and runs coreward-and-out ' +
+              'along the old trade-lanes, Coruscant\'s glitter thinning behind.',
+            'A short run for so famous a world: and then Corellia swings up ahead, ' +
+              'a green-and-gold sphere wrapped in cloud, its orbits thick with ' +
+              'freighters and corvettes fresh off the ways, and beyond it four ' +
+              'sister-worlds and the hard bright star of Centerpoint holding them.',
+            'The packet drops through soft gold light over a coast of gleaming sea ' +
+              'and gantried shipyards and settles, brisk and businesslike, onto ' +
+              'the apron of Coronet Spaceport. The air smells of hot metal, caf, ' +
+              'and the sea. Somebody, somewhere close, is already arguing.',
           ],
         },
       ],
@@ -245,6 +266,30 @@
       }],
     };
 
+    // Corellia (Coronet Spaceport concourse) -> Coruscant (the way back).
+    R.cor_port_concourse.transit = {
+      here: 'A transit terminal offers the run back to the Core',
+      intro: 'The Coronet spaceport terminal books passage to:',
+      destinations: [{
+        toId: cor.startId,
+        label: 'Coruscant',
+        note: 'the galactic capital',
+        arrival: [
+          'You buy a berth on a Coruscant-bound freighter and she lifts off ' +
+            'the Coronet apron, the gold coast and the gantried yards falling ' +
+            'away, the Five Brothers dwindling to five joined stars astern.',
+          'The short run coreward, and then the capital fills the viewport — ' +
+            'Coruscant, a whole world made city, blazing and endless, beside ' +
+            'which even proud Corellia feels, for a moment, like a small green ' +
+            'town.',
+          'The freighter settles into the ceaseless churn of Westport, and the ' +
+            'announcer\'s voice and the crush of a hundred worlds fold over you ' +
+            'again. Nobody here, you notice, is arguing about the right of way. ' +
+            'You almost miss it.',
+        ],
+      }],
+    };
+
     // The single start the launcher offers (the great spaceport of Westport).
     const starts = [
       {
@@ -261,6 +306,7 @@
       nalhutta: nal.area,
       sullust: sul.area,
       ryloth: ryl.area,
+      corellia: cel.area,
       R,
       starts,
       recallId: cor.startId,
