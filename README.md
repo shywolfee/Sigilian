@@ -5,13 +5,14 @@ entirely in the browser. No build step, no server: **open `index.html`** and
 play. The engine is plain ES5-ish JavaScript organised under a single `MUD`
 global, so it also runs headless (in Node/tests) exactly as it does in the page.
 
-The repo ships three hand-written *Star Wars* fan-game areas (450 rooms in all):
+The repo ships five hand-written *Star Wars* fan-game areas (650 rooms in all):
 **Coruscant**, the galactic capital, a 200-room vertical slice of the
 ecumenopolis from the Senate heights to Level 1313; **Nar Shaddaa**, the
-Smugglers' Moon (150); and **Nal Hutta**, the Hutt homeworld (100). The last two
-are deliberately *unfinished* — built to be expanded, with sealed doors and
-"not-yet-mapped" seams pointing at content a later pass will add. The point,
-though, is the framework in `js/`; the content is meant to be replaced.
+Smugglers' Moon (150); **Nal Hutta**, the Hutt homeworld (100); **Sullust**, the
+SoroSuub company-world (100); and **Ryloth**, the Twi'lek homeworld (100). All
+but Coruscant are deliberately *unfinished* — built to be expanded, with sealed
+doors and "not-yet-mapped" seams pointing at content a later pass will add. The
+point, though, is the framework in `js/`; the content is meant to be replaced.
 
 ```
 index.html          # page shell + HUD, loads the scripts in order
@@ -26,6 +27,8 @@ js/
   coruscant.js      # content: Coruscant, the crown of the galaxy (200)
   narshaddaa.js     # content: Nar Shaddaa, the Smugglers' Moon (150, to expand)
   nalhutta.js       # content: Nal Hutta, the Hutt homeworld (100, to expand)
+  sullust.js        # content: Sullust, the SoroSuub company-world (100, to expand)
+  ryloth.js         # content: Ryloth, the Twi'lek homeworld (100, to expand)
   world-data.js     # orchestrator: builds the areas + the transit network
   main.js           # bootstrap: the arrival screen, DOM wiring, game start
 ```
@@ -105,9 +108,10 @@ two-way hop you can make from either side.
 
 Some rooms are **transit terminals**. Type `transit` there to see a numbered
 list of destinations, and `transit <n>` to travel — each route printing its own
-journey. From Coruscant's **Westport Departures Gate** you can transit off-world
-to **Nar Shaddaa**; from Nar Shaddaa's Hutt shuttle berth, down to **Nal
-Hutta**; and every hop can be made back the way it came.
+journey. Coruscant's **Westport Departures Gate** is a departures board to three
+worlds — **Nar Shaddaa**, **Sullust**, and **Ryloth**; from Nar Shaddaa's Hutt
+shuttle berth you can drop further to **Nal Hutta**; and every hop can be made
+back the way it came.
 
 ### Nar Shaddaa — the Smugglers' Moon (150 rooms, *a work in progress*)
 
@@ -127,6 +131,30 @@ of the capital around it — the **Bazaar**, the edge of a Hutt lord's **estate*
 the worker **warrens**, and the **swamp fringe** where the built city gives out
 onto the bog. Its sealed gates and hidden paths point at the vast rest of the
 city and the world, to be expanded a great deal later.
+
+### Sullust — the Buried World (100 rooms, *a work in progress*)
+
+The volcanic company-world of the **SoroSuub Corporation**. Its surface is a
+lethal hell of lava and ash-storm, so its people live *beneath* it, in cool
+green-lit caverns kilometres down — a whole subterranean civilisation the
+Corporation owns down to the air they breathe. You land in the shielded
+**Pinyumb Spaceport**; from the cavern-capital of **Pinyumb** you can descend to
+the **Deep Workings** (mines and geothermal taps), climb to the **SoroSuub
+Spire** (corporate HQ), or go down into the wild **Underdeep** and the mineral
+springs of Piringiisi. Sealed shafts mark the honeycombed rest of the world,
+left to expand.
+
+### Ryloth — the Twin-Sunned Grief (100 rooms, *a work in progress*)
+
+The harsh homeworld of the **Twi'leks**: a slow-turning world of killing day and
+freezing night, its people burrowed into the mountains of the wandering
+twilight. It is a place of fierce clan-honour and quiet clan-guilt, famed for
+its music and grace and shamed by its oldest export — its own people, sold to
+slavers. You land in the mountain-carved **Kala'uun Starport**; from the
+cave-city of **Kala'uun** you can descend to the pale-spice **Ryll Mines**, climb
+to the **Head-Clan's Hold** where the terrible bargains are struck, or brave the
+**Bright Lands**, the storm-scoured surface with its lyleks and its plasma bridge
+to the far clans. The wider world lies unbuilt beyond the shimmering horizon.
 
 ## Core concepts
 
@@ -318,5 +346,5 @@ node test/smoke.js
 It checks the framework (name-matching, abbreviation, area commands, combat,
 leveling, equipment, the turbolift spine up and down, the Temple skywalk, the
 air-taxi, the cross-world transit network, death/recall) and the integrity of
-the shipped world (450 rooms across three areas, every district present, and
+the shipped world (650 rooms across five areas, every district present, and
 full internal reachability of each area from its own entry).

@@ -14,7 +14,7 @@ const base = path.join(__dirname, '..');
 const files = [
   'js/core.js', 'js/entities.js', 'js/world.js', 'js/commands.js',
   'js/combat.js', 'js/game.js', 'js/coruscant.js', 'js/narshaddaa.js',
-  'js/nalhutta.js', 'js/world-data.js',
+  'js/nalhutta.js', 'js/sullust.js', 'js/ryloth.js', 'js/world-data.js',
 ];
 
 const sandbox = { console };
@@ -44,11 +44,13 @@ function run(line) { captured.length = 0; game.handleInput(line); return capture
 
 /* ---- world integrity ---- */
 const rooms = world.allRooms();
-assert(rooms.length === 450, 'world has 450 rooms (got ' + rooms.length + ')');
+assert(rooms.length === 650, 'world has 650 rooms (got ' + rooms.length + ')');
 assert(world.getArea('coruscant').roomCount === 200, 'Coruscant holds 200 rooms');
 assert(world.getArea('narshaddaa').roomCount === 150, 'Nar Shaddaa holds 150 rooms');
 assert(world.getArea('nalhutta').roomCount === 100, 'Nal Hutta holds 100 rooms');
-assert(world.allAreas().length === 3, 'world has three areas');
+assert(world.getArea('sullust').roomCount === 100, 'Sullust holds 100 rooms');
+assert(world.getArea('ryloth').roomCount === 100, 'Ryloth holds 100 rooms');
+assert(world.allAreas().length === 5, 'world has five areas');
 
 // one start city offered by the chooser
 assert(built.starts.length === 1, 'one start city is offered');
@@ -77,6 +79,12 @@ assert(rooms.filter((r) => r.area.id === 'narshaddaa').every((r) => narReach.has
 const nalReach = reachFrom('nal_port_arrival');
 assert(rooms.filter((r) => r.area.id === 'nalhutta').every((r) => nalReach.has(r.id)),
   'all 100 Nal Hutta rooms reachable from the landing pad');
+const sulReach = reachFrom('sul_port_arrival');
+assert(rooms.filter((r) => r.area.id === 'sullust').every((r) => sulReach.has(r.id)),
+  'all 100 Sullust rooms reachable from the landing-cavern');
+const rylReach = reachFrom('ryl_port_arrival');
+assert(rooms.filter((r) => r.area.id === 'ryloth').every((r) => rylReach.has(r.id)),
+  'all 100 Ryloth rooms reachable from the starport');
 
 // every district of every area is represented (its prefix appears among the rooms)
 const prefixes = [
@@ -84,6 +92,8 @@ const prefixes = [
   'works_', 'under_', 'deep_',              // Coruscant
   'nard_', 'narp_', 'narc_', 'narf_', 'nars_', 'narr_', 'narh_', 'nari_', // Nar Shaddaa
   'nal_port_', 'nal_baz_', 'nal_quarter_', 'nal_slum_', 'nal_swamp_',     // Nal Hutta
+  'sul_port_', 'sul_city_', 'sul_mine_', 'sul_soro_', 'sul_deep_',        // Sullust
+  'ryl_port_', 'ryl_city_', 'ryl_mine_', 'ryl_clan_', 'ryl_waste_',       // Ryloth
 ];
 assert(prefixes.every((p) => rooms.some((r) => r.id.indexOf(p) === 0)),
   'every district of every area is present');
@@ -96,17 +106,41 @@ out = run('areas');
 assert(/Coruscant[^\n]*200 rooms/.test(out), 'areas lists Coruscant (200)');
 assert(/Nar Shaddaa[^\n]*150 rooms/.test(out), 'areas lists Nar Shaddaa (150)');
 assert(/Nal Hutta[^\n]*100 rooms/.test(out), 'areas lists Nal Hutta (100)');
-assert(/3 areas, 450 rooms total/.test(out), 'areas prints the world total');
+assert(/Sullust[^\n]*100 rooms/.test(out), 'areas lists Sullust (100)');
+assert(/Ryloth[^\n]*100 rooms/.test(out), 'areas lists Ryloth (100)');
+assert(/5 areas, 650 rooms total/.test(out), 'areas prints the world total');
 
 /* ---- the transit network: Coruscant -> Nar Shaddaa -> Nal Hutta and back ---- */
-// The Westport departures gate is a transit terminal to Nar Shaddaa.
+// The Westport departures gate is a transit board to three worlds.
 built.R.port_departures.add(player);
 out = run('transit');
 assert(/Nar Shaddaa/.test(out) && /1\./.test(out), 'transit lists Nar Shaddaa as a destination');
+assert(/Sullust/.test(out) && /Ryloth/.test(out), 'the departures board also lists Sullust and Ryloth');
 const toNarMsg = run('transit 1');
 assert(player.room.id === 'nard_arrival', 'transit 1 flies you to the Nar Shaddaa arrival berth');
 assert(/Smugglers/.test(toNarMsg), 'the journey to Nar Shaddaa has its own message');
 assert(/Nar Shaddaa/.test(run('where')), 'you are now on Nar Shaddaa');
+
+/* ---- transit from Coruscant to Sullust and Ryloth, and back ---- */
+built.R.port_departures.add(player);
+const toSulMsg = run('transit 2');
+assert(player.room.id === 'sul_port_arrival', 'transit 2 flies you to Sullust');
+assert(/Sullust|buried|cavern/i.test(toSulMsg), 'the journey to Sullust has its own message');
+assert(toSulMsg !== toNarMsg, 'Sullust\'s journey differs from Nar Shaddaa\'s');
+assert(/Sullust/.test(run('where')), 'you are now on Sullust');
+built.R.sul_port_concourse.add(player);
+run('transit 1');
+assert(player.room.id === 'port_concourse', 'the Sullust terminal books passage back to Coruscant');
+
+built.R.port_departures.add(player);
+const toRylMsg = run('transit 3');
+assert(player.room.id === 'ryl_port_arrival', 'transit 3 flies you to Ryloth');
+assert(/Ryloth|Twi|twilight|Kala/i.test(toRylMsg), 'the journey to Ryloth has its own message');
+assert(toRylMsg !== toSulMsg, 'Ryloth\'s journey differs from Sullust\'s');
+assert(/Ryloth/.test(run('where')), 'you are now on Ryloth');
+built.R.ryl_port_concourse.add(player);
+run('transit 1');
+assert(player.room.id === 'port_concourse', 'the Ryloth terminal books passage back to Coruscant');
 
 // From another berth on Nar Shaddaa, a Hutt shuttle drops to Nal Hutta.
 built.R.nard_huttberth.add(player);
